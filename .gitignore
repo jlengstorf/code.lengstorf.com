@@ -1,6 +1,6 @@
 dev
 public
-themes/layouts
-themes/static/images
-themes/static/styles
+themes/code.lengstorf/layouts
+themes/code.lengstorf/static/images
+themes/code.lengstorf/static/styles
 node_modules
