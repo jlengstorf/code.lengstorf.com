@@ -8,10 +8,14 @@
   }
 
   &__header {
-    flex: 3 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    overflow: hidden;
+
+    @supports (display: flex) {
+      flex: 3 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
     @media (min-width: 768px) {
       flex-direction: row;
@@ -25,7 +29,6 @@
   }
 
   &__heading-group {
-    flex: 2 100%;
     order: 2;
     min-width: 300px;
     padding: calc( $height-unit * 1.5 ) calc( $width-unit * 5 );
@@ -38,6 +41,7 @@
   }
 
   &__heading {
+    display: block;
     color: $color-darkest;
     font-size: 8vw;
 
@@ -75,7 +79,6 @@
   }
 
   &__meta-group {
-    flex: 1 25%;
     order: 1;
     margin: 0;
     min-width: calc( $width-unit * 25);
