@@ -1,4 +1,5 @@
 +++
+
 date = "2016-08-07"
 title = "How to Convert HTML Form Field Values to a JSON Object"
 subtitle = "A simple, dependency-free way to use `reduce()` to convert all the fields in a form to a JSON object for AJAX (or whatever)."
@@ -12,7 +13,9 @@ tag = [
 ]
 _videoid = "Dsyau8u1qvM"
 pen_id = "YWJLwz"
+
 +++
+
 Using AJAX is really common, but it's still tricky to get the values out of a form without using a library.
 
 And that's because it seems pretty intimidating to set up all the loops and checks required to deal with parsing a form and all its child elements. You get into [heavy discussions of whether you should use `for`, `for...in`, `for...of`, or `forEach`](http://stackoverflow.com/a/9329476/463471), and after trying to keep up with the various performance, semantic, and stylistic reasons for making those choices, your brain starts to liquefy and drip out your ears — at which point it's easy to just say, "Fuck it; let's just use jQuery."
