@@ -1,0 +1,31 @@
+extends ../pug-includes/default.pug
+
+block append config
+  -
+    config.type = 'error';
+  -
+
+block article
+  header.article__header(
+    class=`article__header--page`
+  )
+    .article__heading-group
+      h1.article__heading Nothing Here ... Yet
+      p.article__subheading The page you've just visited doesn't have any content. Management will be notified.
+    dl.article__meta-group(
+      class=`meta meta--page`
+    )
+
+
+  aside.article__table-of-contents
+
+  article.article__content(
+    class= `article__content--page`
+  )
+    p There are two reasons why you might be seeing this page:
+    ol
+      li I haven't created any posts in the category you just clicked on (I'm working on it, scout’s honor!), or
+      li There was a typo in the URL that you entered/clicked.
+    p If it’s the latter, and you clicked on a link from somewhere else, please 
+      a(href="mailto:jason@lengstorf.com") send me an email
+      |  and let me know where you were and what you clicked, so I can fix the problem.
