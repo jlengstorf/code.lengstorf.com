@@ -1,0 +1,21 @@
+extends default.pug
+
+block append config
+  -
+    config.type = '{{ with .Params.category }}{{ . }}{{ end }}';
+  -
+
+block content
+  block list-header
+    .post-list
+      header.post-list__header
+        h1.post-list__heading 
+          block list-header-heading
+            | {{ .Title }}
+
+  block list-posts
+    | {{ range .Paginator.Pages }}
+    |   {{ if eq .Type "blog" }}
+    |     {{ partial "article-preview" . }}
+    |   {{ end }}
+    | {{ end }}

@@ -1,0 +1,21 @@
+.figure {
+  max-width: 100%;
+
+  &__image-wrap {
+
+  }
+
+  amp-img&__image {
+    border-radius: 0;
+    max-width: 100%;
+  }
+
+  &__caption {
+    margin-top: calc( $height-unit / 4 );
+    color: $color-caption;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+}

@@ -1,0 +1,38 @@
+baseurl = "https://code.lengstorf.com/"
+languageCode = "en-us"
+title = "JavaScript, build tools, modern dev workflow | Jason Lengstorf"
+
+footnotereturnlinkcontents = "↩"
+
+canonifyurls = true
+
+Paginate = 6
+
+PygmentsCodeFences = true
+
+theme = "code.lengstorf"
+
+[permalinks]
+  blog = "/:slug/"
+
+[taxonomies]
+  category = "category"
+  prerequisites = "prerequisites"
+  tag = "tag"
+  difficulty = "difficulty"
+
+[params]
+  googleanalytics = ""
+  site_email = "jason@lengstorf.com"
+
+  [params.schema]
+    type = "Person"
+    name = "Jason Lengstorf"
+    sameAs = [
+      "https://lengstorf.com/",
+      "https://www.facebook.com/jlengstorf",
+      "https://instagram.com/jlengstorf",
+      "https://plus.google.com/+Lengstorf",
+      "https://www.youtube.com/lengstorf",
+      "https://twitter.com/jlengstorf",
+    ]

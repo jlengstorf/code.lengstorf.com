@@ -1,0 +1,326 @@
+.article {
+  display: block;
+
+  @supports (display: flex) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__header {
+    flex: 3 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+
+    &--front-end { color: $color-front-end; }
+    &--api { color: $color-api; }
+    &--build-tools { color: $color-build-tools; }
+    &--devops { color: $color-devops; }
+    &--cms { color: $color-cms; }
+  }
+
+  &__heading-group {
+    flex: 2 100%;
+    order: 2;
+    min-width: 300px;
+    padding: calc( $height-unit * 1.5 ) calc( $width-unit * 5 );
+
+    @media (min-width: 768px) {
+      flex: 2 75%;
+      max-width: calc( $width-unit * 75 );
+      padding: calc( $height-unit * 4 ) calc( $height-unit * 2 ) $height-unit;
+    }
+  }
+
+  &__heading {
+    color: $color-darkest;
+    font-size: 8vw;
+
+    @media (min-width: 480px) {
+      font-size: 6vw;
+    }
+
+    @media (min-width: 768px) {
+      max-width: 750px;
+      font-size: 250%;
+    }
+  }
+
+  &__heading-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &__subheading {
+    margin-top: calc( $height-unit * 0.5 );
+    font-family: $font-family-sans;
+    font-size: 4.75vw;
+    font-weight: $font-weight-bold;
+    line-height: 1.25;
+
+    @media (min-width: 480px) {
+      font-size: 3.25vw;
+    }
+
+    @media (min-width: 768px) {
+      max-width: 750px;
+      font-size: 125%;
+      line-height: 1.1;
+    }
+  }
+
+  &__meta-group {
+    flex: 1 25%;
+    order: 1;
+    margin: 0;
+    min-width: calc( $width-unit * 25);
+  }
+
+  &__video {
+    @media (min-width: 768px) {
+      padding-right: calc( $width-unit * 5 );
+    }
+  }
+
+  &__table-of-contents-heading {
+    padding-left: calc( $width-unit / 2 );
+    border-left: 2px solid transparent;
+    color: color( $color-text tint(40%) );
+    font-size: 62.5%;
+    font-weight: $font-weight-normal;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  &__table-of-contents {
+    display: none;
+    float: left;
+    max-width: calc( $width-unit * 26 );
+    min-width: calc( $width-unit * 25 );
+    padding: calc( $height-unit * 1.5 ) calc( $width-unit * 5 );
+    line-height: 1.5;
+
+    @supports (display: flex) {
+      flex: 1 25%;
+      max-width: calc( $width-unit * 25 );
+      float: none;
+    }
+
+    @media (min-width: 768px) {
+      display: block;
+    }
+
+    nav {
+      margin-top: 0;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Hacking and wheezing our way through Hugo generated markup. */
+    li li li {
+      margin-top: calc( $height-unit / 4 );
+      padding-left: calc( $width-unit * 0.75 );
+      color: color( $color-text tint(30%) );
+      font-size: 85%;
+      font-weight: $font-weight-normal;
+    }
+
+    /* Second-level TOC links. */
+    nav>ul>li>ul>li {
+      margin-top: calc( $height-unit / 2 );
+      color: $color-text;
+      font-size: 75%;
+      font-weight: $font-weight-bold;
+    }
+
+    /* Third-level TOC links. */
+    nav>ul>li>ul>li>ul>li {
+      color: color( $color-text tint(10%) );
+    }
+
+    /* Fourth-level TOC links. */
+    nav>ul>li>ul>li>ul>li>ul>li {
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    a {
+      display: block;
+      padding: 0 calc( $width-unit / 4 ) 0 calc( $width-unit / 2 );
+      color: inherit;
+      text-decoration: none;
+      border-left: 2px solid transparent;
+
+      &:hover,&:active,&:focus {
+        background-color: $color-gray-light;
+        border-color: color( $color-gray-light shade(10%) );
+        outline: none;
+
+        .article--front-end & {
+          background-color: color( $color-front-end tint(90%) );
+          border-color: $color-front-end;
+        }
+
+        .article--api & {
+          background-color: color( $color-api tint(90%) );
+          border-color: $color-api;
+        }
+
+        .article--build-tools & {
+          background-color: color( $color-build-tools tint(90%) );
+          border-color: $color-build-tools;
+        }
+
+        .article--devops & {
+          background-color: color( $color-devops tint(90%) );
+          border-color: $color-devops;
+        }
+
+        .article--cms & {
+          background-color: color( $color-cms tint(90%) );
+          border-color: $color-cms;
+        }
+      }
+    }
+  }
+
+  &__content {
+    float: left;
+    min-width: calc( $width-unit * 70 );
+    margin: 0;
+    padding: calc( $height-unit * 2 ) calc( $width-unit * 5 );
+    background-image: linear-gradient(
+      165deg,
+      color( $color-gray-light tint(20%) ) 0%,
+      color( $color-gray-light tint(20%) alpha(0) ) calc( $width-unit * 50 )
+    );
+
+    @supports (display: flex) {
+      flex: 2 100%;
+      float: none;
+    }
+
+    @media (min-width: 768px) {
+      max-width: calc( $width-unit * 75 );
+      padding: calc( $height-unit * 3 ) 0 calc( $height-unit * 5 ) calc( $height-unit * 2 );
+      border-left: 2px solid $color-lightest;
+      border-top: 2px solid $color-lightest;
+
+      @supports (display: flex) {
+        flex: 2 74%;
+        min-width: 0;
+        max-width: 75%;
+      }
+    }
+
+    &--front-end {
+      background-image: linear-gradient(
+        165deg,
+        color( $color-front-end tint(90%) ) 0%,
+        color( $color-front-end tint(90%) alpha(0) ) calc( $width-unit * 50 )
+      );
+    }
+
+    &--api {
+      background-image: linear-gradient(
+        165deg,
+        color( $color-api tint(90%) ) 0%,
+        color( $color-api tint(90%) alpha(0) ) calc( $width-unit * 50 )
+      );
+    }
+
+    &--build-tools {
+      background-image: linear-gradient(
+        165deg,
+        color( $color-build-tools tint(90%) ) 0%,
+        color( $color-build-tools tint(90%) alpha(0) ) calc( $width-unit * 50 )
+      );
+    }
+
+    &--devops {
+      background-image: linear-gradient(
+        165deg,
+        color( $color-devops tint(90%) ) 0%,
+        color( $color-devops tint(90%) alpha(0) ) calc( $width-unit * 50 )
+      );
+    }
+
+    &--cms {
+      background-image: linear-gradient(
+        165deg,
+        color( $color-cms tint(90%) ) 0%,
+        color( $color-cms tint(90%) alpha(0) ) calc( $width-unit * 50 )
+      );
+    }
+
+    >*:not([class]),.codepen {
+      max-width: 750px;
+
+      @media (min-width: 768px) {
+        margin-right: calc( $width-unit * 5 );
+      }
+    }
+  }
+
+  &__aside {
+    display: block;
+    max-width: 750px;
+    padding: $height-unit calc( $width-unit * 2 );
+    font-size: 75%;
+    line-height: 1.5;
+    background: $color-gray-light;
+    border: 1px solid color( $color-gray-light shade(5%) );
+
+    @media (min-width: 768px) {
+      margin-right: calc( $width-unit * 5 );
+    }
+  }
+
+  &--front-end &__aside {
+    background-color: color( $color-front-end tint(90%) );
+    border-color: color( $color-front-end tint(80%) );
+  }
+  &--api &__aside {
+    background-color: color( $color-api tint(90%) );
+    border-color: color( $color-api tint(80%) );
+  }
+  &--build-tools &__aside {
+    background-color: color( $color-build-tools tint(90%) );
+    border-color: color( $color-build-tools tint(80%) );
+  }
+  &--devops &__aside {
+    background-color: color( $color-devops tint(90%) );
+    border-color: color( $color-devops tint(80%) );
+  }
+  &--cms &__aside {
+    background-color: color( $color-cms tint(90%) );
+    border-color: color( $color-cms tint(80%) );
+  }
+
+  amp-youtube {
+    max-width: 950px;
+    border: 1px solid color( $color-gray-light shade(5%) );
+  }
+
+  amp-img {
+    background: color( $color-gray-light shade(5%) );
+    border: 1px solid color( $color-gray-light shade(5%) );
+    border-radius: 50%;
+  }
+
+  &__discussion {
+    max-width: 750px;
+    margin-top: calc( $height-unit * 3 );
+  }
+}

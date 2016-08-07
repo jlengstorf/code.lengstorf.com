@@ -1,0 +1,36 @@
+| {{ $baseurl := .Site.BaseURL }}
+| {{ $datetime := .Date.Format "2006-01-02T15:04:05Z07:00" }}
+| {{ $category := .Params.category }}
+article.post-list__article.article(
+  class="post-list__article--{{ $category }}"
+)
+  header.article__header(
+    class=`article__header--{{ $category }}`
+  )
+    .article__heading-group
+      h1.article__heading
+        a.article__heading-link(
+          href="{{ .Permalink }}"
+        ) {{ .Title }}
+      p.article__subheading {{ .Params.subtitle | markdownify }}
+      a.post-list__read-more(
+        class="post-list__read-more--{{ $category }}"
+        href="{{ .Permalink }}"
+      ) Read This Post
+    dl.article__meta-group(
+      class=`meta meta--{{ $category }}`
+    )
+      dt.meta__label.sr-only Date:
+      dl.meta__item.meta__item--date
+        time(datetime=`{{ $datetime }}`) {{ .Date.Format "Jan 2, 2006" }}
+      dt.meta__label.sr-only Posted in:
+      dl.meta__item.meta__item--category
+        | {{ index (index .Site.Data.category $category ) "name" }}
+      | {{ if .Params.tag }}
+      dt.meta__label.sr-only Tags:
+      dl.meta__item.meta__item--tags
+        | {{ range .Params.tag }}
+        a.meta__tag(href="{{ $baseurl }}tag/{{ . | urlize }}/") {{ . }}
+        |  
+        | {{ end }}
+      | {{ end }}

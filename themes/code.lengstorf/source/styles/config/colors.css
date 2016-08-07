@@ -1,0 +1,4 @@
+body {
+  background: $color-lightest;
+  color: $color-darkest;
+}

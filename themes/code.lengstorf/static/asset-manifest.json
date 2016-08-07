@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "app.css": {
+      "files": [
+        "styles/app.css"
+      ],
+      "main": true
+    }
+  },
+  "paths": {
+    "source": "source/",
+    "dist": "static/"
+  },
+  "config": {
+    "devUrl": "localhost:1313"
+  }
+}

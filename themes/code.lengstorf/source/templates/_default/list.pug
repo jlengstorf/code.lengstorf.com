@@ -1,0 +1,6 @@
+extends ../pug-includes/list.pug
+
+block append config
+  -
+    config.type = '{{ with .Params.category }}{{ . }}{{ end }}';
+  -

@@ -1,0 +1,73 @@
+.meta {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  background: $color-gray-light;
+  padding: calc( $height-unit / 2 ) $height-unit;
+  text-align: center;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    align-items: stretch;
+    flex-direction: column;
+    padding: $height-unit;
+    text-align: right;
+  }
+
+  /* Colors change based on the main category. */
+  &--front-end { background-color: $color-front-end; }
+  &--api { background-color: $color-api; }
+  &--build-tools { background-color: $color-build-tools; }
+  &--devops { background-color: $color-devops; }
+  &--cms { background-color: $color-cms; }
+
+  &__item {
+    display: inline-block;
+    flex: 1 20%;
+    margin: 0 calc( $width-unit * 2 );
+    color: $color-lightest;
+    font-family: $font-family-sans;
+    font-size: 62.5%;
+    line-height: 1.375;
+
+    @media (min-width: 768px) {
+      flex: none;
+      display: block;
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    &--date {
+      font-weight: $font-weight-bold;
+
+      @media (min-width: 768px) {
+        margin-top: 0;
+        font-size: 100%;
+        line-height: 2.5;
+
+        @supports (display: flex) {
+          margin-top: auto;
+        }
+      }
+    }
+
+    &--category {
+      &::before {
+        content: 'Posted in ';
+      }
+    }
+  }
+
+  &__tag {
+    color: inherit;
+    text-decoration: none;
+    text-transform: lowercase;
+
+    &::before { content: '#'; }
+
+    &:hover,&:active,&:focus {
+      outline: 0;
+      text-decoration: underline;
+    }
+  }
+}
