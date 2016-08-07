@@ -1,0 +1,6 @@
+dev
+public
+themes/layouts
+themes/static/images
+themes/static/styles
+node_modules
