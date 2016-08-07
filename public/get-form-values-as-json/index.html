@@ -1,0 +1,738 @@
+<!DOCTYPE html><html ⚡><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"><link rel="canonical" href="https://code.lengstorf.com/get-form-values-as-json/"><title>How to Convert HTML Form Field Values to a JSON Object</title><meta name="description" content=""><link rel="apple-touch-icon" sizes="57x57" href="https://code.lengstorf.com/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="https://code.lengstorf.com/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="https://code.lengstorf.com/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="https://code.lengstorf.com/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="https://code.lengstorf.com/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="https://code.lengstorf.com/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="https://code.lengstorf.com/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="https://code.lengstorf.com/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="https://code.lengstorf.com/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" href="https://code.lengstorf.com/favicon-32x32.png?v=2" sizes="32x32"><link rel="icon" type="image/png" href="https://code.lengstorf.com/favicon-194x194.png?v=2" sizes="194x194"><link rel="icon" type="image/png" href="https://code.lengstorf.com/favicon-96x96.png?v=2" sizes="96x96"><link rel="icon" type="image/png" href="https://code.lengstorf.com/android-chrome-192x192.png?v=2" sizes="192x192"><link rel="icon" type="image/png" href="https://code.lengstorf.com/favicon-16x16.png?v=2" sizes="16x16"><link rel="manifest" href="https://code.lengstorf.com/manifest.json"><link rel="mask-icon" href="https://code.lengstorf.com/safari-pinned-tab.svg" color="#c319ff"><meta name="msapplication-TileColor" content="#c319ff"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><meta name="theme-color" content="#faf8fd"><style amp-custom>body{background:#fff;color:#110117}body,html{color:#584d5d;font-family:mallory-microplus,sans-serif;font-size:14px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}@media (min-width:768px){body,html{font-size:17.5px}}code,pre{font-family:monospace;text-transform:none}h1,h2,h3,h4,h5,h6{color:#110117;font-family:mallory,sans-serif;line-height:1}h2+*,h3+*{margin-top:8px;margin-top:.5rem}@media (min-width:768px){h2+*,h3+*{margin-top:.33333rem}}:not(.figure)+h2:not([class]),:not(.figure)+h3:not([class]),:not(.figure)+h4:not([class]),:not(.figure)+h5:not([class]),:not(.figure)+h6:not([class]){margin-top:32px;margin-top:2rem}h1{font-size:275%}h2{font-size:175%;font-weight:700}h2 strong{font-weight:400}h3{font-size:125%;font-weight:800}h3,h4{text-transform:uppercase}h4{color:#8a828e;font-size:115%;font-weight:400;letter-spacing:.05em}sup{position:relative;top:-8px;top:-.5rem;margin:0 .25em;font-size:10.5px;line-height:.75;vertical-align:baseline}sup>a[rel]{display:inline-block;height:14px;width:14px;background-color:#8a828e;border:0;border-radius:50%;color:#fff;font-size:9px;font-style:normal;font-weight:700;line-height:16px;text-align:center;text-decoration:none;-webkit-transition:.2s background-color linear;transition:.2s background-color linear}sup>a[rel]:active,sup>a[rel]:focus,sup>a[rel]:hover{background-color:#110117;border:0;outline:none}li{margin-top:4px;margin-top:.25rem}aside{font-family:mallory-microplus,sans-serif}code{display:inline-block;margin-top:0;padding:0 .25em;background:#faf8fd;border:1px solid #e1dfe4;border-radius:4px;font-size:100%;line-height:1.375}*{margin:0;box-sizing:border-box}*+*{margin-top:12px;margin-top:.75rem}@media (min-width:768px){*+*{margin-top:1.25rem}}body{margin:0}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}.article{display:block}@supports (display:flex){.article{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between}}.article__header{-webkit-box-flex:3;-webkit-flex:3 100%;-ms-flex:3 100%;flex:3 100%;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between}@media (min-width:768px){.article__header{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row}}.article__header--front-end{color:#c319ff}.article__header--api{color:#1999ff}.article__header--build-tools{color:#65e200}.article__header--devops{color:#ff8a00}.article__header--cms{color:#ff2414}.article__heading-group{-webkit-box-flex:2;-webkit-flex:2 100%;-ms-flex:2 100%;flex:2 100%;-webkit-box-ordinal-group:3;-webkit-order:2;-ms-flex-order:2;order:2;min-width:300px;padding:24px 5vw;padding:1.5rem 5vw}@media (min-width:768px){.article__heading-group{-webkit-box-flex:2;-webkit-flex:2 75%;-ms-flex:2 75%;flex:2 75%;max-width:75vw;padding:4rem 2rem 1rem}}.article__heading{color:#110117;font-size:8vw}@media (min-width:480px){.article__heading{font-size:6vw}}@media (min-width:768px){.article__heading{max-width:750px;font-size:250%}}.article__heading-link{color:inherit;text-decoration:none}.article__subheading{margin-top:8px;margin-top:.5rem;font-family:mallory-microplus,sans-serif;font-size:4.75vw;font-weight:700;line-height:1.25}@media (min-width:480px){.article__subheading{font-size:3.25vw}}@media (min-width:768px){.article__subheading{max-width:750px;font-size:125%;line-height:1.1}}.article__meta-group{-webkit-box-flex:1;-webkit-flex:1 25%;-ms-flex:1 25%;flex:1 25%;-webkit-box-ordinal-group:2;-webkit-order:1;-ms-flex-order:1;order:1;margin:0;min-width:25vw}@media (min-width:768px){.article__video{padding-right:5vw}}.article__table-of-contents-heading{padding-left:.5vw;border-left:2px solid transparent;color:#9b949e;font-size:62.5%;font-weight:400;letter-spacing:.05em;line-height:1;text-transform:uppercase}.article__table-of-contents{display:none;float:left;max-width:26vw;min-width:25vw;padding:24px 5vw;padding:1.5rem 5vw;line-height:1.5}@supports (display:flex){.article__table-of-contents{-webkit-box-flex:1;-webkit-flex:1 25%;-ms-flex:1 25%;flex:1 25%;max-width:25vw;float:none}}@media (min-width:768px){.article__table-of-contents{display:block}}.article__table-of-contents nav{margin-top:0}.article__table-of-contents ul{list-style:none;margin:0;padding:0}.article__table-of-contents li li li{margin-top:4px;margin-top:.25rem;padding-left:.75vw;color:#8a828e;font-size:85%;font-weight:400}.article__table-of-contents nav>ul>li>ul>li{margin-top:8px;margin-top:.5rem;color:#584d5d;font-size:75%;font-weight:700}.article__table-of-contents nav>ul>li>ul>li>ul>li{color:#695f6d}.article__table-of-contents nav>ul>li>ul>li>ul>li>ul>li{letter-spacing:.05em;line-height:1.2;text-transform:uppercase}.article__table-of-contents a{display:block;padding:0 .25vw 0 .5vw;color:inherit;text-decoration:none;border-left:2px solid transparent}.article__table-of-contents a:active,.article__table-of-contents a:focus,.article__table-of-contents a:hover{background-color:#faf8fd;border-color:#e1dfe4;outline:none}.article--front-end .article__table-of-contents a:active,.article--front-end .article__table-of-contents a:focus,.article--front-end .article__table-of-contents a:hover{background-color:#f9e8ff;border-color:#c319ff}.article--api .article__table-of-contents a:active,.article--api .article__table-of-contents a:focus,.article--api .article__table-of-contents a:hover{background-color:#e8f5ff;border-color:#1999ff}.article--build-tools .article__table-of-contents a:active,.article--build-tools .article__table-of-contents a:focus,.article--build-tools .article__table-of-contents a:hover{background-color:#f0fce6;border-color:#65e200}.article--devops .article__table-of-contents a:active,.article--devops .article__table-of-contents a:focus,.article--devops .article__table-of-contents a:hover{background-color:#fff3e6;border-color:#ff8a00}.article--cms .article__table-of-contents a:active,.article--cms .article__table-of-contents a:focus,.article--cms .article__table-of-contents a:hover{background-color:#ffe9e8;border-color:#ff2414}.article__content{float:left;min-width:70vw;margin:0;padding:32px 5vw;padding:2rem 5vw;background-image:-webkit-linear-gradient(285deg,#fbf9fd,rgba(251,249,253,0) 50vw);background-image:linear-gradient(165deg,#fbf9fd,rgba(251,249,253,0) 50vw)}@supports (display:flex){.article__content{-webkit-box-flex:2;-webkit-flex:2 100%;-ms-flex:2 100%;flex:2 100%;float:none}}@media (min-width:768px){.article__content{max-width:75vw;padding:3rem 0 5rem 2rem;border-left:2px solid #fff;border-top:2px solid #fff}@supports (display:flex){.article__content{-webkit-box-flex:2;-webkit-flex:2 74%;-ms-flex:2 74%;flex:2 74%;min-width:0;max-width:75%}}}.article__content--front-end{background-image:-webkit-linear-gradient(285deg,#f9e8ff,rgba(249,232,255,0) 50vw);background-image:linear-gradient(165deg,#f9e8ff,rgba(249,232,255,0) 50vw)}.article__content--api{background-image:-webkit-linear-gradient(285deg,#e8f5ff,rgba(232,245,255,0) 50vw);background-image:linear-gradient(165deg,#e8f5ff,rgba(232,245,255,0) 50vw)}.article__content--build-tools{background-image:-webkit-linear-gradient(285deg,#f0fce6,hsla(93,79%,95%,0) 50vw);background-image:linear-gradient(165deg,#f0fce6,hsla(93,79%,95%,0) 50vw)}.article__content--devops{background-image:-webkit-linear-gradient(285deg,#fff3e6,rgba(255,243,230,0) 50vw);background-image:linear-gradient(165deg,#fff3e6,rgba(255,243,230,0) 50vw)}.article__content--cms{background-image:-webkit-linear-gradient(285deg,#ffe9e8,hsla(3,100%,95%,0) 50vw);background-image:linear-gradient(165deg,#ffe9e8,hsla(3,100%,95%,0) 50vw)}.article__content .codepen,.article__content>:not([class]){max-width:750px}@media (min-width:768px){.article__content .codepen,.article__content>:not([class]){margin-right:5vw}}.article__aside{display:block;max-width:750px;padding:16px 2vw;padding:1rem 2vw;font-size:75%;line-height:1.5;background:#faf8fd;border:1px solid #eeecf0}@media (min-width:768px){.article__aside{margin-right:5vw}}.article--front-end .article__aside{background-color:#f9e8ff;border-color:#f3d1ff}.article--api .article__aside{background-color:#e8f5ff;border-color:#d1ebff}.article--build-tools .article__aside{background-color:#f0fce6;border-color:#e0f9cc}.article--devops .article__aside{background-color:#fff3e6;border-color:#ffe8cc}.article--cms .article__aside{background-color:#ffe9e8;border-color:#ffd3d0}.article amp-youtube{max-width:950px;border:1px solid #eeecf0}.article amp-img{background:#eeecf0;border:1px solid #eeecf0;border-radius:50%}.article__discussion{max-width:750px;margin-top:48px;margin-top:3rem}.aside{display:inline-block;margin:0;background:#e6e6e6;line-height:1.25;text-decoration:none}.aside:before{content:'';right:calc(1vw * 5 + 200px);width:100px;height:.625em;border-bottom:1px dashed #ccc}.aside:after,.aside:before{position:absolute;display:block}.aside:after{content:attr(data-aside);right:5vw;-webkit-transform:translateY(-55%);transform:translateY(-55%);width:200px;margin:0;padding:16px;padding:1rem;font-size:75%;background:#e6e6e6;border:1px dashed #ccc}.figure{max-width:100%}amp-img.figure__image{border-radius:0;max-width:100%}.figure__caption{margin-top:4px;margin-top:.25rem;color:#8a828e;font-size:9px;letter-spacing:.05em;line-height:1.2;text-transform:uppercase}.footer{display:block;width:100%;padding:32px 5vw;padding:2rem 5vw;background-color:#faf8fd;border-bottom:1px solid #eeecf0;border-top:1px solid #eeecf0;text-align:center}@media (min-width:650px){.footer{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;padding-left:0;padding-right:0}.footer__meta{-webkit-box-flex:1;-webkit-flex:1 25%;-ms-flex:1 25%;flex:1 25%;min-width:25vw;padding-right:1rem;text-align:right}.footer__bio{-webkit-box-flex:2;-webkit-flex:2 75%;-ms-flex:2 75%;flex:2 75%;min-width:75vw;margin-top:0;padding:0 2rem;text-align:left}}.footer__image{display:inline-block;width:150px;height:150px;border-radius:50%}.footer__links{max-width:750px;margin-left:auto;margin-right:auto}@media (min-width:650px){.footer__links{display:block;max-width:125px;margin-top:0;margin-right:0;text-align:center}}.footer__link{display:inline-block;max-width:30px;margin:0 16px;margin:0 1rem}@media (min-width:650px){.footer__link{max-width:20px;margin:0 .5rem}}.footer__link:active,.footer__link:focus,.footer__link:hover{outline:0}.footer__link:active path,.footer__link:focus path,.footer__link:hover path{fill:#110117}.footer__icon{width:100%}.footer__icon path{fill:#584d5d;-webkit-transition:.2s fill ease-in-out;transition:.2s fill ease-in-out}h3.footer__heading{max-width:750px;margin-left:auto;margin-right:auto;margin-top:8px;margin-top:.5rem}@media (min-width:650px){h3.footer__heading{margin:0}}.footer__worked-with{color:#8a828e;font-size:8px;font-weight:200;letter-spacing:.1em;text-transform:uppercase}amp-img.footer__worked-with-image{margin-top:0;background-color:transparent;border:0;border-radius:0;max-width:100%}.footer__blurb{max-width:750px;margin-left:auto;margin-right:auto}@media (min-width:650px){.footer__blurb{margin-left:0;margin-right:0}}@media (min-width:768px){.footer__blurb{font-size:85%}}.footnotes{max-width:750px;color:#8a828e;font-size:87.5%}.footnotes hr{border-top:1px solid #faf8fd}.footnotes ol{padding-left:0;counter-reset:a;list-style:none}.footnotes li{position:relative;margin:0;padding:7px;padding-left:28px;border:1px solid transparent;border-radius:7px;-webkit-transition:.2s all ease-in-out;transition:.2s all ease-in-out}.footnotes li:before{counter-increment:a;content:counter(a);position:absolute;left:7px;top:10px;display:inline-block;width:14px;height:14px;background-color:#8a828e;border:0;border-radius:50%;color:#fff;font-size:9px;font-weight:700;line-height:16px;text-align:center;text-decoration:none;-webkit-transition:.2s background-color linear;transition:.2s background-color linear}.highlight{clear:both;margin-bottom:32px;margin-bottom:2rem;margin-top:32px;margin-top:2rem;padding:16px 5vw;padding:1rem 5vw;border-right:20px solid #272822;overflow-x:scroll}@media (min-width:768px){.highlight{padding-left:20px;padding-right:20px}}.highlight pre{width:410px;color:#fff;font-size:80%}@media (min-width:768px){.highlight pre{width:600px;font-size:95%}}.meta{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;background:#faf8fd;padding:8px 16px;padding:.5rem 1rem;text-align:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center}@media (min-width:768px){.meta{-webkit-box-align:stretch;-webkit-align-items:stretch;-ms-flex-align:stretch;-ms-grid-row-align:stretch;align-items:stretch;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;padding:1rem;text-align:right}}.meta--front-end{background-color:#c319ff}.meta--api{background-color:#1999ff}.meta--build-tools{background-color:#65e200}.meta--devops{background-color:#ff8a00}.meta--cms{background-color:#ff2414}.meta__item{display:inline-block;-webkit-box-flex:1;-webkit-flex:1 20%;-ms-flex:1 20%;flex:1 20%;margin:0 2vw;color:#fff;font-family:mallory-microplus,sans-serif;font-size:62.5%;line-height:1.375}@media (min-width:768px){.meta__item{-webkit-box-flex:0;-webkit-flex:none;-ms-flex:none;flex:none;display:block;margin:0;line-height:1.75}}.meta__item--date{font-weight:700}@media (min-width:768px){.meta__item--date{margin-top:0;font-size:100%;line-height:2.5}@supports (display:flex){.meta__item--date{margin-top:auto}}}.meta__item--category:before{content:'Posted in '}.meta__tag{color:inherit;text-decoration:none;text-transform:lowercase}.meta__tag:before{content:'#'}.meta__tag:active,.meta__tag:focus,.meta__tag:hover{outline:0;text-decoration:underline}.nav{position:relative;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;justify-conent:space-between;z-index:10}.nav__link{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;margin:0;margin-left:2px;padding:8px 1vw;padding:.5rem 1vw;min-width:55px;max-width:calc(1vw * 15 - 2px);background-color:#e7e6e8;border-bottom:4px solid #110117;color:#110117;font-family:mallory-microplus,sans-serif;font-size:62.5%;font-weight:700;line-height:1.2;text-align:center;text-decoration:none;-webkit-transition:.25s all ease-in-out;transition:.25s all ease-in-out}@media (min-width:768px){.nav__link{padding:.25rem 1vw;line-height:1.75;text-align:right}}.nav__link:active,.nav__link:focus,.nav__link:hover{outline:0;padding-bottom:8px;padding-bottom:.5rem;padding-top:8px;padding-top:.5rem;margin-bottom:-8px;margin-bottom:-.5rem}.nav__link--home{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;max-width:25vw;min-width:20px;margin-left:0;color:#fff;background-color:#110117;font-family:monospace;font-weight:400}.nav__link--home:active,.nav__link--home:focus,.nav__link--home:hover{margin-bottom:0;padding-bottom:4px;padding-bottom:.25rem;padding-top:4px;padding-top:.25rem;color:#ff2414}.nav__link--front-end{background-color:#f9e8ff;border-color:#c319ff}.nav__link--api{background-color:#e8f5ff;border-color:#1999ff}.nav__link--build-tools{background-color:#f0fce6;border-color:#65e200}.nav__link--devops{background-color:#fff3e6;border-color:#ff8a00}.nav__link--cms{background-color:#ffe9e8;border-color:#ff2414}.post-list__header{padding:8px 5vw;padding:.5rem 5vw;background-color:#faf8fd;text-align:center}.post-list__heading{font-size:75%;font-weight:400;letter-spacing:.1em;text-transform:uppercase}.post-list__article{margin-top:2px;border-bottom:2px solid #faf8fd}.post-list__article:first-child{margin-top:0}.post-list__article--front-end{border-color:#c319ff}.post-list__article--api{border-color:#1999ff}.post-list__article--build-tools{border-color:#65e200}.post-list__article--devops{border-color:#ff8a00}.post-list__article--cms{border-color:#ff2414}.post-list__read-more{display:block;margin-top:16px;margin-top:1rem;padding:4px 16px 2px;padding:.25rem 1rem .125rem;text-align:center;background:rgba(250,248,253,0);border:2px solid #110117;border-radius:8px;color:#110117;font-family:mallory-microplus,sans-serif;font-size:90%;font-weight:700;letter-spacing:.1em;line-height:1.5;text-decoration:none;text-transform:uppercase;-webkit-transition:.1s all linear;transition:.1s all linear}@media (min-width:360px){.post-list__read-more{max-width:240px;margin-left:auto;margin-right:auto}}@media (min-width:640px){.post-list__read-more{margin-left:0;margin-right:0}}.post-list__read-more--front-end{border-color:#c319ff;color:#c319ff}.post-list__read-more--front-end:active,.post-list__read-more--front-end:focus,.post-list__read-more--front-end:hover{background-color:#c319ff}.post-list__read-more--api{border-color:#1999ff;color:#1999ff}.post-list__read-more--api:active,.post-list__read-more--api:focus,.post-list__read-more--api:hover{background-color:#1999ff}.post-list__read-more--build-tools{border-color:#65e200;color:#65e200}.post-list__read-more--build-tools:active,.post-list__read-more--build-tools:focus,.post-list__read-more--build-tools:hover{background-color:#65e200}.post-list__read-more--devops{border-color:#ff8a00;color:#ff8a00}.post-list__read-more--devops:active,.post-list__read-more--devops:focus,.post-list__read-more--devops:hover{background-color:#ff8a00}.post-list__read-more--cms{border-color:#ff2414;color:#ff2414}.post-list__read-more--cms:active,.post-list__read-more--cms:focus,.post-list__read-more--cms:hover{background-color:#ff2414}.post-list__read-more:active,.post-list__read-more:focus,.post-list__read-more:hover{color:#fff;outline:0}.site-footer{margin:0;padding:32px 5vw;padding:2rem 5vw;color:#9b949e;font-family:mallory-microplus,sans-serif;text-align:center}.site-footer__nav-links{margin-top:8px;margin-top:.5rem}.site-footer__nav-link{display:inline-block;margin:0;padding:0 .5vw;color:inherit;font-size:70%;text-decoration:none}.site-footer__nav-link:active,.site-footer__nav-link:focus,.site-footer__nav-link:hover{outline:none;text-decoration:underline}.site-footer__credits{font-size:75%}.site-footer__credits a{color:inherit;text-decoration:none}.site-footer__credits a:active,.site-footer__credits a:focus,.site-footer__credits a:hover{outline:none;text-decoration:underline}.site-header{margin-top:0;background-color:#fff;border-bottom:2px solid #fff}.site-content{margin-top:0}.site-content__article{position:relative}
+ 
+</style><style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
+</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript></head><script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script><script async src="https://cdn.ampproject.org/v0.js"></script><body class="no-js"><script id="__bs_script__">
+  document.write("<script async src='http://HOST:8100/browser-sync/browser-sync-client.2.12.5.js'><\/script>".replace("HOST", location.hostname));
+</script><header class="site-header"><nav class="site-header__nav nav nav--main"><a class="nav__link nav__link--home" href="https://code.lengstorf.com/" title="Jason Lengstorf on code">&lt;jl/&gt;</a> <a class="nav__link nav__link--front-end" href="https://code.lengstorf.com/category/front-end/" title="">Front-End</a> <a class="nav__link nav__link--api" href="https://code.lengstorf.com/category/api/" title="">APIs</a> <a class="nav__link nav__link--build-tools" href="https://code.lengstorf.com/category/build-tools/" title="">Build Tools</a> <a class="nav__link nav__link--devops" href="https://code.lengstorf.com/category/devops/" title="">DevOps</a> <a class="nav__link nav__link--cms" href="https://code.lengstorf.com/category/cms/" title="">CMS</a> </nav></header><main class="site-content"><article class="site-content__article article article--front-end"><header class="article__header article__header--front-end"><div class="article__heading-group"><h1 class="article__heading">How to Convert HTML Form Field Values to a JSON Object</h1><p class="article__subheading">A simple, dependency-free way to use <code>reduce()</code> to convert all the fields in a form to a JSON object for AJAX (or whatever).</p></div><dl class="article__meta-group meta meta--front-end"><dt class="meta__label sr-only">Date:</dt><dl class="meta__item meta__item--date"><time datetime="2016-08-07T00:00:00Z">Aug 7, 2016</time></dl><dt class="meta__label sr-only">Main Topic:</dt><dl class="meta__item meta__item--category">JavaScript and CSS</dl><dt class="meta__label sr-only">Tags:</dt><dl class="meta__item meta__item--tags"><a class="meta__tag" href="https://code.lengstorf.com/tag/javascript/">javascript</a> <a class="meta__tag" href="https://code.lengstorf.com/tag/reduce/">reduce</a> <a class="meta__tag" href="https://code.lengstorf.com/tag/forms/">forms</a> <a class="meta__tag" href="https://code.lengstorf.com/tag/ajax/">ajax</a> </dl></dl></header><aside class="article__table-of-contents"><h4 class="article__table-of-contents-heading">In This Article:</h4><nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#what-we-ll-be-building">What We&rsquo;ll Be Building</a></li>
+<li><a href="#before-we-get-started-goals-and-plans">Before We Get Started: Goals and Plans</a>
+<ul>
+<li><a href="#start-with-a-goal-what-should-we-end-up-with">Start with a goal: what should we end up with?</a></li>
+<li><a href="#make-a-plan-how-can-we-convert-form-fields-to-json">Make a plan: how can we convert form fields to JSON?</a></li>
+</ul></li>
+<li><a href="#getting-started-create-a-form-for-testing">Getting Started: Create a Form for Testing</a></li>
+<li><a href="#step-1-add-a-listener-to-the-submit-event-for-the-form">Step 1: Add a Listener to the <code>submit</code> Event for the Form</a>
+<ul>
+<li><a href="#create-a-handlesubmit-function">Create a <code>handleSubmit()</code> function.</a></li>
+<li><a href="#attach-an-event-listener-to-the-form">Attach an event listener to the form.</a></li>
+</ul></li>
+<li><a href="#step-2-extract-the-values-of-form-fields-as-json">Step 2: Extract the Values of Form Fields As JSON</a>
+<ul>
+<li><a href="#step-2-1-understand-how-reduce-works">Step 2.1 — Understand how <code>reduce()</code> works.</a>
+<ul>
+<li><a href="#a-really-simple-example-of-reducing-an-array">A really simple example of reducing an array.</a></li>
+</ul></li>
+<li><a href="#step-2-2-deconstruct-the-function">Step 2.2 — Deconstruct the function.</a></li>
+<li><a href="#step-2-3-write-the-reducer-function">Step 2.3 — Write the reducer function.</a></li>
+<li><a href="#step-2-4-call-the-reducer">Step 2.4 — Call the reducer.</a></li>
+</ul></li>
+<li><a href="#step-3-add-a-check-to-make-sure-only-the-fields-we-want-are-collected">Step 3: Add a Check to Make Sure Only the Fields We Want Are Collected</a>
+<ul>
+<li><a href="#step-3-1-create-a-function-to-check-for-valid-elements">Step 3.1 — Create a function to check for valid elements.</a></li>
+<li><a href="#step-3-2-add-the-check-to-formtojson">Step 3.2 — Add the check to <code>formToJSON()</code>.</a></li>
+</ul></li>
+<li><a href="#step-4-only-store-checkable-fields-if-a-field-is-in-checked-state">Step 4: Only Store Checkable Fields If a Field Is In <code>checked</code> State</a>
+<ul>
+<li><a href="#step-4-1-create-a-function-to-check-for-checkable-elements">Step 4.1 — Create a function to check for checkable elements.</a></li>
+<li><a href="#step-4-2-add-the-check-to-formtojson">Step 4.2 — Add the check to <code>formToJSON()</code>.</a></li>
+</ul></li>
+<li><a href="#step-5-if-a-field-allows-multiple-values-store-them-in-an-array">Step 5: If a Field Allows Multiple Values, Store Them In an Array</a>
+<ul>
+<li><a href="#step-5-1-create-checks-for-elements-that-accept-multiple-values">Step 5.1 — Create checks for elements that accept multiple values.</a></li>
+<li><a href="#step-5-2-handle-checkboxes-in-formtojson">Step 5.2 — Handle checkboxes in <code>formToJSON()</code>.</a></li>
+<li><a href="#step-5-3-write-a-function-to-retrieve-values-from-multi-selects">Step 5.3 — Write a function to retrieve values from multi-selects.</a></li>
+<li><a href="#step-5-4-handle-multi-select-values-in-formtojson">Step 5.4 — Handle multi-select values in <code>formToJSON()</code>.</a>
+<ul>
+<li><a href="#run-a-quick-test-of-multi-select-values">Run a quick test of multi-select values.</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#the-final-result-form-field-values-are-collected-in-an-object-for-use-as-json">The Final Result: Form Field Values Are Collected in an Object for Use as JSON</a></li>
+</ul></li>
+</ul>
+</nav></aside><article class="article__content article__content--front-end">
+
+<p>Using AJAX is really common, but it&rsquo;s still tricky to get the values out of a form without using a library.</p>
+
+<p>And that&rsquo;s because it seems pretty intimidating to set up all the loops and checks required to deal with parsing a form and all its child elements. You get into <a href="http://stackoverflow.com/a/9329476/463471">heavy discussions of whether you should use <code>for</code>, <code>for...in</code>, <code>for...of</code>, or <code>forEach</code></a>, and after trying to keep up with the various performance, semantic, and stylistic reasons for making those choices, your brain starts to liquefy and drip out your ears — at which point it&rsquo;s easy to just say, &ldquo;Fuck it; let&rsquo;s just use jQuery.&rdquo;</p>
+
+<p><strong>But for simple sites that don&rsquo;t need much beyond grabbing form data as an object to use with JSON</strong>, jQuery (or any big library or framework) includes a lot of overhead for only one or two functions that you&rsquo;ll be using.<sup class="footnote-ref" id="fnref:homework"><a rel="footnote" href="#fn:homework">1</a></sup></p>
+
+<p>So in this walkthrough, we&rsquo;ll be writing our own script — in plain JavaScript  — to pull the values of a form&rsquo;s fields into an object, which we could then use for AJAX, updating information on other parts of the page, and anything else you might want to do with a form&rsquo;s data.</p>
+
+<h2 id="what-we-ll-be-building">What We&rsquo;ll Be Building</h2>
+
+<p>At the end of this walkthrough, we&rsquo;ll have built the form shown in this pen:</p>
+
+<p><p data-height="1000" data-theme-id="dark" data-slug-hash="YWJLwz" data-default-tab="result" data-user="jlengstorf" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/jlengstorf/pen/YWJLwz/">How to Get Form Field Data as JSON Using Plain JavaScript</a> by Jason Lengstorf (<a href="http://codepen.io/jlengstorf">@jlengstorf</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script></p>
+
+<p>If you fill the form and hit the &ldquo;Send It!&rdquo; button, the form data will be output as JSON in the &ldquo;Form Data&rdquo; section below.</p>
+
+<aside class="article__aside"><p><strong>NOTE:</strong> To show that <code>hidden</code> inputs will be included, an input called <code>secret</code> has been included in this form. Its value is a random GUID.</p>
+</aside>
+
+<h2 id="before-we-get-started-goals-and-plans">Before We Get Started: Goals and Plans</h2>
+
+<p>To save ourselves a lot of headache and heartache, we&rsquo;re going to <a href="https://lengstorf.com/effective-project-planning/">start our project with an clear plan</a>. This&rsquo;ll keep our goals clear, and helps define the structure and purpose of the code before we ever write a line.</p>
+
+<h3 id="start-with-a-goal-what-should-we-end-up-with">Start with a goal: what should we end up with?</h3>
+
+<p>Before we write any JavaScript, let&rsquo;s start by deciding how we want the output to look.</p>
+
+<p>If I&rsquo;ve filled out the form above completely, we&rsquo;d want the resulting object to look like this:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
+  <span style="color: #f92672">&quot;salutation&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;Mr.&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;name&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;Jason Lengstorf&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;email&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;jason@lengstorf.com&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;subject&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;I have a general question.&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;message&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;Is this thing on?&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;snacks&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">[</span>
+    <span style="color: #e6db74">&quot;pizza&quot;</span>
+  <span style="color: #f8f8f2">],</span>
+  <span style="color: #f92672">&quot;secret&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;1b3a9374-1a8e-434e-90ab-21aa7b9b80e7&quot;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>Each field&rsquo;s <code>name</code> attribute is used as the object&rsquo;s key, and the field&rsquo;s <code>value</code> is set as the object&rsquo;s value.</p>
+
+<p>This is ideal, because it means that we can do something like this:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// Find our form in the DOM using its class name.</span>
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">form</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">getElementByClassName</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;.contact-form&#39;</span><span style="color: #f8f8f2">)[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">];</span>
+
+<span style="color: #75715e">// Get the form data with our (yet to be defined) function.</span>
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">data</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">getFormDataAsJSON</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">form</span><span style="color: #f8f8f2">);</span>
+
+<span style="color: #75715e">// Do something with the email address.</span>
+<span style="color: #a6e22e">doSomething</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">email</span><span style="color: #f8f8f2">);</span>
+</pre></div>
+
+<p>This is straightforward, easy to read as a human, and also easy to send to  APIs that accept <code>application/json</code> data in requests (which is most of them these days).</p>
+
+<p>So let&rsquo;s shoot for that.</p>
+
+<h3 id="make-a-plan-how-can-we-convert-form-fields-to-json">Make a plan: how can we convert form fields to JSON?</h3>
+
+<p>When we&rsquo;re finished, our JavaScript should accomplish the following goals:</p>
+
+<ol>
+<li>Capture the form&rsquo;s <code>submit</code> event and prevent the default submission.</li>
+<li>Convert the form&rsquo;s child elements to JSON.</li>
+<li>Check to make sure only form field elements are added to the object.</li>
+<li>Add a safeguard to only store checkable fields if the <code>checked</code> attribute is set.</li>
+<li>Handle inputs that allow multiple values, like checkboxes.</li>
+</ol>
+
+<p><strong>Ready to flex that sexy-ass brain?</strong> Create a fork of the <a href="http://codepen.io/jlengstorf/pen/GqYZra">markup-and-styles-only pen</a>, and let&rsquo;s jump in and start writing some JavaScript.</p>
+
+<h2 id="getting-started-create-a-form-for-testing">Getting Started: Create a Form for Testing</h2>
+
+<p>To avoid the hassle of setting up front-end tooling (we&rsquo;re using Babel to transpile the newer features of JavaScript, such as <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/apC.md#appendix-c-lexical-this">fat-arrow functions</a>), we&rsquo;re going to work through this project on Codepen.</p>
+
+<p>To start, create a fork of <a href="http://codepen.io/jlengstorf/pen/GqYZra/">this pen</a>, which contains form markup with common inputs, and some styles to make it display nicely.</p>
+
+<p><p data-height="1000" data-theme-id="dark" data-slug-hash="GqYZra" data-default-tab="result" data-user="jlengstorf" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/jlengstorf/pen/GqYZra/">How to Get Form Field Data as JSON Using Plain JavaScript (Starter — No JS)</a> by Jason Lengstorf (<a href="http://codepen.io/jlengstorf">@jlengstorf</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script></p>
+
+<aside class="article__aside"><p><strong>NOTE:</strong> The markup is written in Jade (which was recently renamed to <a href="https://github.com/pugjs/pug">Pug</a>) because I find it faster and easier to read. If you prefer to look at plain HTML, you can hit the &ldquo;view compiled&rdquo; button at the bottom right of the Jade pane in the pen above.</p>
+</aside>
+
+<aside class="article__aside"><p><strong>NOTE:</strong> The styles for the form use <a href="http://getbem.com/naming/">BEM-style naming conventions</a>, and I&rsquo;m using <a href="http://postcss.org/">PostCSS</a> to make it easy to group my styles together without <em>actually</em> creating nested CSS. For me, this is <em>far</em> easier to read than other ways of writing CSS, but if you prefer regular CSS, click the &ldquo;view compiled&rdquo; button at the bottom-right of the PostCSS pane in the pen above.</p>
+</aside>
+
+<h2 id="step-1-add-a-listener-to-the-submit-event-for-the-form">Step 1: Add a Listener to the <code>submit</code> Event for the Form</h2>
+
+<p>Before we do anything else, we need to listen for the <code>submit</code> event on our form, and prevent it from doing its usual thing.</p>
+
+<p>To do this, let&rsquo;s create a function called <code>handleSubmit()</code>, then use <code>getElementsByClassName()</code> to find our form, and attach the function to the form&rsquo;s <code>submit</code> event.</p>
+
+<h3 id="create-a-handlesubmit-function">Create a <code>handleSubmit()</code> function.</h3>
+
+<p>At the moment, this function isn&rsquo;t going to do much. To start, we&rsquo;ll prevent the default <code>submit</code> action, create a variable called <code>data</code> to store the output (which we&rsquo;ll be building in a moment), then find our output container and print out the <code>data</code> variable as JSON.</p>
+
+<p>In order to prevent the default action, this function needs to accept one argument: the <code>event</code> that&rsquo;s created when the user clicks the submit button on the form. We can stop the form from submitting the usual way (which triggers the browser to go somewhere else) using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault"><code>event.preventDefault()</code></a>.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * A handler function to prevent default submission and run our custom script.</span>
+<span style="color: #75715e"> * @param  {Event} event  the submit event triggered by the user</span>
+<span style="color: #75715e"> * @return {void}</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">handleFormSubmit</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">event</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+  
+  <span style="color: #75715e">// Stop the form from submitting since we’re handling that with AJAX.</span>
+  <span style="color: #a6e22e">event</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">preventDefault</span><span style="color: #f8f8f2">();</span>
+  
+  <span style="color: #75715e">// TODO: Call our function to get the form data.</span>
+  <span style="color: #66d9ef">const</span> <span style="color: #a6e22e">data</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{};</span>
+  
+  <span style="color: #75715e">// Demo only: print the form data onscreen as a formatted JSON object.</span>
+  <span style="color: #66d9ef">const</span> <span style="color: #a6e22e">dataContainer</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">getElementsByClassName</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;results__display&#39;</span><span style="color: #f8f8f2">)[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">];</span>
+  
+  <span style="color: #75715e">// Use `JSON.stringify()` to make the output valid, human-readable JSON.</span>
+  <span style="color: #a6e22e">dataContainer</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">textContent</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">JSON</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">stringify</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">null</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;  &quot;</span><span style="color: #f8f8f2">);</span>
+  
+  <span style="color: #75715e">// ...this is where we’d actually do something with the form data...</span>
+<span style="color: #f8f8f2">};</span>
+</pre></div>
+
+<aside class="article__aside"><p><strong>NOTE:</strong> The <code>data</code> variable is not JSON <em>yet</em>. This is kind of confusing at first, but it&rsquo;s a matter of nuance. Typically, a function that converts &ldquo;to JSON&rdquo; is <em>actually</em> converting to an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals">object literal</a>. This allows us to access the data using JavaScript. In order to convert that data to a valid JSON string, we need to use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify()</code></a>.</p>
+</aside>
+
+<h3 id="attach-an-event-listener-to-the-form">Attach an event listener to the form.</h3>
+
+<p>With the event handler created, we need to add a listener to the form so we can actually handle the event.</p>
+
+<p>To do this, we use <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName"><code>getElementsByClassName()</code></a> to target the form, then store the first item in the resulting collection as <code>form</code>.</p>
+
+<p>Next, using <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener"><code>addEventListener()</code></a>, we hook <code>handleSubmit()</code> to the <code>submit</code> event, which will allow it to run whenever the user clicks to submit the form.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">const</span> <span style="color: #a6e22e">handleFormSubmit</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">event</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span><span style="color: #75715e">/* omitted for brevity */</span><span style="color: #f8f8f2">};</span>
+
+<span style="color: #75715e">/*</span>
+<span style="color: #75715e"> * This is where things actually get started. We find the form element using</span>
+<span style="color: #75715e"> * its class name, then attach the `handleFormSubmit()` function to the </span>
+<span style="color: #75715e"> * `submit` event.</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">form</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">getElementsByClassName</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;contact-form&#39;</span><span style="color: #f8f8f2">)[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">];</span>
+<span style="color: #a6e22e">form</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">addEventListener</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;submit&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">handleFormSubmit</span><span style="color: #f8f8f2">);</span>
+</pre></div>
+
+<p>At this point we can test that things are working properly by clicking the &ldquo;Send It!&rdquo; button on the form. We should see <code>{}</code> in the &ldquo;Form Data&rdquo; output box.</p>
+
+<h2 id="step-2-extract-the-values-of-form-fields-as-json">Step 2: Extract the Values of Form Fields As JSON</h2>
+
+<p>Next up, we need to actually grab values from the form fields.</p>
+
+<p>To do this, we&rsquo;ll use something that — at first — might look scary as shit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce"><code>reduce()</code></a> combined with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call"><code>call()</code></a>.</p>
+
+<p>We&rsquo;ll dive into the dirty details of what <code>reduce()</code> is actually doing in the next section, but for now let&rsquo;s focus on how we&rsquo;re actually using it.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * Retrieves input data from a form and returns it as a JSON object.</span>
+<span style="color: #75715e"> * @param  {HTMLFormControlsCollection} elements  the form elements</span>
+<span style="color: #75715e"> * @return {Object}                               form data as an object literal</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">formToJSON</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">elements</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">[].</span><span style="color: #a6e22e">reduce</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">call</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">elements</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+  
+  <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">;</span>
+
+<span style="color: #f8f8f2">},</span> <span style="color: #f8f8f2">{});</span>
+
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">handleFormSubmit</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">event</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+  
+  <span style="color: #75715e">// Stop the form from submitting since we’re handling that with AJAX.</span>
+  <span style="color: #a6e22e">event</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">preventDefault</span><span style="color: #f8f8f2">();</span>
+  
+  <span style="color: #75715e">// Call our function to get the form data.</span>
+  <span style="color: #66d9ef">const</span> <span style="color: #a6e22e">data</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">formToJSON</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">form</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">elements</span><span style="color: #f8f8f2">);</span>
+
+  <span style="color: #75715e">// Demo only: print the form data onscreen as a formatted JSON object.</span>
+  <span style="color: #66d9ef">const</span> <span style="color: #a6e22e">dataContainer</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">getElementsByClassName</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;results__display&#39;</span><span style="color: #f8f8f2">)[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">];</span>
+  
+  <span style="color: #75715e">// Use `JSON.stringify()` to make the output valid, human-readable JSON.</span>
+  <span style="color: #a6e22e">dataContainer</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">textContent</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">JSON</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">stringify</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">null</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;  &quot;</span><span style="color: #f8f8f2">);</span>
+  
+  <span style="color: #75715e">// ...this is where we’d actually do something with the form data...</span>
+<span style="color: #f8f8f2">};</span>
+
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">form</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">getElementsByClassName</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;contact-form&#39;</span><span style="color: #f8f8f2">)[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">];</span>
+<span style="color: #a6e22e">form</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">addEventListener</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;submit&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">handleFormSubmit</span><span style="color: #f8f8f2">);</span>
+</pre></div>
+
+<p>I know. <em>I know.</em> It looks hairy. But let&rsquo;s dig in and see what this is doing.</p>
+
+<p>First, let&rsquo;s break this into its component parts:</p>
+
+<ol>
+<li>We have a function called <code>formToJSON()</code>, which accepts one argument: <code>form</code></li>
+<li>Inside that function, we return the value of <code>[].reduce.call()</code>, which accepts three arguments: a form, a function, and an empty object literal (<code>{}</code>)</li>
+<li>The function argument accepts the arguments <code>data</code> and <code>child</code>, and adds a new property with the key of <code>child.name</code> and the value <code>child.value</code>, finally returning the <code>data</code> object</li>
+</ol>
+
+<p><strong>After we&rsquo;ve added that code to our pen, we need to call the function from <code>handleSubmit()</code>.</strong> Find <code>const data = {};</code> inside the function and replace it with <code>const data = formToJSON(form.elements);</code>.</p>
+
+<p>Now we can run it by clicking the &ldquo;Send It!&rdquo; button will now output this:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
+  <span style="color: #f92672">&quot;salutation&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;Ms.&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;name&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;email&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;subject&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;I have a problem.&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;message&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;snacks&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;cake&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;secret&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;1b3a9374-1a8e-434e-90ab-21aa7b9b80e7&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;&quot;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>There are some issues here — for example, neither &ldquo;Ms.&rdquo; nor &ldquo;Cake&rdquo; was actually selected on the form, and there&rsquo;s an empty entry at the bottom (which is our button) — but this isn&rsquo;t too bad for a first step.</p>
+
+<p>So how did that just happen? Let&rsquo;s go step by step to figure it out.</p>
+
+<aside class="article__aside"><p><strong>NOTE:</strong> Using <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements"><code>form.elements</code></a>, we get pretty decent access to the form. For example, we can get the email using <code>form.elements.email.value</code>. However, if we need to convert this to JSON for use with AJAX, it&rsquo;s a disaster due to its inclusion of numerical indexes, IDs, and names. You can see this for yourself by adding <code>console.log(JSON.stringify(form.elements));</code> to <code>handleSubmit()</code>. That&rsquo;s why we&rsquo;re building our own function instead of just using this built-in access.</p>
+</aside>
+
+<h3 id="step-2-1-understand-how-reduce-works">Step 2.1 — Understand how <code>reduce()</code> works.</h3>
+
+<p>The simplest explanation for <code>reduce()</code> is this:</p>
+
+<blockquote>
+<p>The <code>reduce()</code> method uses a function to convert an array into a single value.</p>
+</blockquote>
+
+<p>This method is part of the <code>Array</code> prototype, so it can be applied to any array value.</p>
+
+<p>It takes two arguments:</p>
+
+<ol>
+<li>A reducer function, which is required.</li>
+<li>An initial value, which is optional (defaults to <code>0</code>).</li>
+</ol>
+
+<p>The reducer function is applied to each element of the array. This function accepts four arguments:</p>
+
+<ol>
+<li>The value returned by the reducer function when it ran on the previous element (or the initial value, if this is the first element).</li>
+<li>The current array element.</li>
+<li>The current array index.</li>
+<li>The whole array, in case the reducer needs a reference to it.</li>
+</ol>
+
+<p>For our reducer, we only need the first two arguments.</p>
+
+<h4 id="a-really-simple-example-of-reducing-an-array">A really simple example of reducing an array.</h4>
+
+<p>Let&rsquo;s say we have an array of numbers, which represent sales for the day:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">const</span> <span style="color: #a6e22e">sales</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[</span><span style="color: #ae81ff">100.12</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">19.49</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">42.18</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">99.62</span><span style="color: #f8f8f2">];</span>
+</pre></div>
+
+<p>We need to determine total sales for the day, so we set up this simple function to add up sales:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">function</span> <span style="color: #a6e22e">getTotalSales</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">previousTotal</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">currentSaleAmount</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">previousTotal</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">currentSaleAmount</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>Then we use <code>reduce()</code> to apply the function to the array of sales:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">const</span> <span style="color: #a6e22e">sales</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[</span><span style="color: #ae81ff">100.12</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">19.49</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">42.18</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">99.62</span><span style="color: #f8f8f2">];</span>
+
+<span style="color: #66d9ef">function</span> <span style="color: #a6e22e">getTotalSales</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">previousTotal</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">currentSaleAmount</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">previousTotal</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">currentSaleAmount</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">}</span>
+
+<span style="color: #a6e22e">sales</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">reduce</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">getTotalSales</span><span style="color: #f8f8f2">);</span>
+<span style="color: #75715e">// result: 271.41</span>
+</pre></div>
+
+<aside class="article__aside"><p><strong>TIP:</strong> You can run these examples in your browser&rsquo;s console to see the results for yourself.</p>
+</aside>
+
+<p>Now, if we want to condense this code a little, we can actually write the whole thing like this:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">const</span> <span style="color: #a6e22e">sales</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[</span><span style="color: #ae81ff">100.12</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">19.49</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">10</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">42.18</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">99.62</span><span style="color: #f8f8f2">];</span>
+<span style="color: #a6e22e">sales</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">reduce</span><span style="color: #f8f8f2">((</span><span style="color: #a6e22e">prev</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">curr</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span> <span style="color: #a6e22e">prev</span> <span style="color: #f92672">+</span> <span style="color: #a6e22e">curr</span><span style="color: #f8f8f2">);</span>
+<span style="color: #75715e">// result: 271.41</span>
+</pre></div>
+
+<p>When this is called, <code>reduce()</code> starts with <code>0</code> as the value of <code>prev</code>, and takes the first element of the array, <code>100.12</code>, as the value of <code>curr</code>. It adds those together and returns them.</p>
+
+<p>Now <code>reduce()</code> moves to the second element in the array, <code>19.49</code>, and this time the value of <code>prev</code> is the value returned last time: <code>100.12</code>.</p>
+
+<p>This process is repeated until all of the elements have been added together, and we end up with our total sales for the day: <code>271.41</code>.</p>
+
+<h3 id="step-2-2-deconstruct-the-function">Step 2.2 — Deconstruct the function.</h3>
+
+<p>As it stands, <code>formToJSON()</code> is actually made of three parts:</p>
+
+<ol>
+<li>A <em>reducer function</em> to combine our form elements into a single object.</li>
+<li>An initial value of <code>{}</code> to hold our form data.</li>
+<li>A call to <code>reduce()</code> using <code>call()</code>, which allows us to force <code>reduce()</code> to work with <code>elements</code>, even though it&rsquo;s <em>technically</em> not an array.</li>
+</ol>
+
+<aside class="article__aside"><p><strong>NOTE:</strong> The form elements are actually what&rsquo;s called an <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormControlsCollection"><code>HTMLFormControlsCollection</code></a>, which is &ldquo;array-like&rdquo;, meaning it&rsquo;s basically an array, but it&rsquo;s missing some of the array methods, and has some of its own special properties and methods.</p>
+</aside>
+
+<h3 id="step-2-3-write-the-reducer-function">Step 2.3 — Write the reducer function.</h3>
+
+<p>First up, we need to have our reducer function. In the simple example of reducing an array, we used single values, which won&rsquo;t work in this case. Instead, we want to add each field to an object with a format like this:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">field_name</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;field_value&quot;</span><span style="color: #f8f8f2">,</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>So our reducer function works like this:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// This is the function that is called on each element of the array.</span>
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">reducerFunction</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+
+  <span style="color: #75715e">// Add the current field to the object.</span>
+  <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span><span style="color: #f8f8f2">;</span>
+
+  <span style="color: #75715e">// For the demo only: show each step in the reducer’s progress.</span>
+  <span style="color: #a6e22e">console</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">log</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">JSON</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">stringify</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">));</span>
+
+  <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">};</span>
+</pre></div>
+
+<p>The <code>data</code> object is the previous value of the reducer, and <code>element</code> is the current form element in the array. We then add a new property to the object using the element&rsquo;s <code>name</code> property — this is the input&rsquo;s <code>name</code> attribute in the HTML — and store its <code>value</code> there.</p>
+
+<p>When we return <code>data</code>, we make the updated object available to the next call of the funciton, which allows us to add each field to the object, one by one.</p>
+
+<h3 id="step-2-4-call-the-reducer">Step 2.4 — Call the reducer.</h3>
+
+<p>To make it a little more obvious what&rsquo;s happening in the <code>formToJSON()</code> function, here&rsquo;s what it looks like if we break it up into more verbose code:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">const</span> <span style="color: #a6e22e">formToJSON_deconstructed</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">elements</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+  
+  <span style="color: #75715e">// This is the function that is called on each element of the array.</span>
+  <span style="color: #66d9ef">const</span> <span style="color: #a6e22e">reducerFunction</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+    
+    <span style="color: #75715e">// Add the current field to the object.</span>
+    <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span><span style="color: #f8f8f2">;</span>
+    
+    <span style="color: #75715e">// For the demo only: show each step in the reducer’s progress.</span>
+    <span style="color: #a6e22e">console</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">log</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">JSON</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">stringify</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">));</span>
+
+    <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">};</span>
+  
+  <span style="color: #75715e">// This is used as the initial value of `data` in `reducerFunction()`.</span>
+  <span style="color: #66d9ef">const</span> <span style="color: #a6e22e">reducerInitialValue</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{};</span>
+  
+  <span style="color: #75715e">// To help visualize what happens, log the inital value.</span>
+  <span style="color: #a6e22e">console</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">log</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;Initial `data` value:&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">JSON</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">stringify</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">reducerInitialValue</span><span style="color: #f8f8f2">));</span>
+  
+  <span style="color: #75715e">// Now we reduce by `call`-ing `Array.prototype.reduce()` on `elements`.</span>
+  <span style="color: #66d9ef">const</span> <span style="color: #a6e22e">formData</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[].</span><span style="color: #a6e22e">reduce</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">call</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">elements</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">reducerFunction</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">reducerInitialValue</span><span style="color: #f8f8f2">);</span>
+  
+  <span style="color: #75715e">// The result is then returned for use elsewhere.</span>
+  <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">formData</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">};</span>
+</pre></div>
+
+<p>In the above example, we do exactly the same thing as in <code>formToJSON()</code>, but we&rsquo;ve broken it down into its component parts.</p>
+
+<p>We can see the output if we update <code>handleSubmit()</code> and change the call to <code>formToJSON(form.elements)</code> to <code>formToJSON_deconstructed(form.elements)</code>. Check the console to see this output:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>Initial `data` value: {}
+{&quot;salutation&quot;:&quot;Mr.&quot;}
+{&quot;salutation&quot;:&quot;Mrs.&quot;}
+{&quot;salutation&quot;:&quot;Ms.&quot;}
+{&quot;salutation&quot;:&quot;Ms.&quot;,&quot;name&quot;:&quot;&quot;}
+{&quot;salutation&quot;:&quot;Ms.&quot;,&quot;name&quot;:&quot;&quot;,&quot;email&quot;:&quot;&quot;}
+{&quot;salutation&quot;:&quot;Ms.&quot;,&quot;name&quot;:&quot;&quot;,&quot;email&quot;:&quot;&quot;,&quot;subject&quot;:&quot;I have a problem.&quot;}
+{&quot;salutation&quot;:&quot;Ms.&quot;,&quot;name&quot;:&quot;&quot;,&quot;email&quot;:&quot;&quot;,&quot;subject&quot;:&quot;I have a problem.&quot;,&quot;message&quot;:&quot;&quot;}
+{&quot;salutation&quot;:&quot;Ms.&quot;,&quot;name&quot;:&quot;&quot;,&quot;email&quot;:&quot;&quot;,&quot;subject&quot;:&quot;I have a problem.&quot;,&quot;message&quot;:&quot;&quot;,&quot;snacks&quot;:&quot;pizza&quot;}
+{&quot;salutation&quot;:&quot;Ms.&quot;,&quot;name&quot;:&quot;&quot;,&quot;email&quot;:&quot;&quot;,&quot;subject&quot;:&quot;I have a problem.&quot;,&quot;message&quot;:&quot;&quot;,&quot;snacks&quot;:&quot;cake&quot;}
+{&quot;salutation&quot;:&quot;Ms.&quot;,&quot;name&quot;:&quot;&quot;,&quot;email&quot;:&quot;&quot;,&quot;subject&quot;:&quot;I have a problem.&quot;,&quot;message&quot;:&quot;&quot;,&quot;snacks&quot;:&quot;cake&quot;,&quot;secret&quot;:&quot;1b3a9374-1a8e-434e-90ab-21aa7b9b80e7&quot;}
+{&quot;salutation&quot;:&quot;Ms.&quot;,&quot;name&quot;:&quot;&quot;,&quot;email&quot;:&quot;&quot;,&quot;subject&quot;:&quot;I have a problem.&quot;,&quot;message&quot;:&quot;&quot;,&quot;snacks&quot;:&quot;cake&quot;,&quot;secret&quot;:&quot;1b3a9374-1a8e-434e-90ab-21aa7b9b80e7&quot;,&quot;&quot;:&quot;&quot;}
+</pre></div>
+
+<p>We can see here that the reducer is called for every form element, and the object grows with each subsequent call until we&rsquo;ve got an entry for every <code>name</code> value in the form.</p>
+
+<p><strong>Change <code>handleSubmit()</code> back to using <code>formToJSON(form.elements)</code></strong>, and let&rsquo;s move on to cleaning up this output to only include fields it <em>should</em> include.</p>
+
+<h2 id="step-3-add-a-check-to-make-sure-only-the-fields-we-want-are-collected">Step 3: Add a Check to Make Sure Only the Fields We Want Are Collected</h2>
+
+<p>The first problem we can see in the output is that fields with both empty <code>name</code> and empty <code>value</code> attributes have been added to the array. This isn&rsquo;t what we want in this case, so we need to add a quick check to verify that fields have both a <code>name</code> and a <code>value</code> before we add them.</p>
+
+<h3 id="step-3-1-create-a-function-to-check-for-valid-elements">Step 3.1 — Create a function to check for valid elements.</h3>
+
+<p>First, let&rsquo;s add a new function to our pen called <code>isValidElement()</code>. This function will accept one argument — the <code>element</code> — and return either <code>true</code> or <code>false</code>.</p>
+
+<p>To return <code>true</code>, the element must have:</p>
+
+<ol>
+<li>A non-empty <code>name</code> property.</li>
+<li>A non-empty <code>value</code> property.</li>
+</ol>
+
+<p>Implement this check like so:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * Checks that an element has a non-empty `name` and `value` property.</span>
+<span style="color: #75715e"> * @param  {Element} element  the element to check</span>
+<span style="color: #75715e"> * @return {Bool}             true if the element is an input, false if not</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">isValidElement</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">element</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+  <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">};</span>
+</pre></div>
+
+<p>Pretty simple, right?</p>
+
+<p>This gives us a flag that lets us avoid unused elements (like the button) and unfilled fields (such as an empty Email field) from being added to the form data object.</p>
+
+<h3 id="step-3-2-add-the-check-to-formtojson">Step 3.2 — Add the check to <code>formToJSON()</code>.</h3>
+
+<p>Next, we need to add an <code>if</code> check for whether or not our <code>element</code> is valid in <code>formToJSON()</code>. Since we don&rsquo;t want to add anything if the element is <em>not</em> valid, we can simply do the following:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">const</span> <span style="color: #a6e22e">formToJSON</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">elements</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">[].</span><span style="color: #a6e22e">reduce</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">call</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">elements</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+  
+  <span style="color: #75715e">// Make sure the element has the required properties.</span>
+  <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">isValidElement</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">))</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">},</span> <span style="color: #f8f8f2">{});</span>
+</pre></div>
+
+<p>Now when we submit our form, the output is much cleaner:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
+  <span style="color: #f92672">&quot;salutation&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;Ms.&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;subject&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;I have a problem.&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;snacks&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;cake&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;secret&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;1b3a9374-1a8e-434e-90ab-21aa7b9b80e7&quot;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>However, we&rsquo;re still not there yet. In the next step, we&rsquo;ll deal with checkable elements like radio inputs and checkboxes.</p>
+
+<h2 id="step-4-only-store-checkable-fields-if-a-field-is-in-checked-state">Step 4: Only Store Checkable Fields If a Field Is In <code>checked</code> State</h2>
+
+<p>Now we need another check to identify whether or not an element should be added to the array. For instance, right now the <code>salutation</code> field is being stored with the value <code>Ms.</code>, even though that value <em>is not selected</em> in the form.</p>
+
+<p>Obviously, this is bad news. So let&rsquo;s fix it.</p>
+
+<h3 id="step-4-1-create-a-function-to-check-for-checkable-elements">Step 4.1 — Create a function to check for checkable elements.</h3>
+
+<p>First, let&rsquo;s add a new function to check whether or not an element&rsquo;s value should be considered valid for inclusion in the object.</p>
+
+<p>Our criteria for determining a &ldquo;valid&rdquo; element are:</p>
+
+<ol>
+<li>The element is <em>not</em> a checkbox or radio input.</li>
+<li>If the element <em>is</em> a checkbox or radio input, it has the <code>checked</code> attribute.</li>
+</ol>
+
+<p>Add the following to create this check:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * Checks if an element’s value can be saved (e.g. not an unselected checkbox).</span>
+<span style="color: #75715e"> * @param  {Element} element  the element to check</span>
+<span style="color: #75715e"> * @return {Boolean}          true if the value should be added, false if not</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">isValidValue</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">element</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+  <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">!</span><span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;checkbox&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;radio&#39;</span><span style="color: #f8f8f2">].</span><span style="color: #a6e22e">includes</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">type</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">||</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">checked</span><span style="color: #f8f8f2">);</span>
+<span style="color: #f8f8f2">};</span>
+</pre></div>
+
+<aside class="article__aside"><p><strong>NOTE:</strong> The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes"><code>includes()</code></a> method is an easy way to see if a value is present in an array. I prefer this to multiple <code>if</code> checks, switch statements, or other ways of matching a value against an array.</p>
+</aside>
+
+<h3 id="step-4-2-add-the-check-to-formtojson">Step 4.2 — Add the check to <code>formToJSON()</code>.</h3>
+
+<p>Now we can add this check to <code>formToJSON()</code>, which is as simple as adding a second condition to our existing <code>if</code> check:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">const</span> <span style="color: #a6e22e">formToJSON</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">elements</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">[].</span><span style="color: #a6e22e">reduce</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">call</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">elements</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+  
+  <span style="color: #75715e">// Make sure the element has the required properties and should be added.</span>
+  <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">isValidElement</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #a6e22e">isValidValue</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">))</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span><span style="color: #f8f8f2">;</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">},</span> <span style="color: #f8f8f2">{});</span>
+</pre></div>
+
+<p>Now we can run our code and see that the output is much cleaner:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
+  <span style="color: #f92672">&quot;subject&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;I have a problem.&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;secret&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;1b3a9374-1a8e-434e-90ab-21aa7b9b80e7&quot;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>This is much better — now we only get elements that actually have a value set.</p>
+
+<h2 id="step-5-if-a-field-allows-multiple-values-store-them-in-an-array">Step 5: If a Field Allows Multiple Values, Store Them In an Array</h2>
+
+<p>But we&rsquo;re not quite done yet, because the form is still fucking up the <code>snacks</code> field — which is <em>clearly</em> the most important field.</p>
+
+<p>Try selecting both &ldquo;Pizza&rdquo; and &ldquo;Cake&rdquo; to see the problem:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
+  <span style="color: #f92672">&quot;subject&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;I have a problem.&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;snacks&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;cake&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;secret&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;1b3a9374-1a8e-434e-90ab-21aa7b9b80e7&quot;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>Nope. This is a disaster. We need both pizza AND cake. So let&rsquo;s make sure that can happen.</p>
+
+<h3 id="step-5-1-create-checks-for-elements-that-accept-multiple-values">Step 5.1 — Create checks for elements that accept multiple values.</h3>
+
+<p>The check for whether or not multiple values are allowed has two parts, because there are two elements that allow multiple values.</p>
+
+<p>First, we need to add a check for any checkboxes. This is simple enough: we just check if the <code>type</code> is <code>checkbox</code>:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * Checks if an input is a checkbox, because checkboxes allow multiple values.</span>
+<span style="color: #75715e"> * @param  {Element} element  the element to check</span>
+<span style="color: #75715e"> * @return {Boolean}          true if the element is a checkbox, false if not</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">isCheckbox</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">element</span> <span style="color: #f92672">=&gt;</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">type</span> <span style="color: #f92672">===</span> <span style="color: #e6db74">&#39;checkbox&#39;</span><span style="color: #f8f8f2">;</span>
+</pre></div>
+
+<p>Second, we need to add a check for a <code>select</code> element with the <code>multiple</code> attribute.</p>
+
+<p>This is a bit trickier, but still pretty straightforward. A <code>select</code> has a property called <code>options</code>, so we&rsquo;ll check for that first. Next, we check for the <code>multiple</code> property. If both exist, our check will return <code>true</code>:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * Checks if an input is a `select` with the `multiple` attribute.</span>
+<span style="color: #75715e"> * @param  {Element} element  the element to check</span>
+<span style="color: #75715e"> * @return {Boolean}          true if the element is a multiselect, false if not</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">isMultiSelect</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">element</span> <span style="color: #f92672">=&gt;</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">options</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">multiple</span><span style="color: #f8f8f2">;</span>
+</pre></div>
+
+<h3 id="step-5-2-handle-checkboxes-in-formtojson">Step 5.2 — Handle checkboxes in <code>formToJSON()</code>.</h3>
+
+<p>Inside <code>formToJSON()</code>, we need to add another <code>if</code> block for our <code>isCheckbox()</code> function.</p>
+
+<p>If the current element is a checkbox, we need to store its value(s) in an array. Let&rsquo;s take a look at the code first, and then we&rsquo;ll talk about how it works.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">const</span> <span style="color: #a6e22e">formToJSON</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">elements</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">[].</span><span style="color: #a6e22e">reduce</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">call</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">elements</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+
+  <span style="color: #75715e">// Make sure the element has the required properties and should be added.</span>
+  <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">isValidElement</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #a6e22e">isValidValue</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">))</span> <span style="color: #f8f8f2">{</span>
+
+    <span style="color: #75715e">/*</span>
+<span style="color: #75715e">     * Some fields allow for more than one value, so we need to check if this</span>
+<span style="color: #75715e">     * is one of those fields and, if so, store the values as an array.</span>
+<span style="color: #75715e">     */</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">isCheckbox</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">))</span> <span style="color: #f8f8f2">{</span>
+      
+      <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">||</span> <span style="color: #f8f8f2">[]).</span><span style="color: #a6e22e">concat</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">},</span> <span style="color: #f8f8f2">{});</span>
+</pre></div>
+
+<p>Since we need to get the element&rsquo;s values into an array, we use a bit of shorthand in <code>(data[element.name] || [])</code>, which means, &ldquo;use the existing array, or a new, empty one&rdquo;.</p>
+
+<p>Then we use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat"><code>concat()</code></a> to add the current value to the array.</p>
+
+<p>Now if we check the options for both pizza and cake, we see the following:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
+  <span style="color: #f92672">&quot;subject&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;I have a problem.&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;snacks&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">[</span>
+    <span style="color: #e6db74">&quot;pizza&quot;</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;cake&quot;</span>
+  <span style="color: #f8f8f2">],</span>
+  <span style="color: #f92672">&quot;secret&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;1b3a9374-1a8e-434e-90ab-21aa7b9b80e7&quot;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>Much better. Crisis averted, everyone!</p>
+
+<h3 id="step-5-3-write-a-function-to-retrieve-values-from-multi-selects">Step 5.3 — Write a function to retrieve values from multi-selects.</h3>
+
+<p>Our very last step before we can call this sucker done is to add a check for <code>select</code> fields that support multiple selected options. I&rsquo;m not a big fan of this input type, because I think it&rsquo;s a confusing input for people to use — one that&rsquo;s easily replaced with checkboxes — but for the sake of covering bases we&rsquo;ll plug it in.</p>
+
+<p>The selected options from a multi-select are stored in their own array-like object, called an <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection"><code>HTMLOptionsCollection</code></a>, so we need to run <code>reduce()</code> on this as well.</p>
+
+<p>Let&rsquo;s keep things clean by moving this out into its own function.</p>
+
+<p>This function will accept each options, check if the <code>selected</code> property is <code>true</code>, then add its value to an array called <code>values</code>, which will ultimately be returned containing the values of all selected options.</p>
+
+<p>Add the following to the pen:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">/**</span>
+<span style="color: #75715e"> * Retrieves the selected options from a multi-select as an array.</span>
+<span style="color: #75715e"> * @param  {HTMLOptionsCollection} options  the options for the select</span>
+<span style="color: #75715e"> * @return {Array}                          an array of selected option values</span>
+<span style="color: #75715e"> */</span>
+<span style="color: #66d9ef">const</span> <span style="color: #a6e22e">getSelectValues</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">options</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">[].</span><span style="color: #a6e22e">reduce</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">call</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">options</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">values</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">option</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+  <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">option</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">selected</span> <span style="color: #f92672">?</span> <span style="color: #a6e22e">values</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">concat</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">option</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">:</span> <span style="color: #a6e22e">values</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">},</span> <span style="color: #f8f8f2">[]);</span>
+</pre></div>
+
+<h3 id="step-5-4-handle-multi-select-values-in-formtojson">Step 5.4 — Handle multi-select values in <code>formToJSON()</code>.</h3>
+
+<p>To put a bow on all this, we need to add an <code>else if</code> block in our <code>formToJSON()</code> function.</p>
+
+<p>After the <code>isCheckbox()</code> check, we&rsquo;ll add a <code>isMultiSelect()</code> check. If that returns <code>true</code>, we&rsquo;ll add the select&rsquo;s values to the object as an array using <code>getSelectValues()</code>.</p>
+
+<p>Make the following updates to the pen:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">const</span> <span style="color: #a6e22e">formToJSON</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">elements</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">[].</span><span style="color: #a6e22e">reduce</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">call</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">elements</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+
+  <span style="color: #75715e">// Make sure the element has the required properties and should be added.</span>
+  <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">isValidElement</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #a6e22e">isValidValue</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">))</span> <span style="color: #f8f8f2">{</span>
+
+    <span style="color: #75715e">/*</span>
+<span style="color: #75715e">     * Some fields allow for more than one value, so we need to check if this</span>
+<span style="color: #75715e">     * is one of those fields and, if so, store the values as an array.</span>
+<span style="color: #75715e">     */</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">isCheckbox</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">))</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">||</span> <span style="color: #f8f8f2">[]).</span><span style="color: #a6e22e">concat</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">isMultiSelect</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">))</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">getSelectValues</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">[</span><span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">name</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">element</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">value</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span>
+  <span style="color: #f8f8f2">}</span>
+
+  <span style="color: #66d9ef">return</span> <span style="color: #a6e22e">data</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">},</span> <span style="color: #f8f8f2">{});</span>
+</pre></div>
+
+<h4 id="run-a-quick-test-of-multi-select-values">Run a quick test of multi-select values.</h4>
+
+<p>Since our current form doesn&rsquo;t have a select with the <code>multiple</code> attribute, so let&rsquo;s quickly add that to the <code>subject</code> field in our pen.</p>
+
+<p>Look for the <code>select</code> in the HTML pane and add the <code>multiple</code> attribute like so:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>      <span style="color: #f92672">select</span><span style="color: #a6e22e">#subject.contact-form__input.contact-form__input--select</span>(
+        <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;subject&quot;</span>
+        <span style="color: #a6e22e">multiple</span>
+      )
+</pre></div>
+
+<p>Now we can actually test. Click on both options and submit the form. The out put will now be:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
+  <span style="color: #f92672">&quot;subject&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">[</span>
+    <span style="color: #e6db74">&quot;I have a problem.&quot;</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;I have a general question.&quot;</span>
+  <span style="color: #f8f8f2">],</span>
+  <span style="color: #f92672">&quot;secret&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;1b3a9374-1a8e-434e-90ab-21aa7b9b80e7&quot;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>After we&rsquo;ve tested, we can remove the <code>multiple</code> attribute from the <code>select</code> input.</p>
+
+<aside class="article__aside"><p><strong>NOTE:</strong> Reading values from a multi-select isn&rsquo;t supported in IE11 and below using this script. Personally, I would recommend just using checkboxes — I think multi-selects are a confusing user experience for many people — but if you need to support them in older browsers you&rsquo;ll need to modify this code.</p>
+</aside>
+
+<h2 id="the-final-result-form-field-values-are-collected-in-an-object-for-use-as-json">The Final Result: Form Field Values Are Collected in an Object for Use as JSON</h2>
+
+<p>At this point, we&rsquo;ve built a small script that will extract the values from a form as an object literal, which can easily be converted to JSON using <code>JSON.stringify()</code>.</p>
+
+<p>We can test by filling out our form with dummy data and submitting it.</p>
+
+<p>Use your own fork of the pen, or enter dummy data in the form below:</p>
+
+<p><p data-height="976" data-theme-id="dark" data-slug-hash="YWJLwz" data-default-tab="result" data-user="jlengstorf" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/jlengstorf/pen/YWJLwz/">How to Get Form Field Data as JSON Using Plain JavaScript</a> by Jason Lengstorf (<a href="http://codepen.io/jlengstorf">@jlengstorf</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script></p>
+
+<p>After submitting, we&rsquo;ll see the info we entered, and it&rsquo;ll look something like the following:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span>
+  <span style="color: #f92672">&quot;salutation&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;Ms.&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;name&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;Pac-Man&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;email&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;mspacman@example.com&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;subject&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;I have a problem.&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;message&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;These ghosts keep chasing me!&quot;</span><span style="color: #f8f8f2">,</span>
+  <span style="color: #f92672">&quot;snacks&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">[</span>
+    <span style="color: #e6db74">&quot;pizza&quot;</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&quot;cake&quot;</span>
+  <span style="color: #f8f8f2">],</span>
+  <span style="color: #f92672">&quot;secret&quot;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&quot;1b3a9374-1a8e-434e-90ab-21aa7b9b80e7&quot;</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:homework">And even if it&rsquo;s not something we&rsquo;d ever use in production, writing our own utility scripts is a fantastic way to increase our understanding of how things work. If we rely too much on a tool&rsquo;s &ldquo;magic&rdquo; to make our apps work, it becomes <em>really</em> hard to debug them when we find a problem that falls outside of the tool&rsquo;s scope.
+ <a class="footnote-return" href="#fnref:homework">↩</a></li>
+</ol>
+</div>
+<section class="article__discussion"><h2 class="article__discussion-heading">Question? Ideas for improvements? Spotted a bug?</h2><p class="article__discussion-text">The code in this article is <a href="http://codepen.io/jlengstorf/pen/YWJLwz">available on Codepen</a>. You can <a href="http://codepen.io/jlengstorf/details/YWJLwz">add a comment, fork, or favorite</a> this pen. I'd really love to hear your ideas for optimizations, improvements, or improved clarity.</p></section></article><footer class="article__footer footer"><div class="footer__meta"><amp-img class="footer__image" src="https://code.lengstorf.com/images/jason-lengstorf.jpg" srcset="https://code.lengstorf.com/images/jason-lengstorf.jpg 1x, https://code.lengstorf.com/images/jason-lengstorf@2x.jpg 2x" attribution="paint with stars photography" width="125" height="125"></amp-img><div class="footer__links"><nav class="footer__links-nav"><a class="footer__link" href="https://twitter.com/jlengstorf"><svg class="footer__icon footer__icon--twitter" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path fill-rule="evenodd" d="M30 8c-1.2.5-2.4.8-3.7 1 1.3-.8 2.3-2 2.7-3.4-1.2.7-2.5 1.2-4 1.4-1-1-2.6-2-4.3-2-3.4 0-6.2 3-6.2 6.2 0 .5 0 1 .2 1.4C9.7 12.4 5 10 2 6.2c-.4 1-.7 2-.7 3 0 2.2 1 4 2.7 5.2-1 0-2-.3-2.8-.8 0 3 2 5.6 5 6-.6.3-1 .3-1.7.3-.4 0-.8 0-1-.2C4 22.3 6.4 24 9 24c-2 1.7-4.7 2.7-7.5 2.7H0c2.7 1.7 6 2.7 9.4 2.7 11.3 0 17.4-9.4 17.4-17.5v-1c1.2-.7 2.2-1.8 3-3z"></path></svg></a> <a class="footer__link" href="https://facebook.com/jlengstorf"><svg class="footer__icon footer__icon--facebook" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path fill-rule="evenodd" d="M11 5.8v4H8V15h3v15h6.2V15h4.2s.4-2.4.5-5H17V6.4c0-.5.7-1.2 1.4-1.2H22V0h-4.6C11 0 11 5 11 5.8z"></path></svg></a> <a class="footer__link" href="https://github.com/jlengstorf"><svg class="footer__icon footer__icon--github" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path fill-rule="evenodd" d="M15 0C6.7 0 0 6.7 0 15c0 6.6 4.3 12.2 10.3 14.2.7.2 1-.3 1-.7V26c-4.2 1-5-2-5-2-.8-1.8-1.8-2.2-1.8-2.2-1.3-1 0-1 0-1 1.7 0 2.4 1.6 2.4 1.6 1.3 2.3 3.5 1.6 4.3 1.2 0-1 .5-1.6 1-2-3.4-.3-7-1.6-7-7.4 0-1.6.7-3 1.7-4-.2-.4-.7-2 0-4 0 0 1.4-.4 4.2 1.6 1.2-.4 2.5-.5 3.8-.5 1.3 0 2.6 0 3.8.5 2.8-2 4-1.6 4-1.6 1 2 .4 3.6.2 4 1 1 1.6 2.4 1.6 4 0 5.8-3.5 7-7 7.4.7.5 1 1.4 1 2.8v4c0 .5.4 1 1.2.8 6-2 10.2-7.6 10.2-14.2 0-8.3-6.7-15-15-15"></path></svg></a></nav></div></div><div class="footer__bio"><h3 class="footer__heading">Jason Lengstorf is a developer, designer, author, speaker, and traveler.</h3><div class="footer__worked-with"><p class="footer__worked-with-lede">I’ve worked with great companies, including:</p><amp-img class="footer__worked-with-image" src="https://code.lengstorf.com/images/worked-with-dark.png" srcset="https://code.lengstorf.com/images/worked-with-dark.png 1x, https://code.lengstorf.com/images/worked-with-dark@2x.png 2x" width="300" height="19"></amp-img></div><div class="footer__blurb"><p>Like so many of my generation, I’ve dedicated my life to learning a skill that’ll be worth jack shit when the zombies get here. Until then, I’ll be figuring out new ways to move lights in the box in exchange for social status and food money.</p><p>You can <a href="https://code.lengstorf.com/hire-me/">hire me as a designer, developer, or a trainer</a> — I can show you how to build it, teach your team how to build it faster, or build it for you.</p><p>I also write about non-code things at <a href="https://lengstorf.com/">lengstorf.com</a>.</p></div></div></footer></article></main><footer class="site-footer"><nav class="site-footer__nav"><a class="site-footer__nav-link" href="https://code.lengstorf.com/" title="Jason Lengstorf on code">Home</a> <a class="site-footer__nav-link" href="https://code.lengstorf.com/category/front-end/" title="">Front-End</a> <a class="site-footer__nav-link" href="https://code.lengstorf.com/category/api/" title="">APIs</a> <a class="site-footer__nav-link" href="https://code.lengstorf.com/category/build-tools/" title="">Build Tools</a> <a class="site-footer__nav-link" href="https://code.lengstorf.com/category/devops/" title="">DevOps</a> <a class="site-footer__nav-link" href="https://code.lengstorf.com/category/cms/" title="">CMS</a> <a class="site-footer__nav-link" href="https://code.lengstorf.com/hire-me/" title="">Hire Me</a> <a class="site-footer__nav-link" href="https://lengstorf.com/contact/" title="">Contact</a> </nav><p class="site-footer__credits">All content © <a href="https://code.lengstorf.com/">Jason Lengstorf</a>.</p></footer><script>(function(d) {
+  var config = {
+    kitId: 'fnr1orp',
+    scriptTimeout: 3000,
+    async: true
+  },
+  h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+})(document);</script></body></html>
