@@ -1,6 +1,7 @@
 +++
 date = "2016-07-21"
 draft = true
+type = "blog"
 
 seo_title = "Deploying a Node.js App to DigitalOcean with SSL"
 description = "This step-by-step tutorial walks through the process of deploying a Node.js app to a DigitalOcean droplet with free SSL from Let's Encrypt for $5/month."
