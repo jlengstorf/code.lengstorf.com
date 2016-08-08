@@ -9,6 +9,7 @@ canonifyurls = true
 Paginate = 6
 
 PygmentsCodeFences = true
+pygmentsuseclasses = true
 
 theme = "code.lengstorf"
 
