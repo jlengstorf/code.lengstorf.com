@@ -92,7 +92,7 @@
   &__worked-with {
     color: $color-caption;
     font-size: 8px;
-    font-weight: $font-weight-light;
+    font-weight: $font-weight-normal;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
