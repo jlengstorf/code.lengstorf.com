@@ -105,12 +105,37 @@ html(⚡)
     noscript
       style(amp-boilerplate).
         body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}
-  script(async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js")
-  script(async src="https://cdn.ampproject.org/v0.js")
+    script(
+      async custom-element="amp-youtube"
+      src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"
+    )
+    script(
+      async custom-element="amp-analytics"
+      src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
+    )
+    script(
+      async custom-element="amp-iframe"
+      src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
+    )
+    script(async src="https://cdn.ampproject.org/v0.js")
 
   body.no-js
-    if process.env.NODE_ENV !== 'production'
-      include ../partials/dev/browsersync.pug
+    // {{ if .Site.BuildDrafts }}
+    include ../partials/dev/browsersync.pug
+    // {{ end }}
+    amp-analytics(type="googleanalytics" id="analytics1")
+      script( type="application/json").
+        {
+          "vars": {
+            "account": "UA-39001606-2"
+          },
+          "triggers": {
+            "trackPageview": {
+              "on": "visible",
+              "request": "pageview"
+            }
+          }
+        }
     header.site-header
       nav.site-header__nav.nav.nav--main
         each link in config.nav
@@ -149,12 +174,12 @@ html(⚡)
         p.site-footer__credits
           | All content © #[a(href="{{ .Site.BaseURL }}") Jason Lengstorf].
 
-    script.
-      (function(d) {
-        var config = {
-          kitId: 'fnr1orp',
-          scriptTimeout: 3000,
-          async: true
-        },
-        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-      })(document);
+    //- script.
+    //-   (function(d) {
+    //-     var config = {
+    //-       kitId: 'fnr1orp',
+    //-       scriptTimeout: 3000,
+    //-       async: true
+    //-     },
+    //-     h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    //-   })(document);

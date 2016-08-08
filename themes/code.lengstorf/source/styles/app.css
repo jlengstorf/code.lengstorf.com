@@ -7,9 +7,15 @@
  */
 @import './config/variables';
 @import './config/colors';
+@import './config/fonts';
 @import './config/typography';
 @import './utils/reset';
 @import './utils/accessibility';
+
+/*
+ * ## Syntax Highlighting
+ */
+@import './pygments/monokai';
 
 /*
  * ## Include Block-Specific Styles
