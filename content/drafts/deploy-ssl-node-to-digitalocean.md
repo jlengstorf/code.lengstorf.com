@@ -68,9 +68,9 @@ First, open Terminal[^windows] and check for existing SSH keys:
 [^windows]:
     If you're on Windows, check out [Git Bash](https://git-scm.com/) for a way to run these commands on your computer.
 
-{{< highlight bash >}}
+``` bash
     ls -la ~/.ssh
-{{< /highlight >}}
+```
 
 If you already have SSH keys set up, you should see a file called `id_rsa.pub`. (If there's a file ending in `.pub`, it's very likely an SSH key.)
 
@@ -80,13 +80,13 @@ If you already have SSH keys set up, you should see a file called `id_rsa.pub`. 
 
 To copy your SSH key, use one of the following commands:
 
-{{< highlight bash >}}
+``` bash
 # This copies the key so you can paste with command + V
 pbcopy < ~/.ssh/id_rsa.pub
 
 # This prints it in the command line for manual copying
 cat ~/.ssh/id_rsa.pub
-{{< /highlight >}}
+```
 
 #### Add your SSH key to the droplet
 
@@ -112,14 +112,14 @@ Your new droplet will display its IP address once it's set up. You can click on 
 
 DigitalOcean droplets are created with a `root` user, and since we added our SSH keys, we can now log in without a password. Like magic!
 
-{{< highlight bash >}}
+``` bash
 # Make sure to replace the IP below with your server's IP address
 ssh root@192.168.1.1
-{{< /highlight >}}
+```
 
 You will most likely be asked if you want to continue connecting the first time you log in. Type `yes` to continue, and you'll see something similar to the following:
 
-{{< highlight bash >}}
+``` bash
 $ ssh root@138.68.11.65
 The authenticity of host '138.68.11.65 (138.68.11.65)' can't be established.
 ECDSA key fingerprint is SHA256:f1qsLkumkNyRNfDVgjJk2R7kRlonuce1IMoEVTL2sfE.
@@ -144,7 +144,7 @@ Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
 applicable law.
 
 root@nodejs-ssl-deploy:~#
-{{< /highlight >}}
+```
 
 ### Configure the server with basic security.
 
@@ -157,33 +157,33 @@ Once we're logged into the server, we need to get a few things configured to kee
 
 First, we're going to add a new user with `sudo` privileges. To do this, run the following command while logged into your droplet:
 
-{{< highlight bash >}}
+``` bash
 # You can choose any username you want here.
 adduser jason
-{{< /highlight >}}
+```
 
 This command prompts us for a password, and then for some additional, optional details.
 
 Afterward, we can see that our user has been created by running `id <your_username>`, which should output something like the following:
 
-{{< highlight bash >}}
+``` bash
 root@nodejs-ssl-deploy:~# id jason
 uid=1000(jason) gid=1000(jason) groups=1000(jason)
-{{< /highlight >}}
+```
 
 In order to run some of the commands on the server, such as restarting services, we need to add our new user to the `sudo` group. Do this by running the following command:
 
-{{< highlight bash >}}
+``` bash
 # Don't forget: use your own username here
 usermod -aG sudo jason
-{{< /highlight >}}
+```
 
 Now if we run `id jason` we can see the `sudo` group has been applied.
 
-{{< highlight bash >}}
+``` bash
 root@nodejs-ssl-deploy:~# id jason
 uid=1000(jason) gid=1000(jason) groups=1000(jason),27(sudo)
-{{< /highlight >}}
+```
 
 {{% aside %}}
   `sudo` is short for "superuser do". It's roughly equivalent to running a command as `root`.
@@ -193,7 +193,7 @@ uid=1000(jason) gid=1000(jason) groups=1000(jason),27(sudo)
 
 Next, we need to add our SSH key to the new user. This allows us to log in without a password, which is important because we're planning to disable password logins for this server.
 
-{{< highlight bash >}}
+``` bash
 # Become the new user
 su - jason
 
@@ -205,19 +205,19 @@ chmod 700 ~/.ssh
 
 # Create a file for SSH keys
 nano ~/.ssh/authorized_keys
-{{< /highlight >}}
+```
 
 The `nano` editor allows us to copy-paste your SSH key — the same one we copied to DigitalOcean when we created the droplet — into the new file, then press `control + X` to exit. Type `Y` to save the file, and press `enter` to confirm the file name.
 
 We can make sure the SSH key is saved by running `cat ~/.ssh/authorized_keys`; if the SSH key is printed in the terminal, it's been saved.
 
-{{< highlight bash >}}
+``` bash
 # Set the permissions to only allow this user to access it
 chmod 600 ~/.ssh/authorized_keys
 
 # Stop acting as the new user and become root again
 exit
-{{< /highlight >}}
+```
 
 #### Disable password login
 
@@ -229,21 +229,21 @@ Since every server has a default `root` account that's a target for automated se
 
 After the previous step, you should be logged into your server as `root`. Let's make sure the new account works and has `sudo` access:
 
-{{< highlight bash >}}
+``` bash
 # Log out of the server as root
 exit
 
 # Log into your server as the new user
 ssh jason@138.68.11.65
-{{< /highlight >}}
+```
 
 Inside, we need to update the SSH configuration to disable password logins, and to disable logging in as `root` altogether.
 
 To do this, use the following command to open the SSH configuration file for editing:
 
-{{< highlight bash >}}
+``` bash
 sudo nano /etc/ssh/sshd_config
-{{< /highlight >}}
+```
 
 {{% aside %}}
   **NOTE:** You will be asked for a password when you use the `sudo` command. This is the password you used when you created the user earlier in this tutorial.
@@ -266,19 +266,19 @@ Save the file by pressing `control + X`, then `Y`, then `enter`.
 
 Finally, restart the SSH service with this command:
 
-{{< highlight bash >}}
+``` bash
 # Reloads the configuration we just changed
 sudo systemctl reload sshd
-{{< /highlight >}}
+```
 
 Test your login by opening a new tab in Terminal (`command + T` on Mac) and logging into your server again.
 
 If we log in as our new user, everything works as expected. However, if we try to log in as `root`, we get an error:
 
-{{< highlight text >}}
+``` text
 $ ssh root@138.68.11.65
 Permission denied (publickey).
-{{< /highlight >}}
+```
 
 #### Set up a basic firewall
 
@@ -288,7 +288,7 @@ This, in theory at least, should eliminate a lot of security risks on our server
 
 We're going to run three commands to configure the firewall — called `ufw` — and then we'll enable it. Enter the following while logged into the server:
 
-{{< highlight bash >}}
+``` bash
 # Enable OpenSSH connections
 sudo ufw allow OpenSSH
 
@@ -300,7 +300,7 @@ sudo ufw allow https
 
 # Turn the firewall on
 sudo ufw enable
-{{< /highlight >}}
+```
 
 {{% aside %}}
   When you enable `ufw`, you'll get a notice that enabling the firewall might disrupt your connection. Don't worry about that — you've enabled SSH connections.
@@ -308,7 +308,7 @@ sudo ufw enable
 
 To check the status of the firewall, run `sudo ufw status`, which will give you the following:
 
-{{< highlight text >}}
+``` text
 jason@nodejs-ssl-deploy:~$ sudo ufw status
 Status: active
 
@@ -320,7 +320,7 @@ OpenSSH                    ALLOW       Anywhere
 OpenSSH (v6)               ALLOW       Anywhere (v6)             
 80 (v6)                    ALLOW       Anywhere (v6)             
 443 (v6)                   ALLOW       Anywhere (v6)  
-{{< /highlight >}}
+```
 
 ## Get Your App Up and Running
 
@@ -330,16 +330,16 @@ Now that the server is set up, we can get our app installed.
 
 In order to get a copy of our app to this server, we're going to use [Git](https://git-scm.com/). Fortunately, Ubuntu makes it really easy to install common tools, so all we need to do is run this command:
 
-{{< highlight bash >}}
+``` bash
 sudo apt-get install git
-{{< /highlight >}}
+```
 
 We can validate that Git was installed properly by running `git --version`:
 
-{{< highlight bash >}}
+``` bash
 jason@nodejs-ssl-deploy:~$ git --version
 git version 2.7.4
-{{< /highlight >}}
+```
 
 ### Set up Node.js.
 
@@ -351,9 +351,9 @@ The folks at [NodeSource](https://github.com/nodesource/distributions) have made
 
 Run the following commands to download and execute the setup script:
 
-{{< highlight bash >}}
+``` bash
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-{{< /highlight >}}
+```
 
 {{% aside %}}
   This is a complex command, but essentially it uses `curl` to download the setup script, then _pipes_ (using `|`) the downloaded script to the next command, `bash`, which actually executes it.
@@ -365,9 +365,9 @@ This takes a few seconds to complete.
 
 With the NodeSource script complete, we can simply use `apt-get` to install Node.js:
 
-{{< highlight bash >}}
+``` bash
 sudo apt-get install nodejs
-{{< /highlight >}}
+```
 
 {{% aside %}}
   You may get a notice asking if you want to continue. Press `enter` to continue the installation.
@@ -375,10 +375,10 @@ sudo apt-get install nodejs
 
 Once it's complete, we can verify that `node` is available by running `node --version`:
 
-{{< highlight bash >}}
+``` bash
 jason@nodejs-ssl-deploy:~$ node --version
 v6.3.1
-{{< /highlight >}}
+```
 
 #### Clone the app
 
@@ -390,7 +390,7 @@ Now we can actually clone a copy of our app to the server — things are really 
 
 It doesn't matter where you install the app, so let's create an `apps` dir in our user's home folder and clone the app into a folder named after our domain — this makes it really easy to remember which app is which.
 
-{{< highlight bash >}}
+``` bash
 # Make sure you’re in your home folder
 cd ~
 
@@ -400,7 +400,7 @@ cd apps/
 
 # Clone your app into a new directory named for your domain
 git clone https://github.com/jlengstorf/tutorial-deploy-nodejs-ssl-digitalocean-app.git app.example.com
-{{< /highlight >}}
+```
 
 {{% aside %}}
   **NOTE:** Make sure to replace `app.example.com` with your desired domain name.
@@ -410,13 +410,13 @@ git clone https://github.com/jlengstorf/tutorial-deploy-nodejs-ssl-digitalocean-
 
 To make sure your app is installed and working, move into the new folder and start it:
 
-{{< highlight bash >}}
+``` bash
 # Move into the app directory
 cd app.example.com
 
 # Start the app
 node app
-{{< /highlight >}}
+```
 
 {{% aside %}}
   **NOTE:** The example app's main file is at `app/index.js`. You'll need to adjust your start command depending on how your app is set up.
@@ -424,10 +424,10 @@ node app
 
 The example app listens at `http://localhost:5000`, so we can test if it's working by opening a new Terminal session, logging into our server, and making a `curl` request to the app.
 
-{{< highlight bash >}}
+``` bash
 jason@nodejs-ssl-deploy:~$ curl http://localhost:5000/
 <h1>I’m a Node app!</h1><p>And I’m <em>sooooo</em> secure.</p>
-{{< /highlight >}}
+```
 
 {{% aside %}}
   Since the app is running on `localhost`, it can only be reached from the server itself. We'll correct that later on.
@@ -449,9 +449,9 @@ PM2 also allows us to start the app automatically when the server restarts, whic
 
 Unlike the other tools we've installed, `pm2` is a Node package. We install it using the `npm` command, which is the default package manager for Node.js.
 
-{{< highlight bash >}}
+``` bash
 sudo npm install -g pm2
-{{< /highlight >}}
+```
 
 {{% aside %}}
   Using `-g` means that `pm2` is available globally, which is necessary for it to work properly.
@@ -461,13 +461,13 @@ sudo npm install -g pm2
 
 With PM2 installed, we can now start the app like this:
 
-{{< highlight bash >}}
+``` bash
 # Make sure you're in the app directory
 cd ~/apps/app.example.com
 
 # Start the app with PM2
 pm2 start app
-{{< /highlight >}}
+```
 
 {{% aside %}}
   **NOTE:** You call `pm2 start` with the same argument you'd use to start the app with `node`. If you start the app with `node index.js`, you'd run `pm2 start index.js` here.
@@ -475,7 +475,7 @@ pm2 start app
 
 Once the app is started, we see the status displayed:
 
-{{< highlight text >}}
+``` text
 jason@nodejs-ssl-deploy:~/apps/app.example.com$ pm2 start app
 [PM2] Starting app in fork_mode (1 instance)
 [PM2] Done.
@@ -485,14 +485,14 @@ jason@nodejs-ssl-deploy:~/apps/app.example.com$ pm2 start app
 │ app      │ 0  │ fork │ 21229 │ online │ 0       │ 0s     │ 21.840 MB   │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────────────┴──────────┘
  Use `pm2 show <id|name>` to get more details about an app
-{{< /highlight >}}
+```
 
 And, conveniently, the app is running without locking up our session. In the same session we're able to run `curl http://localhost:5000` to make sure it's running properly:
 
-{{< highlight text >}}
+``` text
 jason@nodejs-ssl-deploy:~/apps/app.example.com$ curl http://localhost:5000/
 <h1>I’m a Node app!</h1><p>And I’m <em>sooooo</em> secure.</p>
-{{< /highlight >}}
+```
 
 ### Start your app automatically when the server restarts
 
@@ -502,17 +502,17 @@ The last thing to do is to make sure that when the server restarts, PM2 starts o
 
 This is a two-step process, which we kick off by running `pm2 startup systemd`:
 
-{{< highlight text >}}
+``` text
 jason@nodejs-ssl-d systemdapps/app.example.com$ pm2 startup 
 [PM2] You have to run this command as root. Execute the following command:
       sudo su -c "env PATH=$PATH:/usr/bin pm2 startup systemd -u jason --hp /home/jason"
-{{< /highlight >}}
+```
 
 PM2 prints out a command that we need to run using `sudo`. Copy-paste that to finish the process.
 
-{{< highlight bash >}}
+``` bash
 sudo su -c "env PATH=$PATH:/usr/bin pm2 startup systemd -u jason --hp /home/jason"
-{{< /highlight >}}
+```
 
 This will step through the process of updating the server to run PM2 on startup, and then you're all set.
 
@@ -536,13 +536,13 @@ So now there's really no excuse not to set up SSL for our domains.
 
 To start, we need to install some tools that Let's Encrypt depends on, then clone the `letsencrypt` repository to our server.
 
-{{< highlight bash >}}
+``` bash
 # Install tools that Let’s Encrypt requires
 sudo apt-get install bc
 
 # Clone the Let’s Encrypt repository to your server
 sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
-{{< /highlight >}}
+```
 
 ### Configure your domain to point to the server
 
@@ -558,13 +558,13 @@ Add an A record for your domain that points to your droplet's IP address.
 
 Now that the domain is pointed to our server, we can generate the SSL certificate:
 
-{{< highlight bash >}}
+``` bash
 # Move into the Let’s Encrypt directory
 cd /opt/letsencrypt
 
 # Create the SSL certificate
 ./letsencrypt-auto certonly --standalone
-{{< /highlight >}}
+```
 
 The tool will run for a while to initialize itself, and then we see a 1980s-looking interactive dialog.
 
@@ -582,9 +582,9 @@ For security, Let’s Encrypt certificates expire every 90 days, which seems pre
 
 It turns out, though, that Let’s Encrypt has an one-step command to renew certificates:
 
-{{< highlight bash >}}
+``` bash
 /opt/letsencrypt/letsencrypt-auto renew
-{{< /highlight >}}
+```
 
 This command checks if the certificate is near its expiration date and, when necessary, it generates an updated certificate that's good for another 90 days.
 
@@ -592,18 +592,18 @@ Now, it would be a _huge_ pain in the ass if we had to manually log into the ser
 
 To set this up, run the following command in the terminal to edit the server's `cron` jobs:
 
-{{< highlight bash >}}
+``` bash
 sudo crontab -e
-{{< /highlight >}}
+```
 
 We get an option for which editor to use here. Since `nano` is easier than the others, we'll stick with that.
 
 When the editor opens, head to the bottom of the file and add the following two lines:
 
-{{< highlight bash >}}
+``` bash
 00 1 * * 1 /opt/letsencrypt/letsencrypt-auto renew >> /var/log/letsencrypt-renewal.log
 30 1 * * 1 /bin/systemctl reload nginx
-{{< /highlight >}}
+```
 
 The first line tells `cron` to run the renewal command, with the output logged so we can check on it when necessary, every Monday at 1 in the morning.
 
@@ -625,9 +625,9 @@ In order to make our app accessible, we need to send visitors to our domain to o
 
 Installing NGINX is no different from most of the other tools we've downloaded so far. Use `apt-get` to download and install it:
 
-{{< highlight bash >}}
+``` bash
 sudo apt-get install nginx
-{{< /highlight >}}
+```
 
 #### Make sure all traffic is secure
 
@@ -635,20 +635,20 @@ Next, we need to make sure that all traffic is served over SSL. To do this, we'l
 
 To do this, we need to edit NGINX's configuration files. Run the following command to open the file for editing:
 
-{{< highlight bash >}}
+``` bash
 sudo nano /etc/nginx/sites-enabled/default
-{{< /highlight >}}
+```
 
 Inside, delete everything and add the following:
 
-{{< highlight bash >}}
+``` bash
 # HTTP — redirect all traffic to HTTPS
 server {
     listen 80;
     listen [::]:80 default_server ipv6only=on;
     return 301 https://$host$request_uri;
 }
-{{< /highlight >}}
+```
 
 Save and exit by pressing `control + X`, then `Y`, then `enter`.
 
@@ -662,9 +662,9 @@ It only takes a couple extra minutes to create a _really_ secure SSL setup, so w
 
 Run the following command on your server:
 
-{{< highlight bash >}}
+``` bash
 sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
-{{< /highlight >}}
+```
 
 This takes a minute or two — encryption should be hard for computers — and when it's done we can move on for now. We'll use this file in the next section.
 
@@ -674,13 +674,13 @@ Since I'm not a security expert, we're going to defer to an [actual security exp
 
 We need to create a new file on our server to hold these settings — if we add another domain to this server, we can reuse them this way — which we'll do with the following command:
 
-{{< highlight bash >}}
+``` bash
 sudo nano /etc/nginx/snippets/ssl-params.conf
-{{< /highlight >}}
+```
 
 Inside, we can copy-paste the following settings.
 
-{{< highlight bash >}}
+``` bash
 # See https://cipherli.st/ for details on this configuration
 ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 ssl_prefer_server_ciphers on;
@@ -698,7 +698,7 @@ add_header X-Content-Type-Options nosniff;
 
 # Add our strong Diffie-Hellman group
 ssl_dhparam /etc/ssl/certs/dhparam.pem;
-{{< /highlight >}}
+```
 
 Save and exit by pressing `control + X`, then `Y`, then `enter`.
 
@@ -714,13 +714,13 @@ Now that we've got a certificate, a strong Diffie-Hellman group, and a secure SS
 
 Open the site configuration again:
 
-{{< highlight bash >}}
+``` bash
 sudo nano /etc/nginx/sites-enabled/default
-{{< /highlight >}}
+```
 
 Inside, add the following below the block we added earlier:
 
-{{< highlight bash >}}
+``` bash
 # HTTPS — proxy all requests to the Node app
 server {
     # Enable HTTP/2
@@ -746,7 +746,7 @@ server {
         proxy_redirect off;
     }
 }
-{{< /highlight >}}
+```
 
 Save and exit by pressing `control + X`, then `Y`, then `enter`.
 
@@ -758,19 +758,19 @@ This configuration listens for connections to our domain on port `443` (the HTT
 
 Before we start the server, we should test the NGINX configuration with `sudo nginx -t`. If we didn't make any typos and everything looks good, we'll get the following:
 
-{{< highlight text >}}
+``` text
 jason@nodejs-ssl-deploy:~$ sudo nginx -t
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
-{{< /highlight >}}
+```
 
 #### Enable NGINX
 
 The very last step in this process is to start NGINX.
 
-{{< highlight bash >}}
+``` bash
 sudo systemctl nginx start
-{{< /highlight >}}
+```
 
 ## Test Your App
 
