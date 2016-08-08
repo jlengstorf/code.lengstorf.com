@@ -322,6 +322,10 @@
     border-radius: 50%;
   }
 
+  i-amp-scroll-container {
+    margin-top: 0;
+  }
+
   &__discussion {
     max-width: 750px;
     margin-top: calc( $height-unit * 3 );
