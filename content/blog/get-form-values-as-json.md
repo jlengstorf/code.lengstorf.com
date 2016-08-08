@@ -31,8 +31,12 @@ So in this walkthrough, we'll be writing our own script — in plain JavaScript 
 
 At the end of this walkthrough, we'll have built the form shown in this pen:
 
-<p data-height="1000" data-theme-id="dark" data-slug-hash="YWJLwz" data-default-tab="result" data-user="jlengstorf" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/jlengstorf/pen/YWJLwz/">How to Get Form Field Data as JSON Using Plain JavaScript</a> by Jason Lengstorf (<a href="http://codepen.io/jlengstorf">@jlengstorf</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+<amp-iframe width="750" height="1000"
+            sandbox="allow-scripts allow-same-origin"
+            layout="responsive"
+            frameborder="0"
+            src="https://codepen.io/jlengstorf/embed/YWJLwz/?height=990&theme-id=dark&default-tab=result&embed-version=2">
+</amp-iframe>
 
 If you fill the form and hit the "Send It!" button, the form data will be output as JSON in the "Form Data" section below.
 
@@ -101,8 +105,12 @@ To avoid the hassle of setting up front-end tooling (we're using Babel to transp
 
 To start, create a fork of [this pen](http://codepen.io/jlengstorf/pen/GqYZra/), which contains form markup with common inputs, and some styles to make it display nicely.
 
-<p data-height="1000" data-theme-id="dark" data-slug-hash="GqYZra" data-default-tab="result" data-user="jlengstorf" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/jlengstorf/pen/GqYZra/">How to Get Form Field Data as JSON Using Plain JavaScript (Starter — No JS)</a> by Jason Lengstorf (<a href="http://codepen.io/jlengstorf">@jlengstorf</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+<amp-iframe width="750" height="1000"
+            sandbox="allow-scripts allow-same-origin"
+            layout="responsive"
+            frameborder="0"
+            src="https://codepen.io/jlengstorf/embed/GqYZra/?height=990&theme-id=dark&default-tab=result&embed-version=2">
+</amp-iframe>
 
 {{% aside %}}
   **NOTE:** The markup is written in Jade (which was recently renamed to [Pug](https://github.com/pugjs/pug)) because I find it faster and easier to read. If you prefer to look at plain HTML, you can hit the "view compiled" button at the bottom right of the Jade pane in the pen above.
@@ -718,8 +726,12 @@ We can test by filling out our form with dummy data and submitting it.
 
 Use your own fork of the pen, or enter dummy data in the form below:
 
-<p data-height="976" data-theme-id="dark" data-slug-hash="YWJLwz" data-default-tab="result" data-user="jlengstorf" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/jlengstorf/pen/YWJLwz/">How to Get Form Field Data as JSON Using Plain JavaScript</a> by Jason Lengstorf (<a href="http://codepen.io/jlengstorf">@jlengstorf</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+<amp-iframe width="750" height="1000"
+            sandbox="allow-scripts allow-same-origin"
+            layout="responsive"
+            frameborder="0"
+            src="https://codepen.io/jlengstorf/embed/YWJLwz/?height=990&theme-id=dark&default-tab=result&embed-version=2">
+</amp-iframe>
 
 After submitting, we'll see the info we entered, and it'll look something like the following:
 
