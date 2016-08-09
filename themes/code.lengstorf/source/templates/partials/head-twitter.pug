@@ -1,0 +1,48 @@
+//{{ if .Params.videoid }}
+meta( name='twitter:card' content='player' )
+meta(
+  name="twitter:player"
+  content="https://www.youtube.com/watch?v={{ .Params.videoid }}"
+)
+meta(
+  name="twitter:player:width"
+  content="{{ with .Params.videowidth }}{{ . }}{{ else }}480{{ end }}"
+)
+meta(
+  name="twitter:player:height"
+  content="{{ with .Params.videoheight }}{{ . }}{{ else }}300{{ end }}"
+)
+//{{ else }}
+meta( name='twitter:card' content='summary_large_image' )
+//{{ end }}
+
+//{{ with .Params.images }}
+meta(
+  name='twitter:image'
+  content!='{{ if in (index . 0) "-600x300" }}{{ index . 1 | absURL }}{{ else }}{{ index . 0 | absURL }}{{ end }}'
+)
+//{{ else }}
+meta(
+  name='twitter:image'
+  content!='{{ $.Site.Params.default_image | absURL }}'
+)
+//{{ end }}
+
+meta(
+  name='twitter:title'
+  content='{{ if .Params.seo_title }}{{ .Params.seo_title }}{{ else }}{{ .Title }}{{ end }}'
+)
+meta(
+  name='twitter:description'
+  content='{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ $.Site.Params.description }}{{ end }}{{ end }}'
+)
+//{{ with .Site.Params.social.twitter }}
+meta( name='twitter:site' content='@{{ . }}' )
+//{{ end }}
+
+//{{ if and (isset .Site.Params "authors") (isset .Params "author") }}
+//  {{ $author := index .Site.Params.authors .Params.author }}
+//  {{ with $author.social.twitter }}
+meta( name='twitter:creator' content='@{{.}}' )
+//  {{ end }}
+//{{ end }}
