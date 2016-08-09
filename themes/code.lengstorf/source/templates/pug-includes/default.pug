@@ -68,7 +68,7 @@ html(⚡)
     block meta_description
       meta(
         name="description"
-        content="{{ with .Description }}{{ . }}{{ else }}{{ end }}"
+        content="{{ with .Description }}{{ . }}{{ else }}{{ $.Site.Params.description }}{{ end }}"
       )
     link(rel="apple-touch-icon", sizes="57x57", href="/apple-touch-icon-57x57.png")
     link(rel="apple-touch-icon", sizes="60x60", href="/apple-touch-icon-60x60.png")
@@ -89,6 +89,9 @@ html(⚡)
     meta(name="msapplication-TileColor", content="#c319ff")
     meta(name="msapplication-TileImage", content="/mstile-144x144.png")
     meta(name="theme-color", content="#faf8fd")
+
+    block opengraph
+      include ../partials/head-open-graph.pug
 
     block fonts
       //- script(src="https://use.typekit.net/jeh2dxb.js")
