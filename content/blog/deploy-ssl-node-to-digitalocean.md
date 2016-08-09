@@ -1,13 +1,12 @@
 +++
-date = "2016-07-21"
-draft = true
+date = "2016-08-09"
 type = "blog"
 
 seo_title = "Deploying a Node.js App to DigitalOcean with SSL"
 description = "This step-by-step tutorial walks through the process of deploying a Node.js app to a DigitalOcean droplet with free SSL from Let's Encrypt for $5/month."
 
 title = "Tutorial: How to Deploy a Node.js App to DigitalOcean with SSL"
-subtitle = "Learn how to use DigitalOcean, Let's Encrypt, and your big, sexy brain to deploy an SSL-enabled Node.js app for $5/month — in 20 minutes."
+subtitle = "Learn how to use DigitalOcean, Let's Encrypt, and your big, sexy brain to deploy an SSL-enabled Node.js app for $5/month — in 30 minutes."
 
 slug = "deploy-nodejs-ssl-digitalocean"
 
@@ -19,8 +18,8 @@ tag = [
     "server",
     "ssl"
 ]
-_videoid = "Dsyau8u1qvM"
-repo_url = "https://github.com/jlengstorf/api.lengstorf.com"
+videoid = "kR06NoSzAXY"
+repo_url = "https://github.com/jlengstorf/tutorial-deploy-nodejs-ssl-digitalocean-app"
 +++
 In this post, we'll walk through the process, from start to finish, of creating a new server, deploying a Node.js app, securing it (for free!) with an SSL certificate, and pointing a domain name to it.
 
@@ -769,7 +768,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 The very last step in this process is to start NGINX.
 
 ``` bash
-sudo systemctl nginx start
+sudo systemctl start nginx
 ```
 
 ## Test Your App
@@ -780,13 +779,13 @@ And now: the big moment. We can now visit our domain in a browser, and we'll see
     Look at that sexy green lock!
 {{< /amp-img >}}
 
-The configuration steps get pretty mind-numbing toward the end, but there's a huge payoff: we can now bask in the glory of a server that took less than 20 minutes to set up, costs $5/month, and —  as a bonus — gets [an A+ for SSL security](https://www.ssllabs.com/ssltest/index.html).
+The configuration steps get pretty mind-numbing toward the end, but there's a huge payoff: we can now bask in the glory of a server that took about 30 minutes to set up, costs $5/month, and —  as a bonus — gets [an A+ for SSL security](https://www.ssllabs.com/ssltest/index.html).
 
 {{< amp-img src="/images/nodejs-ssl-deploy-08.jpg" >}}
     Our app's SSL rating.
 {{< /amp-img >}}
 
-Not bad for 20 minutes' worth of setup, right?
+Not bad for 30 minutes' worth of setup, right?
 
 ## Additional Resources
 
