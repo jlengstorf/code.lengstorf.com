@@ -13,6 +13,8 @@ pygmentsuseclasses = true
 
 theme = "code.lengstorf"
 
+
+
 [permalinks]
   blog = "/:slug/"
 
@@ -23,8 +25,9 @@ theme = "code.lengstorf"
   difficulty = "difficulty"
 
 [params]
-  googleanalytics = ""
   site_email = "jason@lengstorf.com"
+  description = "Jason Lengstorf is a developer, designer, author, and speaker. He creates videos & articles about development, tools, and building better websites."
+  default_image = "/images/code-lengstorf.jpg"
 
   [params.schema]
     type = "Person"
