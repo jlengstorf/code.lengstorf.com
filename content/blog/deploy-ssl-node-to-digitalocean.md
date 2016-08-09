@@ -10,6 +10,10 @@ subtitle = "Learn how to use DigitalOcean, Let's Encrypt, and your big, sexy bra
 
 slug = "deploy-nodejs-ssl-digitalocean"
 
+images = [
+    "/images/nodejs-deploy-ssl-lets-encrypt.jpg"
+]
+
 category = "devops"
 tag = [
     "digitalocean",
