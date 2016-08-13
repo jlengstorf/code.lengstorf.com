@@ -40,3 +40,7 @@ theme = "code.lengstorf"
       "https://www.youtube.com/lengstorf",
       "https://twitter.com/jlengstorf",
     ]
+
+  [params.social]
+    facebook = "jlengstorf"
+    facebook_admin = "1468448880"
