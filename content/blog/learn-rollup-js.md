@@ -47,7 +47,7 @@ By the end of this tutorial, we'll have Rollup configured to:
 
 - [Part I: How to Use Rollup to Process and Bundle JavaScript Files]({{< ref "learn-rollup-js.md" >}}) <— you are here
 - Part II: How to Use Rollup to Process and Bundle Stylesheets (coming soon)
-    - Part III: How to Use Rollup to Watch and Live Reload Files During Development (coming soon)
+- Part III: How to Use Rollup to Watch and Live Reload Files During Development (coming soon)
 
 ## What Is Rollup?
 
