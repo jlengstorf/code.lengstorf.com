@@ -12,7 +12,7 @@ slug = "learn-rollup-js"
 series = "rollup"
 
 images = [
-    "/images/code-lengstorf.jpg"
+    "/images/learn-rollup-js.jpg"
 ]
 
 category = "build-tools"
