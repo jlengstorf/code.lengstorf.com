@@ -1,8 +1,8 @@
 # code.lengstorf.com
 
-<img src="https://code.lengstorf.com/images/code-lengstorf-logo.jpg" alt="Jason Lengstorf nerd the fuck out" width="300" />
+<a href="https://code.lengstorf.com"><img src="https://code.lengstorf.com/images/code-lengstorf-logo.jpg" alt="Jason Lengstorf nerd the fuck out" width="300" /></a>
 
-A blog site built with [Hugo](https://gohugo.io/), on which I shall nerd the fuck out.
+A blog site built with [Hugo](https://gohugo.io/), on which I shall nerd the fuck out. See the blog and videos at [code.lengstorf.com](https://code.lengstorf.com).
 
 ## Tutorials and Code Videos + Articles
 
