@@ -69,6 +69,10 @@ Tree-shaking becomes really important when we're including third-party tools or 
 
 Browserify and webpack will end up including a lot of unused code right now. But Rollup doesn't — it'll only bring in what we're actually using.
 
+{{% aside %}}
+  **UPDATE (2016-08-22):** To clarify, Rollup can only do tree-shaking on ES modules. CommonJS modules — which both lodash and jQuery are at the time of writing — cannot be tree-shaken. However, tree-shaking is _not_ the only speed/performance benefit of Rollup. See [Rich Harris's explanation](https://www.reddit.com/r/javascript/comments/4yprc5/how_to_bundle_javascript_with_rollup_stepbystep/d6qzgzm) and [Nolan Lawson's added info](https://www.reddit.com/r/javascript/comments/4yprc5/how_to_bundle_javascript_with_rollup_stepbystep/d6qzmgh?context=3) for more information.
+{{% /aside %}}
+
 And that's _huge_.
 
 {{% aside %}}
