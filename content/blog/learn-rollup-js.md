@@ -46,8 +46,8 @@ By the end of this tutorial, we'll have Rollup configured to:
 ## Series Navigation
 
 - [Part I: How to Use Rollup to Process and Bundle JavaScript Files]({{< ref "learn-rollup-js.md" >}}) <— you are here
-- Part II: How to Use Rollup to Process and Bundle Stylesheets (coming soon)
-- Part III: How to Use Rollup to Watch and Live Reload Files During Development (coming soon)
+- [Part II: How to Use Rollup to Process and Bundle Stylesheets]({{< ref "learn-rollup-css.md" >}})
+- [Part III: How to Use Rollup to Watch and Live Reload Files During Development]({{< ref "learn-rollup-css.md#livereload" >}})
 
 ## What Is Rollup?
 
@@ -114,15 +114,15 @@ git clone -b step-0 --single-branch https://github.com/jlengstorf/learn-rollup.g
 # The files are downloaded to /path/to/your/projects/learn-rollup/
 ```
 
-### Step 1: Create a configuration file for Rollup.
+### Step 1: Install Rollup and create a configuration file.
 
-TKTK Install Rollup!
+To get started, install Rollup with the following command:
 
 ``` sh
 npm install --save-dev rollup
 ```
 
-Create a new file called `rollup.config.js` in the `learn-rollup` folder. Inside, add the following.
+Next, create a new file called `rollup.config.js` in the `learn-rollup` folder. Inside, add the following.
 
 ``` js
 export default {
