@@ -684,6 +684,10 @@ To see where the power comes in, let's run the command in `production` mode:
 NODE_ENV=production ./node_modules/.bin/rollup -c
 ```
 
+{{% aside %}}
+  **NOTE:** On Windows, use `SET NODE_ENV=production ./node_modules/.bin/rollup -c` to avoid an error setting environment variables.
+{{% /aside %}}
+
 When we reload the browser, there's nothing logged to the console:
 
 {{< amp-img src="/images/learn-rollup-04.jpg" >}}
@@ -759,6 +763,10 @@ With the configuration saved, let's run Rollup with `NODE_ENV` in production:
 ``` sh
 NODE_ENV=production ./node_modules/.bin/rollup -c
 ```
+
+{{% aside %}}
+  **NOTE:** On Windows, use `SET NODE_ENV=production ./node_modules/.bin/rollup -c` to avoid an error setting environment variables.
+{{% /aside %}}
 
 The output isn't pretty, but it's _much_ smaller. Here's a screenshot of what `build/js/main.mind.js` looks like now:
 
