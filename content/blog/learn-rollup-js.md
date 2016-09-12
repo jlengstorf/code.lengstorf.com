@@ -666,6 +666,7 @@ export default {
       exclude: 'node_modules/**',
     }),
     replace({
+      exclude: 'node_modules/**',
       ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
     }),
   ],
@@ -673,6 +674,8 @@ export default {
 ```
 
 In our configuration, we're going to find every occurence of `ENV` and replace it with _either_ the value of `process.env.NODE_ENV` — the conventional way of setting the environment in Node apps — or "development". We use `JSON.stringify()` to make sure the value is wrapped in double quotes, since `ENV` is not.
+
+To make sure we don't cause issues with third-party code, we also set the `exclude` property to ignore our `node_modules` directory and all the packages it contains. (Thanks to [@wesleycoder for the heads-up on this](https://github.com/jlengstorf/learn-rollup/issues/3).)
 
 #### Check the results.
 
