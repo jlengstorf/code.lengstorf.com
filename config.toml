@@ -5,6 +5,7 @@ title = "JavaScript, build tools, modern dev workflow | Jason Lengstorf"
 footnotereturnlinkcontents = "↩"
 
 canonifyurls = true
+builddrafts = false
 
 Paginate = 6
 
