@@ -91,6 +91,8 @@ The folder structure looks like this:
 
 ``` text
 learn-rollup/
+├── build/
+│   └── index.html
 ├── src/
 │   ├── scripts/
 │   │   ├── modules/
@@ -113,6 +115,10 @@ git clone -b step-0 --single-branch https://github.com/jlengstorf/learn-rollup.g
 
 # The files are downloaded to /path/to/your/projects/learn-rollup/
 ```
+
+{{% aside %}}
+  **NOTE:** If you don't clone the repo, make sure to copy the contents of `build/index.html` into your own code. The HTML isn't discussed in this tutorial.
+{{% /aside %}}
 
 ### Step 1: Install Rollup and create a configuration file.
 
