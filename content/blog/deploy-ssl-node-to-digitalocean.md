@@ -656,7 +656,7 @@ server {
 Save and exit by pressing `control + X`, then `Y`, then `enter`.
 
 {{% aside %}}
-  **NOTE:** Since this is a brand new server, there's not really a need to back up the config file. However, if you want to be extra-super careful, you can run `sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bak` to create a backup before overwriting the configuration.
+  **NOTE:** Since this is a brand new server, there's not really a need to back up the config file. However, if you want to be extra-super careful, you can run `sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bak` to create a backup before overwriting the configuration. However, be aware that [this will cause a `duplicate default server` warning](https://github.com/jlengstorf/tutorial-deploy-nodejs-ssl-digitalocean-app/issues/2) when you test the configuration.
 {{% /aside %}}
 
 #### Create a secure Diffie-Hellman Group
