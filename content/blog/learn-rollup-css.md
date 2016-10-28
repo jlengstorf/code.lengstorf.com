@@ -6,11 +6,13 @@ type = "blog"
 seo_title = "How to Bundle Stylesheets and Add LiveReload With Rollup"
 description = "Learn how to use the JavaScript bundler Rollup to process stylesheets using PostCSS and rebuild & reload files when changes are made in this tutorial."
 
-title = "Tutorial: How to Bundle Stylesheets & Add LiveReload With Rollup"
+title = "Rollup.js Tutorial"
 subtitle = "Learn how to use the JavaScript bundler Rollup — as an alternative for Grunt or Gulp — to process stylesheets using PostCSS in this step-by-step tutorial."
 
 slug = "learn-rollup-css"
 series = "rollup"
+series_title = "How to Bundle Stylesheets and Add LiveReload With Rollup"
+series_order = 2
 
 images = [
     "/images/learn-rollup-css.jpg"
