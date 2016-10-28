@@ -5,11 +5,13 @@ type = "blog"
 seo_title = "How to Bundle JavaScript With Rollup — Step-by-Step Tutorial"
 description = "Learn how to use Rollup as a smaller, more efficient alternative to webpack and Browserify to bundle JavaScript files in this step-by-step tutorial series."
 
-title = "Tutorial: How to Bundle JavaScript With Rollup"
+title = "Rollup.js Tutorial"
 subtitle = "Learn how to use Rollup as a smaller, more efficient alternative to webpack and Browserify to bundle JavaScript files in this step-by-step tutorial series."
 
 slug = "learn-rollup-js"
 series = "rollup"
+series_title = "How to Set Up Smaller, More Efficient JavaScript Bundling Using Rollup"
+series_order = 1
 
 images = [
     "/images/learn-rollup-js.jpg"
@@ -262,6 +264,10 @@ Next, create a new file called `.babelrc` in your project's root directory (`lea
 ```
 
 This tells Babel which preset it should use during transpiling.
+
+{{% aside %}}
+  **NOTE:** In older versions of npm (< `v2.15.11`), you may see an error with the `es2015-rollup` preset. If you can't update npm, see [this issue](https://github.com/jlengstorf/learn-rollup/issues/2) for an alternative `.babelrc` configuration.
+{{% /aside %}}
 
 #### Update `rollup.config.js`.
 
