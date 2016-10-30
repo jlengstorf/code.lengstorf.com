@@ -1,6 +1,32 @@
 .figure {
   max-width: 100%;
 
+  &--alignright {
+    display: block;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+
+    @media (min-width: 600px) {
+      float: right;
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      max-width: 200px;
+    }
+
+    @media (min-width: 1024px) {
+      max-width: 300px;
+    }
+
+    @media (min-width: 1500px) {
+      margin-right: calc( 100% - 1050px);
+    }
+  }
+
   &__image-wrap {
 
   }
