@@ -14,8 +14,10 @@ block content
             | {{ .Title }}
 
   block list-posts
-    | {{ range .Paginator.Pages }}
-    |   {{ if eq .Type "blog" }}
+    //
+      {{ range .Paginator.Pages }}
+        {{ if eq .Type "blog" }}
     |     {{ partial "article-preview" . }}
-    |   {{ end }}
-    | {{ end }}
+    //
+        {{ end }}
+      {{ end }}
