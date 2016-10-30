@@ -10,7 +10,6 @@ title = "Make WordPress Deployment Suck Less With Trellis"
 subtitle = "Set up a local WordPress development environment in minutes using Trellis, then deploy it to production _fast_ with free SSL and two-way database syncing."
 
 slug = "learn-trellis-wordpress-roots"
-series = "wordpress-roots"
 
 images = [
     "/images/learn-trellis-roots-wordpress.jpg"
