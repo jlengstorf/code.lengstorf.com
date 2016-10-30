@@ -1,6 +1,14 @@
-| {{ $baseurl := .Site.BaseURL }}
-| {{ $datetime := .Date.Format "2006-01-02T15:04:05Z07:00" }}
-| {{ $category := .Params.category }}
+//
+  {{ $baseurl := .Site.BaseURL }}
+  {{ $datetime := .Date.Format "2006-01-02T15:04:05Z07:00" }}
+  {{ $category := .Params.category }}
+  {{ $.Scratch.Set "title" .Title }}
+  {{ if .Params.series_title }}
+    {{ $.Scratch.Add "title" ", Part " }}
+    {{ $.Scratch.Add "title" (string .Params.series_order) }}
+    {{ $.Scratch.Add "title" ": " }}
+    {{ $.Scratch.Add "title" .Params.series_title }}
+  {{ end }}
 article.post-list__article.article(
   class="post-list__article--{{ $category }}"
 )
@@ -11,7 +19,7 @@ article.post-list__article.article(
       h1.article__heading
         a.article__heading-link(
           href="{{ .Permalink }}"
-        ) {{ .Title }}
+        ) {{ $.Scratch.Get "title" }}
       p.article__subheading {{ .Params.subtitle | markdownify }}
       a.post-list__read-more(
         class="post-list__read-more--{{ $category }}"
