@@ -13,14 +13,23 @@ block article
       },
     };
   -
-  // {{ $catSlug := (urlize .Params.category) }}
-  // {{ $baseurl := .Site.BaseURL }}
-  // {{ $datetime := .Date.Format "2006-01-02T15:04:05Z07:00" }}
+  //
+    {{ $currentNode := . }}
+    {{ $catSlug := (urlize .Params.category) }}
+    {{ $baseurl := .Site.BaseURL }}
+    {{ $datetime := .Date.Format "2006-01-02T15:04:05Z07:00" }}
+    {{ $.Scratch.Set "title" .Title }}
+    {{ if .Params.series_title }}
+      {{ $.Scratch.Add "title" ", Part " }}
+      {{ $.Scratch.Add "title" (string .Params.series_order) }}
+      {{ $.Scratch.Add "title" ": " }}
+      {{ $.Scratch.Add "title" .Params.series_title }}
+    {{ end }}
   header.article__header(
     class=`article__header--{{ $catSlug }}`
   )
     .article__heading-group
-      h1.article__heading {{ .Title }}
+      h1.article__heading {{ $.Scratch.Get "title" }}
       p.article__subheading {{ .Params.subtitle | markdownify }}
     dl.article__meta-group(
       class=`meta meta--{{ $catSlug }}`
@@ -43,6 +52,17 @@ block article
 
 
   aside.article__table-of-contents
+    // {{ if (isset .Params "series") }}
+    h4.article__table-of-contents-heading In This Series:
+    ul.article__table-of-contents-list
+      // {{ range sort (where .Site.Pages "Params.series" .Params.series) "Params.series_order" "asc" }}
+      li.article__table-of-contents-item
+        a.article__table-of-contents-link(
+          href="{{ .Permalink }}"
+          class!= '{{ if eq .Params.series_title $.Params.series_title }}article__table-of-contents-link--selected{{ end }}'
+        ) {{ index .Params "series_title" | default .Title }}
+      // {{ end }}
+    // {{ end }}
     h4.article__table-of-contents-heading In This Article:
     | {{ .TableOfContents }}
 
