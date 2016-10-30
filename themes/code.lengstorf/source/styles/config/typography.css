@@ -146,6 +146,13 @@ sup {
   }
 }
 
+ul,ol {
+  & ul,& ol {
+    margin-top: calc( $height-unit / 4 );
+    margin-bottom: calc( $height-unit / 2 );
+  }
+}
+
 li {
   margin-top: calc( $height-unit / 4 );
 }
@@ -163,4 +170,17 @@ code {
   border-radius: 4px;
   font-size: 100%;
   line-height: 1.375;
+}
+
+.code-caption {
+  margin-top: -1.75rem;
+  color: $color-caption;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  a {
+    color: inherit;
+  }
 }

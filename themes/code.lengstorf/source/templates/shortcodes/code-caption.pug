@@ -1,0 +1,1 @@
+p.code-caption {{ .Inner | replaceRE "<p.*?>(.*?)</p>" "$1" | safeHTML }}
