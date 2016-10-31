@@ -1,5 +1,7 @@
+.DS_Store
 dev
 public
+!themes/code.lengstorf/source/templates/partials/dev
 themes/code.lengstorf/layouts
 themes/code.lengstorf/static/fonts
 themes/code.lengstorf/static/images
