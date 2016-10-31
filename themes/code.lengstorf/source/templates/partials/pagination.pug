@@ -1,0 +1,61 @@
+//- Loop through the available pages.
+//
+  {{- with $.Paginator -}}
+    {{- $current := .PageNumber -}}
+    {{- $min := (sub .PageNumber 3) -}}
+    {{- $max := (add .PageNumber 3) -}}
+ul.pagination
+
+  //- Only show the first/prev links if there are previous pages.
+  //{{- if .HasPrev -}}
+  li.pagination__item.pagination__item--first
+    a.pagination__link.pagination__link--first(
+      href= "{{ .First.URL }}"
+      title="jump to first page"
+    ) «
+  li.pagination__item.pagination__item--prev
+    a.pagination__link.pagination__link--prev(
+      href= "{{ .Prev.URL }}"
+      title="previous page"
+    ) ‹
+  //{{- end -}}
+
+  //- Loop through all pages. Only show ±3 pages from the current.
+  //
+    {{- range .Pagers -}}
+      {{- if and (ge .PageNumber $min) (le .PageNumber $max) -}}
+
+        //- Add a class if this is the current page.
+        {{- $.Scratch.Set "pageClass" "" -}}
+        {{- if eq .PageNumber $current -}}
+          {{- $.Scratch.Set "pageClass" "pagination__link--current" -}}
+        {{- end -}}
+
+  li.pagination__item
+    a.pagination__link(
+      class!= '{{ $.Scratch.Get "pageClass" }}'
+      href= "{{ .URL }}"
+    ) {{- .PageNumber -}}
+
+  //
+      {{- end -}}
+    {{- end -}}
+
+  //- Only show the next/last links if there are additional pages.
+  //
+    {{- if .HasNext -}}
+  li.pagination__item.pagination__item--next
+    a.pagination__link.pagination__link--next(
+      href= "{{ .Next.URL }}"
+      title="next page"
+    ) ›
+  li.pagination__item.pagination__item--last
+    a.pagination__link.pagination__link--last(
+      href= "{{ .Last.URL }}"
+      title="jump to last page"
+    ) »
+  //
+    {{- end -}}
+
+//
+  {{- end -}}
