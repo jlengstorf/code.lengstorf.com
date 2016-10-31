@@ -28,6 +28,7 @@
 @import './blocks/highlight';
 @import './blocks/meta';
 @import './blocks/nav';
+@import './blocks/pagination';
 @import './blocks/post-list';
 @import './blocks/series-nav';
 @import './blocks/site-footer';
