@@ -23,6 +23,7 @@ theme = "code.lengstorf"
   category = "category"
   prerequisites = "prerequisites"
   tag = "tag"
+  series = "series"
   difficulty = "difficulty"
 
 [params]
