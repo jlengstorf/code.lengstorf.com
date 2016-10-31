@@ -34,11 +34,10 @@ article.post-list__article.article(
       dt.meta__label.sr-only Posted in:
       dl.meta__item.meta__item--category
         | {{ index (index .Site.Data.category $category ) "name" }}
-      | {{ if .Params.tag }}
+      | {{- if .Params.tag -}}
       dt.meta__label.sr-only Tags:
       dl.meta__item.meta__item--tags
-        | {{ range .Params.tag }}
-        a.meta__tag(href="{{ $baseurl }}tag/{{ . | urlize }}/") {{ . }}
-        |  
-        | {{ end }}
-      | {{ end }}
+        | {{- range .Params.tag -}}
+        a.meta__tag(href="{{ $baseurl }}tag/{{ . | urlize }}/") {{- . -}}
+        |  {{ end -}}
+      | {{- end -}}
