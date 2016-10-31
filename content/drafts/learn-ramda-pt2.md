@@ -12,7 +12,7 @@ title = "Functional Programming in the Real World"
 subtitle = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
 
 slug = "learn-functional-programming-ramda-pt2"
-series = "ramda"
+series = "functional-programming"
 series_title = "Build a Login Link and Authorize the User"
 series_order = 2
 
@@ -507,3 +507,7 @@ Once we save and reload the app, logging in shows us the loading animation.
             height="525" >}}
     After authenticating, we see the loading animation.
 {{< /amp-img >}}
+
+## What's Next?
+
+In the [third part of this series]({{< ref "learn-ramda-pt3.md" >}}), we'll build and execute an API request to load the authenticated user's recent Instagram uploads.

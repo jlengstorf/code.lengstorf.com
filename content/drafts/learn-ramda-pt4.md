@@ -12,7 +12,7 @@ title = "Functional Programming in the Real World"
 subtitle = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
 
 slug = "learn-functional-programming-ramda-pt4"
-series = "ramda"
+series = "functional-programming"
 series_title = "Generate Markup From the Data and Display Photos"
 series_order = 4
 

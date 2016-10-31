@@ -13,7 +13,7 @@ _title = "How to Use Functional Programming in a Real Project, Part 1"
 subtitle = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
 
 slug = "learn-functional-programming-ramda"
-series = "ramda"
+series = "functional-programming"
 series_title = "Why Functional Programming + App Setup"
 series_order = 1
 

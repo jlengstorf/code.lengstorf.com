@@ -12,7 +12,7 @@ title = "Functional Programming in the Real World"
 subtitle = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
 
 slug = "learn-functional-programming-ramda-pt3"
-series = "ramda"
+series = "functional-programming"
 series_title = "Create an API Request and Load User Media"
 series_order = 3
 
@@ -30,6 +30,12 @@ videoid = "ICYLOZuFMz8"
 repo_url = "https://github.com/jlengstorf/learn-ramda"
 
 +++
+
+This is the third part in the [Functional Programming in the Real World series](/series/functional-programming/).
+
+## Series Navigation 
+
+{{< series-nav >}}
 
 ## Step 2: Request the Authenticated User's Recent Media From the Instagram API
 
