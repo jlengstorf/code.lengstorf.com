@@ -269,6 +269,10 @@ This tells Babel which preset it should use during transpiling.
   **NOTE:** In older versions of npm (< `v2.15.11`), you may see an error with the `es2015-rollup` preset. If you can't update npm, see [this issue](https://github.com/jlengstorf/learn-rollup/issues/2) for an alternative `.babelrc` configuration.
 {{% /aside %}}
 
+{{% aside %}}
+  **UPDATE (2016-11-13):** In the repo for this project, `.babelrc` has been updated with a newer configuration. [See the pull request for details.](https://github.com/jlengstorf/learn-rollup/pull/17)
+{{% /aside %}}
+
 #### Update `rollup.config.js`.
 
 To make this actually do stuff, we need to update `rollup.config.js`.
