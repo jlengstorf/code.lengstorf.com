@@ -579,6 +579,10 @@ We'll be asked for an admin email address, to agree to the terms, and to specify
 
 For now, that's all we need. We'll come back to these in a minute when we configure the domain.
 
+{{% aside %}}
+  **NOTE:** If you want to support multiple subdomains (e.g. `example.com` and `www.example.com`), you'll need to use a slightly different approach to generate your SSL certificate. [See the extra steps here.](https://github.com/jlengstorf/tutorial-deploy-nodejs-ssl-digitalocean-app/issues/4)
+{{% /aside %}}
+
 ### Setup auto-renewal for the SSL certificate
 
 For security, Let’s Encrypt certificates expire every 90 days, which seems pretty short. (By contrast, most paid SSL certificates are valid for at least a year.)
