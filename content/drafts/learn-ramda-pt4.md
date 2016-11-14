@@ -1,35 +1,42 @@
-+++
+---
 
-date = "2016-10-23T13:00:00"
-type = "blog"
+date: 2016-10-23T13:00:00
+type: blog
 
-draft = true
+draft: true
 
-seo_title = "How to Use Ramda in a Real Project — Step-by-Step Tutorial"
-description = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
+seo_title: How to Use Ramda in a Real Project — Step-by-Step Tutorial
+description: |
+  Learn how to use Ramda to build a real-world app using test-driven, 
+  functional JavaScript in this in-depth tutorial.
 
-title = "Functional Programming in the Real World"
-subtitle = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
+title: Functional Programming in the Real World
+subtitle: |
+  Learn how to use Ramda to build a real-world app using test-driven, 
+  functional JavaScript in this in-depth tutorial.
 
-slug = "learn-functional-programming-ramda-pt4"
-series = "functional-programming"
-series_title = "Generate Markup From the Data and Display Photos"
-series_order = 4
+slug: learn-functional-programming-ramda-pt4
+series: functional-programming
+series_title: Generate Markup From the Data and Display Photos
+series_order: 4
 
-images = [
-    "/images/code-lengstorf.jpg"
-]
+images:
+  - /images/code-lengstorf.jpg
 
-category = "front-end"
-tag = [
-    "ramda",
-    "javascript",
-    "functional programming",
-]
-videoid = "ICYLOZuFMz8"
-repo_url = "https://github.com/jlengstorf/learn-ramda"
+category: front-end
+tag:
+  - ramda
+  - javascript
+  - functional programming
 
-+++
+videoid: ICYLOZuFMz8
+repo_url: https://github.com/jlengstorf/learn-ramda
+
+---
+
+This is the final installment in the [Functional Programming in the Real World series](/series/functional-programming/). In this part of the series, we'll work with the data returned from Instagram to generate markup and — finally — to display the images in our app.
+
+{{< series-nav >}}
 
 ## How Do We Make This Giant Response Object Easy to Work With?
 
@@ -123,7 +130,7 @@ Now that we have the response from Instagram, we can see that it's organized lik
 }
 ```
 
-This is _way too much data_ for what we're trying to do. And beyond that, it makes access the data really cumbersome. For example, to get the thumbnail URI right now, we need to do something like the following:
+This is _way too much data_ for what we're trying to do. And beyond that, it makes access the data really cumbersome. For example, to get the thumbnail URI right now, we need to do something like this:
 
 ``` js
 const thumbnail = response.data[0].images.thumbnail.url;
@@ -175,11 +182,15 @@ getPhotos(testResponse);
 //=> [{"test": "foo"}, {"test": "bar"}]
 ```
 
+{{% code-caption %}}
+  You can also [play with this example](https://goo.gl/JqfN6F) on the Ramda <abbr title="Read-Eval-Print Loop">REPL</abbr>.
+{{% /code-caption %}}
+
 ## Create an Object With Only the Data We Need for Each Image
 
 Accessing the data in the Instagram response as-is would be pretty brittle What if Instagram changes `images.low_resolution` to `images.small`? Or renames `user.username` to `user.display_name`?
 
-If we're accessing the data directly, we have to update every place in our code that uses it. In a complex app, this could lead to a lot of work — not to mention leaving room for missed updates and the bugs that follow.
+**If we're accessing the data directly, we have to update every place in our code that uses it.** In a complex app, this could lead to a lot of work — not to mention leaving room for missed updates and the bugs that follow.
 
 So instead, we're going to create a smaller, simpler object that uses _only_ the data we need. This is easy to update, and if the API response changes in the future, we only need to update a single function to make the app compatible. (This also allows us to write automated tests that will fail if the API response changes, eliminating our need to manually check the response.)
 
@@ -248,7 +259,7 @@ This accesses the deeply-nested properties of the Instagram response and returns
 
 To convert each of our image objects to this simplified format, we need to _map_ the function to the image array.
 
-This is similar to `mapObjIndexed`, which we used in `formatArgs`, but it's simpler: it simply calls a given function on each item in a given array.
+This is similar to `mapObjIndexed`, which we used in `formatArgs`, but it's simpler: Ramda's [`map`](http://ramdajs.com/docs/#map) function simply calls a given function on each item in a given array.
 
 Here's a silly example of how that works:
 
@@ -277,6 +288,10 @@ fixFavoriteBeverage(people);
 map(fixFavoriteBeverage, people);
 // => [{"favorite_beverage": "whiskey", "name": "Marisa", "spirit_animal": "koala"}, {"favorite_beverage": "whiskey", "name": "Jason", "spirit_animal": "bear"}]
 ```
+
+{{% code-caption %}}
+  You can also [play with this example](https://goo.gl/2it8UB) on the Ramda <abbr title="Read-Eval-Print Loop">REPL</abbr>.
+{{% /code-caption %}}
 
 ### Map the simplification function to all images in the response.
 
@@ -376,7 +391,7 @@ After mapping `createImage` to the image array, we now have an array of markup s
 
 Before we can do too much with this, we want to convert it into a single string.
 
-For this, we'll use [`reduce`](http://ramdajs.com/docs/#reduce), which uses a function to iterate through each item in an array, updating a value each time, until the entire array is _reduced_ (get it?) to a single value.
+For this, we'll use [`reduce`](http://ramdajs.com/docs/#reduce), which uses a function (called a _reducer_) to iterate through each item in an array, updating a value (called an _accumulator_) each time, until the entire array is _reduced_ (get it?) to a single value.
 
 The [standard example](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works) is to show how to reduce an array of numbers:
 
@@ -399,7 +414,7 @@ numbers.reduce(reducer, initialValue);
   You can also [play with this example](https://goo.gl/TQZ1FM) on the Ramda <abbr title="Read-Eval-Print Loop">REPL</abbr>.
 {{% /code-caption %}}
 
-But that's not all `reduce` can do. In addition to doing math — which admittedly falls into the neat-but-how-will-I-ever-use-this category — we can use `reduce` to perform complex operations to create single values from lists of values, like [converting a form's values to JSON]({{< ref "get-form-values-as-json.md" >}}) or, in this case, combining an array of strings into a single string.
+But that's not all `reduce` can do. In addition to doing math — which admittedly falls into the neat-but-why-should-I-care category — we can use `reduce` to perform complex operations to create single values from lists of values, like combining an array of strings into a single string.
 
 Add the following to `src/scripts/instagram-feed-reader.js` below `getImageMarkupArray`:
 
@@ -408,6 +423,10 @@ const combineImageMarkup = reduce(concat, '');
 ```
 
 To create a single string, we use [`concat`](http://ramdajs.com/docs/#concat) as the reducer function and an empty string (`''`) as the initial value. The result of `combineImageMarkup` is a single string containing the markup for all of our media uploads.
+
+{{% aside %}}
+  **NOTE:** For another practical use-case for `reduce`, I wrote an article on [converting a form's values to JSON]({{< ref "get-form-values-as-json.md" >}}) that reduces the input values into an object.
+{{% /aside %}}
 
 #### Pass the list of markup to the function that combines it.
 
@@ -475,19 +494,19 @@ Now we can reload our app, make sure we're authenticated, and see our most recen
 
 When I first looked at functional programming, I thought to myself, "Why the fuck would I spend so much extra time writing all these functions when I could just write one function to do everything?"
 
-It seemed like a lot of work to write code this way, and I wasn't sure I believed that the benefits outweighed the effort.
+**It seemed like a lot of work to write code this way, and I wasn't sure I believed that the benefits outweighed the effort.**
 
 For my workflow, I've found that using _only_ functional programming can be cumbersome. Some operations — especially when we're dealing with DOM manipulation and other common client-side tasks that are, by necessity, side-effects — get too confusing and awkward.
 
-_However_, there's no disputing that following a functional programming philosophy for most of my code has yielded a ton of benefits:
+_However_, there's no disputing that **applying functional programming principles in most of my code has yielded a ton of benefits:**
 
-1. Writing DRY code happens by default, because we don't have to untangle complex functions to reuse certain steps.
-2. Writing tests is _easy_. I know that if I put the same arguments in, the same arguments should come out. Every time. No matter what.
-3. Maintenance is far less painful. Almost every step is encapsulated in a function that describes what it's doing — this means the code is self-documenting be design, and helps cut down on time spent writing comments to clarify intent (and the greater amount of time wasted when the comments _weren't_ written and you have no idea how or why something you wrote months ago works).
+1. **Writing DRY code happens by default.** We don't have to untangle complex functions to reuse certain steps, and building new functions often just means plugging together existing functions rather than writing new code.
+2. **Writing tests is _easy_.** I know that if I put the same arguments in, the same arguments should come out. Every time. No matter what. No state management or mocking required.
+3. **Maintenance is far less painful.** Almost every step is encapsulated in a function that describes what it's doing — this means the code is self-documenting be design, and helps cut down on time spent writing comments to clarify intent (and the greater amount of time wasted when the comments _weren't_ written and you have no idea how or why something you wrote months ago works).
 
 The big takeaway from learning to write code functionally is this: **functional programming, when applied as a sane default approach and not as dogma, proviced _enormous_ benefits to the reliability, clarity, and maintainability of your code.**
 
-Did I convince you? Do you have questions? Want to argue about monads? [Tweet at me.](https://twitter.com/jlengstorf)
+So what do you think? Did I convince you to use functional programming? Do you have questions? Want to argue about monads? [Tweet at me.](https://twitter.com/jlengstorf)
 
 ## Further Reading
 

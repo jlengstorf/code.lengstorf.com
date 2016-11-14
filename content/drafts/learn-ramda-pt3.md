@@ -1,43 +1,44 @@
-+++
+---
 
-date = "2016-10-23T12:00:00"
-type = "blog"
+date: 2016-10-23T12:00:00
+type: blog
 
-draft = true
+draft: true
 
-seo_title = "How to Use Ramda in a Real Project — Step-by-Step Tutorial"
-description = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
+seo_title: How to Use Ramda in a Real Project — Step-by-Step Tutorial
+description: |
+  Learn how to use Ramda to build a real-world app using test-driven, 
+  functional JavaScript in this in-depth tutorial.
 
-title = "Functional Programming in the Real World"
-subtitle = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
+title: Functional Programming in the Real World
+subtitle: |
+  Learn how to use Ramda to build a real-world app using test-driven, 
+  functional JavaScript in this in-depth tutorial.
 
-slug = "learn-functional-programming-ramda-pt3"
-series = "functional-programming"
-series_title = "Create an API Request and Load User Media"
-series_order = 3
+slug: learn-functional-programming-ramda-pt3
+series: functional-programming
+series_title: Create an API Request and Load User Media
+series_order: 3
 
-images = [
-    "/images/code-lengstorf.jpg"
-]
+images:
+  - /images/code-lengstorf.jpg
 
-category = "front-end"
-tag = [
-    "ramda",
-    "javascript",
-    "functional programming",
-]
-videoid = "ICYLOZuFMz8"
-repo_url = "https://github.com/jlengstorf/learn-ramda"
+category: front-end
+tag:
+  - ramda
+  - javascript
+  - functional programming
 
-+++
+videoid: ICYLOZuFMz8
+repo_url: https://github.com/jlengstorf/learn-ramda
 
-This is the third part in the [Functional Programming in the Real World series](/series/functional-programming/).
+---
 
-## Series Navigation 
+This is the third part in the [Functional Programming in the Real World series](/series/functional-programming/). In this part of the series, we'll build and execute an Instagram API request to retrieve the authenticated user's most recent uploads.
 
 {{< series-nav >}}
 
-## Step 2: Request the Authenticated User's Recent Media From the Instagram API
+## Build a Request to Load Recent Media From the Instagram API
 
 Now that we have a valid token, we can start building the request that will load the user's recent media from Instagram's API.
 
@@ -160,11 +161,11 @@ https://api.instagram.com/v1/users/self/media/recent/?count=16&access_token=1234
   **NOTE:** The "count" is used to tell Instagram how many media items to return. We aren't quite there yet, so don't worry about it for now.
 {{% /aside %}}
 
-### Write a function to make JSONP requests to the Instagram API.
+## Make a JSONP Request to the Instagram API
 
 Now that we have a full API request URI, all that's left to do is send the request to Instgram.
 
-#### Use JSONP to bypass CORS restrictions.
+### Use JSONP to bypass CORS restrictions.
 
 Since Instagram doesn't allow [cross-origin requests (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS), we need to use a technique called [JSONP](http://stackoverflow.com/a/3840118/463471), which means that Instagram will wrap the response in a callback to bypass the cross-origin restrictions.
 
@@ -172,7 +173,7 @@ Since Instagram doesn't allow [cross-origin requests (CORS)](https://developer.m
   **NOTE:** You don't need to know or care about JSONP for this app; we have a great third-party package to solve this problem for us. It never hurts to know what's happening under the hood, though.
 {{% /aside %}}
 
-#### The request is handled by Promises.
+### The request is handled by Promises.
 
 Due to the anynchronous nature of making API requests, we have to handle the response differently than a standard function output. My current preferred way of handling async code is [Promises](https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch3.md), which allow us to define actions in an easy-to-read, chronological order:
 
@@ -185,7 +186,7 @@ getArticles()
 
 It's very easy to tell what's going on here, even if you've never used Promises before: the `getArticles` function executes, then the `formatArticles` function executes, then the `displayArticles` function executes. Each of these functions has access to the result of the previous step (kind of like `compose`), so we can easily define a series of steps for our data.
 
-#### Write the unsafe function that sends the JSONP request.
+### Write the unsafe function that sends the JSONP request.
 
 Asynchronous requests are impure because they don't return a value. So we need to add our new function to the `unsafe` object.
 
@@ -213,11 +214,11 @@ Finally — only for the purpose of seeing the output in development — we use 
 
 In the next section, we'll execute the request and actually take a look at some data.
 
-### Execute the request and return the JSON response.
+## Execute the Request and Return the JSON Response
 
 The last thing to do before we can actually see some data is to create a function to call our fetch function, then implement that in our `initialize` function.
 
-#### Write a function to start the API request with the right data.
+### Write a function to start the API request with the right data.
 
 To actually make the API request, we need to assemble our arguments and our token.
 
@@ -242,7 +243,7 @@ Finally, we can call our unsafe fetch function using the generated endpoint.
   **NOTE:** Although it might seem like a lot of work to set up this app in the functional programming way, we can see the payoff here. Look at how clean and self-descriptive this code is.
 {{% /aside %}}
 
-#### Add the new function to the `initialize` function.
+### Add the new function to the `initialize` function.
 
 Now that we have a function to make the request, let's call it when the user is logged in. Update the `initialize` function in `src/scripts/instagram-feed-reader.js` as shown in the highlighted lines below:
 
@@ -258,15 +259,13 @@ Now that we have a function to make the request, let's call it when the user is 
 
 We added an `args` argument to the `initialize` function — this is what allows anyone importing this module to modify the API arguments — and then pass `args` to `showPhotos` if the user is logged in.
 
-After saving, we can open the app in our browser and authorize it, and the console will show us our recent Instagram media. 
+After saving, we can open the app in our browser and authorize it, and the console will show us our recent Instagram media.
 
-{{< amp-img src="/images/learn-functional-programming-ramda-04.jpg" 
+{{< amp-img src="/images/learn-functional-programming-ramda-04.jpg"
             height="630" >}}
     After authenticating, we see the loading animation.
 {{< /amp-img >}}
 
-However, you can see that Instagram sends a _ton_ of data back — we don't need all of that.
+## What's Next?
 
-So in the next section, we'll wrestle that data into a simpler format that's easier to work with.
-
-
+We can see that Instagram sends a _ton_ of data back in its response — we don't need all of that. In the [final part of this series]({{< ref "learn-ramda-pt4.md" >}}), we'll wrestle that data into a simpler format that's easier to work with.

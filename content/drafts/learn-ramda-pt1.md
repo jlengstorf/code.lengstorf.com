@@ -1,36 +1,35 @@
-+++
+---
 
-date = "2016-10-23T10:00:00"
-type = "blog"
+date: 2016-10-23T10:00:00
+type: blog
 
-draft = true
+draft: true
 
-seo_title = "How to Use Ramda in a Real Project — Step-by-Step Tutorial"
-description = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
+seo_title: How to Use Ramda in a Real Project — Step-by-Step Tutorial
+description: |
+  Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial.
+title: Functional Programming in the Real World
+subtitle: |
+  Learn how to use Ramda to build a real-world app using test-driven, 
+  functional JavaScript in this in-depth tutorial.
+slug: learn-functional-programming-ramda
+series: functional-programming
+series_title: Why Functional Programming + App Setup
+series_order: 1
 
-title = "Functional Programming in the Real World"
-_title = "How to Use Functional Programming in a Real Project, Part 1"
-subtitle = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
+images:
+  - /images/code-lengstorf.jpg
 
-slug = "learn-functional-programming-ramda"
-series = "functional-programming"
-series_title = "Why Functional Programming + App Setup"
-series_order = 1
+category: front-end
+tag:
+  - ramda
+  - javascript
+  - functional programming
 
-images = [
-    "/images/code-lengstorf.jpg"
-]
+videoid: ICYLOZuFMz8
+repo_url: https://github.com/jlengstorf/learn-ramda
 
-category = "front-end"
-tag = [
-    "ramda",
-    "javascript",
-    "functional programming",
-]
-videoid = "ICYLOZuFMz8"
-repo_url = "https://github.com/jlengstorf/learn-ramda"
-
-+++
+---
 
 For months, I've been seeing comments that hint at the advantages of functional programming:
 
@@ -187,7 +186,7 @@ localStorage.debug = '*'
 
 After reloading, we can see the app, as well as the debugging messages in the console.
 
-{{< amp-img src="/images/learn-functional-programming-ramda-01.jpg" 
+{{< amp-img src="/images/learn-functional-programming-ramda-01.jpg"
             height="505" >}}
     The starter, before we start building anything.
 {{< /amp-img >}}

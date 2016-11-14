@@ -1,43 +1,46 @@
-+++
+---
 
-date = "2016-10-23T11:00:00"
-type = "blog"
+date: 2016-10-23T11:00:00
+type: blog
 
-draft = true
+draft: true
 
-seo_title = "How to Use Ramda in a Real Project — Step-by-Step Tutorial"
-description = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
+seo_title: How to Use Ramda in a Real Project — Step-by-Step Tutorial
+description: |
+  Learn how to use Ramda to build a real-world app using test-driven, 
+  functional JavaScript in this in-depth tutorial.
 
-title = "Functional Programming in the Real World"
-subtitle = "Learn how to use Ramda to build a real-world app using test-driven, functional JavaScript in this in-depth tutorial."
+title: Functional Programming in the Real World
+subtitle: |
+  Learn how to use Ramda to build a real-world app using test-driven, 
+  functional JavaScript in this in-depth tutorial.
 
-slug = "learn-functional-programming-ramda-pt2"
-series = "functional-programming"
-series_title = "Build a Login Link and Authorize the User"
-series_order = 2
+slug: learn-functional-programming-ramda-pt2
+series: functional-programming
+series_title: Build a Login Link and Authorize the User
+series_order: 2
 
-images = [
-    "/images/code-lengstorf.jpg"
-]
+images:
+  - /images/code-lengstorf.jpg
 
-category = "front-end"
-tag = [
-    "ramda",
-    "javascript",
-    "functional programming",
-]
-videoid = "ICYLOZuFMz8"
-repo_url = "https://github.com/jlengstorf/learn-ramda"
+category: front-end
+tag: [
+  - ramda
+  - javascript
+  - functional programming
 
-+++
+videoid: ICYLOZuFMz8
+repo_url: https://github.com/jlengstorf/learn-ramda
+
+---
+
+This is the second installment of the [Functional Programming in the Real World series](/series/functional-programming/).
 
 In the [first part of this series]({{< ref "learn-ramda-pt1.md" >}}), we discussed the challenges of learning functional programming, some of the benefits of using it, and set up the foundation for our application.
 
 In this section we'll actually start coding: **we'll build the part of the app that displays a login button with a properly-formed Instagram authentication request URI, and add a check to see if the user is authenticated.**
 
 Instagram's API allows us to use [client-side authorization](https://www.instagram.com/developer/authentication/), which means we can ask the user to authorize the app, and upon doing so they'll be redirected to the URI we specify with `#access_token=...` added to the end. Since our app is front-end only, we need to use this authorization flow.
-
-## Series Navigation
 
 {{< series-nav >}}
 
@@ -269,9 +272,9 @@ Edit `src/scripts/instagram-feed-reader.js` and insert our composed function bel
 ``` diff
   // Alias this long-ass function name for brevity.
   const esc = encodeURIComponent;
-  
+
   const formatArgs = mapObjIndexed((arg, key) => `${esc(key)}=${esc(arg)}`);
-  
+
 + const getQueryString = compose(join('&'), values, formatArgs);
 ```
 
@@ -285,10 +288,10 @@ Add the following to the bottom of `src/scripts/instagram-feed-reader.js` to mak
 const buildLoginLink = args => {
   const queryString = getQueryString(args);
   const loginLink = `${IG_API_OAUTH}?${queryString}`;
- 
+
   const getClass = bemmit('instagram-feed');
   const loginClass = getClass('auth');
- 
+
   return `
     <a href="${loginLink}" class="${loginClass}">Authorize Instagram</a>
   `;
@@ -433,16 +436,16 @@ Next, in `src/scripts/main.js`, import the modules and initialize the app:
 
 ``` diff
 + import loadRecentInstagramPosts from './instagram-feed-reader';
-+ 
++
   // Create a debugger.
   import debug from 'debug';
   const log = debug('app:main');
-  
+
   log('Starting the app...');
-  
+
   // Start the app.
 + loadRecentInstagramPosts();
-  
+
   log('App started.');
 
 ```
@@ -450,7 +453,7 @@ Next, in `src/scripts/main.js`, import the modules and initialize the app:
 Now, when we reload the app, we see a login button. And what's better is that it works!
 
 {{< amp-img src="/images/learn-functional-programming-ramda-02.gif"
-            srcset="/images/learn-functional-programming-ramda-02.gif" 
+            srcset="/images/learn-functional-programming-ramda-02.gif"
             height="621" >}}
     Our login button works, and a token is generated.
 {{< /amp-img >}}
@@ -465,19 +468,19 @@ Make the following changes in `src/scripts/instagram-feed-reader.js`:
 
 ``` diff
   // ... earlier code ommitted for brevity
-  
+
   const showLogin = () => {
     const args = {
       client_id: IG_CLIENT_ID,
       redirect_uri: IG_REDIRECT_URI,
       response_type: 'token',
     };
-  
+
     render(buildLoginLink(args));
   };
-  
+
 + const isLoggedIn = test(/^#access_token=/);
-  
+
   export default function initialize() {
 +   if (isLoggedIn(document.location.hash)) {
 +   
@@ -503,7 +506,7 @@ If so, we can request their recent media from the Instagram API. If not, we show
 
 Once we save and reload the app, logging in shows us the loading animation.
 
-{{< amp-img src="/images/learn-functional-programming-ramda-03.jpg" 
+{{< amp-img src="/images/learn-functional-programming-ramda-03.jpg"
             height="525" >}}
     After authenticating, we see the loading animation.
 {{< /amp-img >}}
