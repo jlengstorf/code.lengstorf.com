@@ -24,7 +24,7 @@ images:
   - /images/code-lengstorf.jpg
 
 category: front-end
-tag: [
+tag:
   - ramda
   - javascript
   - functional programming
