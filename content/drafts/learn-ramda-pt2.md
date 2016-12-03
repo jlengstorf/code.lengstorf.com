@@ -289,6 +289,8 @@ const buildLoginLink = args => {
   const queryString = getQueryString(args);
   const loginLink = `${IG_API_OAUTH}?${queryString}`;
 
+  log(`loginLink: ${loginLink}`);
+
   const getClass = bemmit('instagram-feed');
   const loginClass = getClass('auth');
 
@@ -359,6 +361,9 @@ drinkFact('whiskey');
 drinkFact('juice');
 //=> We like to drink juice.
 ```
+{{% code-caption %}}
+  You can also [play with this example](https://goo.gl/95rxjR) on the Ramda <abbr title="Read-Eval-Print Loop">REPL</abbr>.
+{{% /code-caption %}}
 
 Since we have to explicitly provide the `drink` argument, it's much easier to see what's gone wrong if we get unexpected results. **In a pure function, we know _for sure_ that the function will always return the same result for the same argument.**
 
@@ -375,32 +380,35 @@ Our app is designed to write to a single element a `<div id="app"></div>`. Howev
 Add the following to the bottom of `src/scripts/instagram-feed-reader.js`:
 
 ``` js
+// Anything with side-effects goes in here to make it really obvious.
 const unsafe = {
-  renderStringToDOM: (selector, htmlStr) => {
+  renderStringToDOM: curry((selector, htmlStr) => {
 
     // This is a side-effect.
     document.querySelector(selector).innerHTML = htmlStr;
-  },
+  }),
 };
 
 // Create a shortcut for rendering into our app’s wrapper element.
-const render = htmlString => unsafe.renderStringToDOM('#app', htmlString);
+const render = unsafe.renderStringToDOM('#app');
 ```
 
 We're writing two functions here:
 
-1. A general-purpose function to put any string of markup into any element with a give `selector`
+1. A general-purpose function to put any string of markup into any element with a given `selector`
 2. A highly-specific `render` function that inserts markup into our app's wrapper element
 
-{{% aside %}}
-  **NOTE:** I went back and forth on whether or not `render` should be in the `unsafe` object. On the one hand, it uses a function with side-effects, but on the other hand, that means that every function calling render (and any functions calling those functions) would also end up in `unsafe`, and that makes the API messy.
+Note the use of [`curry`](http://ramdajs.com/docs/#curry) here. This creates a curried version of the passed function, which means we can partially call our new `renderStringToDOM` function.
 
-  Ultimately I decided only functions that _actually_ have side-effects are kept in `unsafe`, and functions that call them are not. I could be convinced to go the other way, though, so feel free to [tweet at me](https://twitter.com/intent/tweet?text=@jlengstorf&url=https://code.lengstorf.com/learn-functional-programming-ramda/) or [open an issue](https://github.com/jlengstorf/instagram-feed/issues) to discuss.
+{{% aside %}}
+  **NOTE:** I went back and forth on whether or not `render` should be in the `unsafe` object. On the one hand, it uses a function with side-effects, but on the other hand, that means that every function calling render (and any functions calling those functions) would also end up in `unsafe`, which makes the API messy.
+
+  Ultimately I decided only functions that _actually_ have side-effects are kept in `unsafe`, and functions that call them are not. This is a gut-feel decision, though, so [tweet at me](https://twitter.com/intent/tweet?text=@jlengstorf&url=https://code.lengstorf.com/learn-functional-programming-ramda/) or [open an issue](https://github.com/jlengstorf/instagram-feed/issues) if you'd like to dig into the "right way" to handle this.
 {{% /aside %}}
 
 ### Put it all together (and finally supply some data).
 
-Up until now, we've been writing functions, but there's no data anywhere to be found. **This is a central tenet of functional programming: no data until the very end.**
+Up until now, we've been writing functions, but there's no data anywhere to be found. **This is one of the Big Ideas™ of functional programming: no data until the very end.**
 
 Now that we've built this pipeline of functions to properly process our data, we can actually drop some data in and see what comes out the other side.
 
@@ -495,7 +503,7 @@ Make the following changes in `src/scripts/instagram-feed-reader.js`:
 The implicit authorization flow from Instagram will always redirect to the URI pattern `REDIRECT_URI#access_token=IG_ACCESS_TOKEN`, which looks something like this:
 
 ``` text
-http://example.com/my-app/#access_token=12345678.a1b2c3d.abcdef1234567890abcdef1234567890
+http://127.0.0.1:8080/#access_token=12345678.a1b2c3d.abcdef1234567890abcdef1234567890
 ```
 
 Because of this, we can assume the user is authenticated if the document hash starts with `#access_token=`. Taking advantage of currying, we create a function called `isLoggedIn` by passing the regular expression `/^#access_token=/` to `test`.
@@ -506,7 +514,7 @@ If so, we can request their recent media from the Instagram API. If not, we show
 
 Once we save and reload the app, logging in shows us the loading animation.
 
-{{< amp-img src="/images/learn-functional-programming-ramda-03.jpg"
+{{< amp-img src="/images/learn-functional-programming-ramda-01.jpg"
             height="525" >}}
     After authenticating, we see the loading animation.
 {{< /amp-img >}}
