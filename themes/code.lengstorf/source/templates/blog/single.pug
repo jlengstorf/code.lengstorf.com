@@ -70,13 +70,14 @@ block article
     class= `article__content--{{ $catSlug }}`
   )
     // {{ if (isset .Params "videoid") }}
-    section.article__video
-      amp-youtube(
-        data-videoid!=`{{ .Params.videoid }}`
-        width="480"
-        height="270"
-        layout="responsive"
-      )
+    section.article__video.
+      <amp-youtube data-videoid='{{ .Params.videoid }}'
+                   {{ range .Params.video_settings }}
+                     data-param-{{ .key }}="{{ .val }}"
+                   {{ end }}
+                   width="480"
+                   height="270"
+                   layout="responsive"></amp-youtube>
     // {{ end }}
     | {{ .Content }}
 
