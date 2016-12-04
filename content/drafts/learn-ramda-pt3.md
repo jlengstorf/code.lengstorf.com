@@ -1,5 +1,4 @@
 ---
-
 date: 2016-10-23T12:00:00
 type: blog
 
@@ -29,9 +28,15 @@ tag:
   - javascript
   - functional programming
 
-videoid: ICYLOZuFMz8
+videoid: hJ2RVXEIgkk
+video_settings:
+  - key: listType
+    val: playlist
+  - key: list
+    val: PLz8Iz-Fnk_eRM5oTjUdn2CQ7lPf-zmhVD
+  - key: rel
+    val: 0
 repo_url: https://github.com/jlengstorf/learn-ramda
-
 ---
 
 This is the third part in the [Functional Programming in the Real World series](/series/functional-programming/). In this part of the series, we'll build and execute an Instagram API request to retrieve the authenticated user's most recent uploads.
@@ -72,6 +77,9 @@ const darkKnight = { hero: 'Batman' };
 assoc('villain', 'Joker', darkKnight);
 //=> {"hero": "Batman", "villain": "Joker"}
 ```
+{{% code-caption %}}
+  You can also [play with this example](https://goo.gl/GDfPAM) on the Ramda <abbr title="Read-Eval-Print Loop">REPL</abbr>.
+{{% /code-caption %}}
 
 In order to avoid hard-coding data, we're going to create a function called `addTokenToArgs`, which is the curried result of calling `assoc` with just the first parameter — a key of `access_token` — applied.
 
@@ -95,6 +103,9 @@ const args = {
 addTokenToArgs(token, args);
 //=> {"access_token": "a_mighty_roar", "name": "Jason", "spirit_animal": "bear"}
 ```
+{{% code-caption %}}
+  You can also [play with this example](https://goo.gl/YF5BYf) on the Ramda <abbr title="Read-Eval-Print Loop">REPL</abbr>.
+{{% /code-caption %}}
 
 ### Format the arguments as a query string.
 
@@ -132,6 +143,9 @@ getQueryString(args);
 getQueryStringWithToken(token, args);
 //=> "name=Jason&spirit_animal=bear&access_token=a_mighty_roar"
 ```
+{{% code-caption %}}
+  You can also [play with this example](https://goo.gl/XbA25w) on the Ramda <abbr title="Read-Eval-Print Loop">REPL</abbr>.
+{{% /code-caption %}}
 
 ### Build the full request URI.
 
@@ -175,7 +189,7 @@ Since Instagram doesn't allow [cross-origin requests (CORS)](https://developer.m
 
 ### The request is handled by Promises.
 
-Due to the anynchronous nature of making API requests, we have to handle the response differently than a standard function output. My current preferred way of handling async code is [Promises](https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch3.md), which allow us to define actions in an easy-to-read, chronological order:
+Due to the asynchronous nature of making API requests, we have to handle the response differently than a standard function output. My current preferred way of handling async code is [Promises](https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch3.md), which allow us to define actions in an easy-to-read, chronological order:
 
 ``` js
 // Assume that getArticles() returns a Promise
@@ -211,6 +225,10 @@ To make sending the request easy, we're using a third-party package called [fetc
 `fetchJSONP` returns a Promise, and in order to access JSON data, we need to call the `json` method on the response, which we do using `then`.
 
 Finally — only for the purpose of seeing the output in development — we use another `then` to call our `logAndReturn` function, which will print its argument to the console and return it unchanged.
+
+{{% aside %}}
+  **NOTE:** The `logAndReturn` function was included in this tutorial's [starter code](https://github.com/jlengstorf/instagram-feed/tree/starter). It uses Ramda's [`tap`](http://ramdajs.com/docs/#tap) function — which executes a function on its argument, then returns the argument unchanged — to log the value without breaking the composability of our functions.
+{{% /aside %}}
 
 In the next section, we'll execute the request and actually take a look at some data.
 
@@ -263,7 +281,7 @@ After saving, we can open the app in our browser and authorize it, and the conso
 
 {{< amp-img src="/images/learn-functional-programming-ramda-04.jpg"
             height="630" >}}
-    After authenticating, we see the loading animation.
+    We’re now successfully loading data from the Instagram API.
 {{< /amp-img >}}
 
 ## What's Next?
