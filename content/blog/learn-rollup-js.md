@@ -1,32 +1,46 @@
-+++
-date = "2016-08-19"
-type = "blog"
+---
+date: 2016-08-19
+type: blog
 
-seo_title = "How to Bundle JavaScript With Rollup — Step-by-Step Tutorial"
-description = "Learn how to use Rollup as a smaller, more efficient alternative to webpack and Browserify to bundle JavaScript files in this step-by-step tutorial series."
+seo_title: >
+    How to Bundle JavaScript With Rollup — Step-by-Step Tutorial
+description: >
+    Learn how to use Rollup as a smaller, more efficient alternative 
+    to webpack and Browserify to bundle JavaScript files in this 
+    step-by-step tutorial series.
 
-title = "Rollup.js Tutorial"
-subtitle = "Learn how to use Rollup as a smaller, more efficient alternative to webpack and Browserify to bundle JavaScript files in this step-by-step tutorial series."
+title: Rollup.js Tutorial
+subtitle: >
+    Learn how to use Rollup as a smaller, more efficient alternative 
+    to webpack and Browserify to bundle JavaScript files in this 
+    step-by-step tutorial series.
 
-slug = "learn-rollup-js"
-series = "rollup"
-series_title = "How to Set Up Smaller, More Efficient JavaScript Bundling Using Rollup"
-series_order = 1
+slug: learn-rollup-js
+series: rollup
+series_title: >
+    How to Set Up Smaller, More Efficient JavaScript Bundling 
+    Using Rollup
+series_order: 1
 
-images = [
-    "/images/learn-rollup-js.jpg"
-]
+images:
+  - /images/learn-rollup-js.jpg
 
-category = "build-tools"
-tag = [
-    "rollup",
-    "javascript",
-    "babel",
-    "modules"
-]
-videoid = "ICYLOZuFMz8"
-repo_url = "https://github.com/jlengstorf/learn-rollup"
-+++
+category: build-tools
+tag:
+  - rollup
+  - javascript
+  - babel
+  - modules
+
+videoid: ICYLOZuFMz8
+video_settings:
+  - key: listType
+    val: playlist
+  - key: list
+    val: PLz8Iz-Fnk_eRM5oTjUdn2CQ7lPf-zmhVD
+    
+repo_url: "https://github.com/jlengstorf/learn-rollup"
+---
 
 This week, we're going to build our first project using [Rollup](http://rollupjs.org/), which is a build tool for bundling JavaScript (and stylesheets, but we'll get to that next week).
 

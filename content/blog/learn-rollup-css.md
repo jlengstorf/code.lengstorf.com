@@ -1,34 +1,43 @@
-+++
+---
+date: 2016-08-25
+type: blog
 
-date = "2016-08-25"
-type = "blog"
+seo_title: How to Bundle Stylesheets and Add LiveReload With Rollup
+description: >
+    Learn how to use the JavaScript bundler Rollup to process 
+    stylesheets using PostCSS and rebuild & reload files when changes 
+    are made in this tutorial.
 
-seo_title = "How to Bundle Stylesheets and Add LiveReload With Rollup"
-description = "Learn how to use the JavaScript bundler Rollup to process stylesheets using PostCSS and rebuild & reload files when changes are made in this tutorial."
+title: Rollup.js Tutorial
+subtitle: >
+    Learn how to use the JavaScript bundler Rollup — as an alternative 
+    for Grunt or Gulp — to process stylesheets using PostCSS in this 
+    step-by-step tutorial.
 
-title = "Rollup.js Tutorial"
-subtitle = "Learn how to use the JavaScript bundler Rollup — as an alternative for Grunt or Gulp — to process stylesheets using PostCSS in this step-by-step tutorial."
+slug: learn-rollup-css
+series: rollup
+series_title: How to Bundle Stylesheets and Add LiveReload With Rollup
+series_order: 2
 
-slug = "learn-rollup-css"
-series = "rollup"
-series_title = "How to Bundle Stylesheets and Add LiveReload With Rollup"
-series_order = 2
+images:
+    - /images/learn-rollup-css.jpg
 
-images = [
-    "/images/learn-rollup-css.jpg"
-]
+category: build-tools
+tag:
+    - rollup
+    - javascript
+    - postcss
+    - modules
 
-category = "build-tools"
-tag = [
-    "rollup",
-    "javascript",
-    "postcss",
-    "modules"
-]
-videoid = "hJ2RVXEIgkk"
-repo_url = "https://github.com/jlengstorf/learn-rollup-js"
+videoid: hJ2RVXEIgkk
+video_settings:
+  - key: listType
+    val: playlist
+  - key: list
+    val: PLz8Iz-Fnk_eRM5oTjUdn2CQ7lPf-zmhVD
 
-+++
+repo_url: "https://github.com/jlengstorf/learn-rollup-js"
+---
 
 In the first part of this series, we walked through the process of [setting up Rollup as a front-end build tool for JavaScript]({{< ref "learn-rollup-js.md" >}}).
 
