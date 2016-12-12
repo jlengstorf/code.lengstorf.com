@@ -569,6 +569,12 @@ cd /opt/letsencrypt
 ./letsencrypt-auto certonly --standalone
 ```
 
+{{% aside %}}
+  **NOTE:** If you want to support subdomains, such as `www.example.com`, you need to use the `-d` flag for each one. For example:
+  
+  `./letsencrypt-auto certonly --standalone -d example.com -d www.example.com`
+{{% /aside %}}
+
 The tool will run for a while to initialize itself, and then we see a 1980s-looking interactive dialog.
 
 {{< amp-img src="/images/nodejs-ssl-deploy-06.jpg" >}}
