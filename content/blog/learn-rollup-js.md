@@ -465,13 +465,13 @@ export default {
   format: 'iife',
   sourceMap: 'inline',
   plugins: [
-    babel({
-      exclude: 'node_modules/**',
-    }),
     eslint({
       exclude: [
         'src/styles/**',
       ]
+    }),
+    babel({
+      exclude: 'node_modules/**',
     }),
   ],
 };
