@@ -62,7 +62,7 @@ Choose the $5/month option with Ubuntu 16.04.1 x64. Select a region closest to y
     Creating a $5/month DigitalOcean droplet with Ubuntu 16.04.1
 {{< /amp-img >}}
 
-Finally, add your SSH key and 
+Finally, add your SSH key and
 
 #### How to find your SSH key
 
@@ -327,7 +327,7 @@ OpenSSH (v6)               ALLOW       Anywhere (v6)
 
 ## Get Your App Up and Running
 
-Now that the server is set up, we can get our app installed. 
+Now that the server is set up, we can get our app installed.
 
 ### Install Git.
 
@@ -506,7 +506,7 @@ The last thing to do is to make sure that when the server restarts, PM2 starts o
 This is a two-step process, which we kick off by running `pm2 startup systemd`:
 
 ``` text
-jason@nodejs-ssl-d systemdapps/app.example.com$ pm2 startup 
+jason@nodejs-ssl-d systemdapps/app.example.com$ pm2 startup
 [PM2] You have to run this command as root. Execute the following command:
       sudo su -c "env PATH=$PATH:/usr/bin pm2 startup systemd -u jason --hp /home/jason"
 ```
@@ -566,13 +566,13 @@ Now that the domain is pointed to our server, we can generate the SSL certificat
 cd /opt/letsencrypt
 
 # Create the SSL certificate
-./letsencrypt-auto certonly --standalone
+./certbot-auto certonly --standalone
 ```
 
 {{% aside %}}
   **NOTE:** If you want to support subdomains, such as `www.example.com`, you need to use the `-d` flag for each one. For example:
-  
-  `./letsencrypt-auto certonly --standalone -d example.com -d www.example.com`
+
+  `./certbot-auto certonly --standalone -d example.com -d www.example.com`
 {{% /aside %}}
 
 The tool will run for a while to initialize itself, and then we see a 1980s-looking interactive dialog.
@@ -596,7 +596,7 @@ For security, Let’s Encrypt certificates expire every 90 days, which seems pre
 It turns out, though, that Let’s Encrypt has an one-step command to renew certificates:
 
 ``` bash
-/opt/letsencrypt/letsencrypt-auto renew
+/opt/letsencrypt/certbot-auto renew
 ```
 
 This command checks if the certificate is near its expiration date and, when necessary, it generates an updated certificate that's good for another 90 days.
@@ -614,7 +614,7 @@ We get an option for which editor to use here. Since `nano` is easier than the o
 When the editor opens, head to the bottom of the file and add the following two lines:
 
 ``` bash
-00 1 * * 1 /opt/letsencrypt/letsencrypt-auto renew >> /var/log/letsencrypt-renewal.log
+00 1 * * 1 /opt/letsencrypt/certbot-auto renew >> /var/log/letsencrypt-renewal.log
 30 1 * * 1 /bin/systemctl reload nginx
 ```
 
