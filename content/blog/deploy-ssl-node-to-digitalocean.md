@@ -62,7 +62,7 @@ Choose the $5/month option with Ubuntu 16.04.1 x64. Select a region closest to y
     Creating a $5/month DigitalOcean droplet with Ubuntu 16.04.1
 {{< /amp-img >}}
 
-Finally, add your SSH key and 
+Finally, add your SSH key and
 
 #### How to find your SSH key
 
@@ -331,7 +331,7 @@ OpenSSH (v6)               ALLOW       Anywhere (v6)
 
 ## Get Your App Up and Running
 
-Now that the server is set up, we can get our app installed. 
+Now that the server is set up, we can get our app installed.
 
 ### Install Git.
 
@@ -577,7 +577,7 @@ Now that the domain is pointed to our server, we can generate the SSL certificat
 cd /opt/letsencrypt
 
 # Create the SSL certificate
-./letsencrypt-auto certonly --standalone
+./certbot-auto certonly --standalone
 ```
 
 The tool will run for a while to initialize itself, and then we'll be asked for an admin email address, to agree to the terms, and to specify our domain name or names. Once that's done, the certificate will be stored on the server for use with our app.
@@ -595,7 +595,7 @@ For security, Let’s Encrypt certificates expire every 90 days, which seems pre
 It turns out, though, that Let’s Encrypt has an one-step command to renew certificates:
 
 ``` bash
-/opt/letsencrypt/letsencrypt-auto renew
+/opt/letsencrypt/certbot-auto renew
 ```
 
 This command checks if the certificate is near its expiration date and, when necessary, it generates an updated certificate that's good for another 90 days.
@@ -613,7 +613,7 @@ We get an option for which editor to use here. Since `nano` is easier than the o
 When the editor opens, head to the bottom of the file and add the following two lines:
 
 ``` bash
-00 1 * * 1 /opt/letsencrypt/letsencrypt-auto renew >> /var/log/letsencrypt-renewal.log
+00 1 * * 1 /opt/letsencrypt/certbot-auto renew >> /var/log/letsencrypt-renewal.log
 30 1 * * 1 /bin/systemctl reload nginx
 ```
 
