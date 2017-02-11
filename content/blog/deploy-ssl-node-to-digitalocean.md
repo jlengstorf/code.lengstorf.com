@@ -174,6 +174,10 @@ root@nodejs-ssl-deploy:~# id jason
 uid=1000(jason) gid=1000(jason) groups=1000(jason)
 ```
 
+{{% aside %}}
+  **NOTE:** Make sure to save this password somewhere. It’s required for installing or modifying settings on the server later.
+{{% /aside %}}
+
 In order to run some of the commands on the server, such as restarting services, we need to add our new user to the `sudo` group. Do this by running the following command:
 
 ``` bash
@@ -506,7 +510,7 @@ The last thing to do is to make sure that when the server restarts, PM2 starts o
 This is a two-step process, which we kick off by running `pm2 startup systemd`:
 
 ``` text
-jason@nodejs-ssl-d systemdapps/app.example.com$ pm2 startup 
+jason@nodejs-ssl-deploy:~/app.example.com$ pm2 startup 
 [PM2] You have to run this command as root. Execute the following command:
       sudo su -c "env PATH=$PATH:/usr/bin pm2 startup systemd -u jason --hp /home/jason"
 ```
@@ -557,6 +561,13 @@ Log into your DNS provider. I use CloudFlare; you'll want to log into whichever 
 
 Add an A record for your domain that points to your droplet's IP address.
 
+To check that the domain is pointing to your droplet, run the following (make sure to replace `app.example.com` with the domain you just configured):
+
+``` sh
+dig +short app.example.com
+# output should be your droplet’s IP address, e.g. 138.68.11.65
+```
+
 ### Generate the SSL certificate.
 
 Now that the domain is pointed to our server, we can generate the SSL certificate:
@@ -569,24 +580,12 @@ cd /opt/letsencrypt
 ./letsencrypt-auto certonly --standalone
 ```
 
-{{% aside %}}
-  **NOTE:** If you want to support subdomains, such as `www.example.com`, you need to use the `-d` flag for each one. For example:
-  
-  `./letsencrypt-auto certonly --standalone -d example.com -d www.example.com`
-{{% /aside %}}
-
-The tool will run for a while to initialize itself, and then we see a 1980s-looking interactive dialog.
-
-{{< amp-img src="/images/nodejs-ssl-deploy-06.jpg" >}}
-    The Let’s Encrypt setup dialog
-{{< /amp-img >}}
-
-We'll be asked for an admin email address, to agree to the terms, and to specify our domain name. Once that's done, the certificate will be stored on the server for use with our app.
+The tool will run for a while to initialize itself, and then we'll be asked for an admin email address, to agree to the terms, and to specify our domain name or names. Once that's done, the certificate will be stored on the server for use with our app.
 
 For now, that's all we need. We'll come back to these in a minute when we configure the domain.
 
 {{% aside %}}
-  **NOTE:** If you want to support multiple subdomains (e.g. `example.com` and `www.example.com`), you'll need to use a slightly different approach to generate your SSL certificate. [See the extra steps here.](https://github.com/jlengstorf/tutorial-deploy-nodejs-ssl-digitalocean-app/issues/4)
+  **NOTE:** If you want to support multiple subdomains (e.g. `example.com` and `www.example.com`), you'll need to specify them during the setup as a comma-separated list: `example.com,www.example.com`
 {{% /aside %}}
 
 ### Setup auto-renewal for the SSL certificate
@@ -788,6 +787,10 @@ sudo systemctl start nginx
 ## Test Your App
 
 And now: the big moment. We can now visit our domain in a browser, and we'll see our app.
+
+{{% aside %}}
+  **NOTE:** In some cases, you may see the "Welcome to nginx!" screen instead of your app. If that happens, restart Nginx with `sudo systemctl restart nginx`, then hard refresh your browser (`command` + `shift` + `R` on Mac) to see the live app.
+{{% /aside %}}
 
 {{< amp-img src="/images/nodejs-ssl-deploy-07.jpg" >}}
     Look at that sexy green lock!
