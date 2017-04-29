@@ -718,7 +718,7 @@ NODE_ENV=production ./node_modules/.bin/rollup -c
 ```
 
 {{% aside %}}
-  **NOTE:** On Windows, use `SET NODE_ENV=production ./node_modules/.bin/rollup -c` to avoid an error setting environment variables.
+  **NOTE:** On Windows, use `SET NODE_ENV=production ./node_modules/.bin/rollup -c` to avoid an error setting environment variables. If you have issues with that command, see [this issue](https://github.com/jlengstorf/learn-rollup/issues/30) for additional information.
 {{% /aside %}}
 
 When we reload the browser, there's nothing logged to the console:
