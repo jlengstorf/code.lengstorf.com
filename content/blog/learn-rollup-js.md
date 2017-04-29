@@ -253,14 +253,17 @@ So let's make that part of our Rollup process so we don't have to think about it
 
 #### Install the necessary modules.
 
-First, we need to install the [Babel Rollup plugin](https://github.com/rollup/rollup-plugin-babel) and the [appropriate Babel preset](https://github.com/rollup/babel-preset-es2015-rollup).
+First, we need to install the [Babel Rollup plugin](https://github.com/rollup/rollup-plugin-babel) and the [appropriate Babel preset](https://www.npmjs.com/package/babel-preset-es2015).
 
 ``` sh
 # Install Rollup’s Babel plugin.
 npm install --save-dev rollup-plugin-babel
 
-# Install the Babel preset for transpiling ES2015 using Rollup.
-npm install --save-dev babel-preset-es2015-rollup
+# Install the Babel preset for transpiling ES2015.
+npm install --save-dev babel-preset-es2015
+
+# Install Babel’s external helpers for module support.
+npm install --save-dev babel-plugin-external-helpers
 ```
 
 {{% aside %}}
@@ -273,7 +276,17 @@ Next, create a new file called `.babelrc` in your project's root directory (`lea
 
 ``` json
 {
-  "presets": ["es2015-rollup"],
+  "presets": [
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ]
+  ],
+  "plugins": [
+    "external-helpers"
+  ]
 }
 ```
 
@@ -284,7 +297,7 @@ This tells Babel which preset it should use during transpiling.
 {{% /aside %}}
 
 {{% aside %}}
-  **UPDATE (2016-11-13):** In the repo for this project, `.babelrc` has been updated with a newer configuration. [See the pull request for details.](https://github.com/jlengstorf/learn-rollup/pull/17)
+  **UPDATE (2016-11-13):** In the video, `.babelrc` uses an older (outdated) configuration. [See this pull request for configuration changes](https://github.com/jlengstorf/learn-rollup/pull/17), and [this one for the changes to `package.json`](https://github.com/jlengstorf/learn-rollup/pull/37).
 {{% /aside %}}
 
 #### Update `rollup.config.js`.
