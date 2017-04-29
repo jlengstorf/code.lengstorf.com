@@ -36,7 +36,7 @@ video_settings:
   - key: list
     val: PLz8Iz-Fnk_eRM5oTjUdn2CQ7lPf-zmhVD
 
-repo_url: "https://github.com/jlengstorf/learn-rollup-js"
+repo_url: "https://github.com/jlengstorf/learn-rollup"
 ---
 
 In the first part of this series, we walked through the process of [setting up Rollup as a front-end build tool for JavaScript]({{< ref "learn-rollup-js.md" >}}).
