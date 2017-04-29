@@ -261,9 +261,6 @@ npm install --save-dev rollup-plugin-babel
 
 # Install the Babel preset for transpiling ES2015.
 npm install --save-dev babel-preset-es2015
-
-# Install Babel’s external helpers for module support.
-npm install --save-dev babel-plugin-external-helpers
 ```
 
 {{% aside %}}
@@ -283,9 +280,6 @@ Next, create a new file called `.babelrc` in your project's root directory (`lea
         "modules": false
       }
     ]
-  ],
-  "plugins": [
-    "external-helpers"
   ]
 }
 ```
