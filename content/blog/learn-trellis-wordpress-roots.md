@@ -703,7 +703,7 @@ pwd
 
 # Deploy the `roots.code.lengstorf.com` site using `production` options.
 # NOTE: Replace this site key with YOUR site key.
-./deploy.sh production roots.code.lengstorf.com
+./bin/deploy.sh production roots.code.lengstorf.com
 ```
 
 This takes a minute or two, and ends with a "play recap", just like provisioning. It should look something like this:
@@ -713,6 +713,10 @@ PLAY RECAP *********************************************************************
 162.243.171.188            : ok=27   changed=12   unreachable=0    failed=0
 localhost                  : ok=0    changed=0    unreachable=0    failed=0
 ```
+
+{{% aside %}}
+  **NOTE:** At the time of recording, the deploy script was at the root of the Trellis directory. The command has been updated in this article, but not in the video.
+{{% /aside %}}
 
 ### Check the Live Site
 
@@ -760,7 +764,7 @@ git push
 
 # Deploy the changes to production.
 cd ../trellis
-./deploy.sh production roots.code.lengstorf.com
+./bin/deploy.sh production roots.code.lengstorf.com
 ```
 
 ### Activate WP Sync DB on the production site and get the API key.
