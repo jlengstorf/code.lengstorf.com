@@ -1,7 +1,0 @@
-| {{ $videoid := .Get "videoid" }}
-amp-youtube(
-  layout="responsive" 
-  data-videoid!=`{{ .Get "videoid" }}`
-  width!=`{{ with .Get "width" }}{{ . }}{{ else }}480{{ end }}`
-  height!=`{{ with .Get "height" }}{{ . }}{{ else }}300{{ end }}`
-)

@@ -1,16 +1,7 @@
 # code.lengstorf.com
 
-<a href="https://code.lengstorf.com"><img src="https://code.lengstorf.com/images/code-lengstorf-logo.jpg" alt="Jason Lengstorf nerd the fuck out" width="300" /></a>
+This blog has been reunited with the mothership and lives at https://lengstorf.com/code/ now.
 
-A blog site built with [Hugo](https://gohugo.io/), on which I shall nerd the fuck out. See the blog and videos at [code.lengstorf.com](https://code.lengstorf.com).
+Content is at https://github.com/jlengstorf/lengstorf.com. The blog source lives in the [Gatsby theme for my site](https://github.com/jlengstorf/gatsby-theme-jason-blog).
 
-## Tutorials and Code Videos + Articles
-
-I use this site as a place to keep articles and videos about various tools I work with in the course of my projects.
-
-You can suggest corrections or additions as pull requests against [the article Markdown](https://github.com/jlengstorf/code.lengstorf.com/tree/master/content/blog), and you can see posts I'm in the process of writing in [the `drafts` folder](https://github.com/jlengstorf/code.lengstorf.com/tree/master/content/drafts).
-
-## Submitting Ideas for Tutorials
-
-If you have a request or an idea for a tutorial, please [open an issue](https://github.com/jlengstorf/code.lengstorf.com/issues) or add a comment to an existing topic suggestion in the issues list.
-
+All that’s here now is a set of [redirects for Netlify](https://www.netlify.com/docs/redirects/).
