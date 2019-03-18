@@ -1,9 +1,0 @@
-extends ../pug-includes/list.pug
-
-block append config
-  -
-    config.type = '{{ with .Params.language }}{{ . }}{{ end }}';
-  -
-
-block list-header-heading
- | Showing posts tagged with &ldquo;{{ .Title }}&rdquo;

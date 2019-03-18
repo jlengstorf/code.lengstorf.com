@@ -1,0 +1,8 @@
+# Redirect from the old code subdomain to the new sub-blog.
+/                                 https://lengstorf.com/code/
+/learn-trellis-wordpress-roots/   https://lengstorf.com/code/learn-trellis-wordpress-roots/
+/learn-trellis-wordpress-roots/   https://lengstorf.com/code/learn-trellis-wordpress-roots/
+/learn-rollup-css/                https://lengstorf.com/code/learn-rollup-css/
+/learn-rollup-js/                 https://lengstorf.com/code/learn-rollup-js/
+/deploy-nodejs-ssl-digitalocean/  https://lengstorf.com/code/deploy-nodejs-ssl-digitalocean/
+/get-form-values-as-json/         https://lengstorf.com/code/get-form-values-as-json/
